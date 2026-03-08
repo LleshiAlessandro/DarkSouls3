@@ -1,0 +1,179 @@
+---
+config:
+  layout: elk
+  theme: dark
+---
+classDiagram
+direction LR
+    class Form {
+    }
+
+    class Knight {
+	    +Knight()
+	    +SpecialAbility() int
+    }
+
+    class Mage {
+	    +Mage()
+	    +SpecialAbility() int
+    }
+
+    class Priest {
+	    +Priest()
+	    +SpecialAbility() int
+    }
+
+    class Barbarian {
+	    +Barbarian()
+	    +SpecialAbility() int
+    }
+
+    class Classific {
+	    +Classific()
+	    +updateClassific()
+    }
+
+    class Item {
+	    -String name
+	    +Item(String name)
+    }
+
+    class Player {
+	    -String name
+	    +Player(String name)
+    }
+
+    class Ending {
+	    GOOD_ENDING
+	    BAD_ENDING
+	    CLASSIC_ENDING
+    }
+
+    class NPC {
+	    -String name
+	    +NPC(String name)
+    }
+
+    class GameManager {
+	    +GameManager()
+	    +start()
+    }
+
+    class ItemConsumable {
+	    +int quantity
+	    +ItemConsumable()
+	    +getQuantity() int
+	    +setQuantity() void
+    }
+
+    class EndingManager {
+	    -Ending e
+	    +EndingManager()
+    }
+
+    class Villain {
+	    +Villain()
+    }
+
+    class FightManager {
+	    -int turno
+	    +FightManager()
+	    +incrementTurn() void
+	    +fight(Character c, Villain v)
+    }
+
+    class PgStatsCommon {
+	    -String name;
+	    -int life
+	    -int baseAtt
+	    +PgStatsCommon(String name, int life, int baseAtt)
+	    +attac() int
+	    +takeDamage() int
+    }
+
+    class ItemEquippable {
+	    -String name
+	    -int damage
+	    +ItemEquippable(int damage, String name)
+	    +getDamage() int
+	    +getName() String
+    }
+
+    class FileManager {
+	    -Gestore g
+	    +SaveSerialized()
+	    +SaveCSV()
+	    +LoadSerialized()
+	    +LoadCSV()
+    }
+
+    class Inventory {
+	    -int numberEstus
+	    -int numberAshenEstus
+	    -int greenBlossom
+	    +Inventory(int nE, int nAE, int gB)
+	    +addItem() void
+	    +removeItem() void
+    }
+
+    class Event {
+	    ITEM_FOUND
+	    CRAFT_BOSS_WEPON
+	    NEW_LOCATION
+	    NEW_NPC
+	    RESTORE_HEALS
+	    NEW_VILLAIN
+    }
+
+    class Character {
+	    -int mana
+	    -int stamina
+	    +Character(int mana, int stamina)
+	    +restoreMana() void
+	    +restoreStamina() void
+	    +abstract specialAbility() int
+	    +useItem() void
+	    +useEstus() int
+	    +restoreEstus() int
+	    +addItem() void
+	    +removeItem() void
+    }
+
+    class EventManager {
+	    -Random rdn
+	    -int randEvent
+	    +EventManager(Event e)
+	    +villainAppear()
+	    +itemFound()
+	    +newLocation()
+	    +craftNewWepon()
+	    +newNPC()
+	    +restoreHewals()
+    }
+
+	<<enum>> Ending
+	<<enum>> Event
+	<<Abstract>> Character
+	<<static>> EventManager
+
+    Character <|-- Mage
+    Character <|-- Barbarian
+    Character "1" o--> "1" Inventory : -Inventory
+    GameManager "1" --> "1" Player : -Player
+    GameManager "1" --> "1" FileManager : -FileManager
+    Form -- GameManager : -GameManager g
+    GameManager "1" ..> "1" EventManager
+    GameManager "1" --> "1" FightManager : -FightManager
+    GameManager "1" --> "1" Classific : -Classific
+    Character <|-- Knight
+    Character <|-- Priest
+    Inventory "1" <--> "0..n" Item : -ArrayList Item
+    Item <|-- ItemConsumable
+    Item <|-- ItemEquippable
+    EventManager -- Event : -Event e
+    GameManager "1" ..> "1" EndingManager
+    EndingManager -- Ending
+    PgStatsCommon <|-- Character
+    GameManager -- PgStatsCommon : -PgStatsCommon
+    PgStatsCommon <|-- Villain
+    EventManager -- NPC : -ArrayList NPC
