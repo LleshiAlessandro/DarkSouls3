@@ -54,11 +54,6 @@ direction LR
 	    +NPC(String name)
     }
 
-    class GameManager {
-	    +GameManager()
-	    +start()
-    }
-
     class ItemConsumable {
 	    +int quantity
 	    +ItemConsumable()
@@ -139,6 +134,11 @@ direction LR
 	    +removeItem() void
     }
 
+    class GameManager {
+	    +GameManager()
+	    +start()
+    }
+
     class EventManager {
 	    -Random rdn
 	    -int randEvent
@@ -151,10 +151,23 @@ direction LR
 	    +restoreHewals()
     }
 
+    class Map {
+	    FIRELINK_SHRINE
+	    FARRON_KEEP
+	    IRITHYLL_OF_THE_BOREAL_VALLEY
+	    ANOR_LONDO
+	    LOTHRIC_CASTLE
+	    ARCHDRAGON_PEAK
+	    KILN_OF_THE_FIRST_FLAME
+	    PAINTED_WORLD_OF_ARIANDEL
+	    THE_RINGED_CITY
+    }
+
 	<<enum>> Ending
 	<<enum>> Event
 	<<Abstract>> Character
 	<<static>> EventManager
+	<<enum>> Map
 
     Character <|-- Mage
     Character <|-- Barbarian
@@ -177,3 +190,4 @@ direction LR
     GameManager -- PgStatsCommon : -PgStatsCommon
     PgStatsCommon <|-- Villain
     EventManager -- NPC : -ArrayList NPC
+    EventManager -- Map : -Map
