@@ -8,9 +8,9 @@ package darksouls3;
  *
  * @author lleshi.alessandro
  */
-public class Knigh extends Character{
+public class Knight extends Character{
     
-    public Knigh(int mana, int stamina, String name, int life, int baseAtt) {
+    public Knight(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }
     
