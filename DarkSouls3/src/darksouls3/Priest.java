@@ -14,8 +14,10 @@ public class Priest extends Character{
         super(mana, stamina, name, life, baseAtt);
     }
     
-    public int specialAbility(){
-        
-        return -1;
+    @Override
+    //benedizione degli angeli
+    public void specialAbility(Villain v){
+        life = 100;
+        v.setLife(v.life = v.life -30);
     }
 }

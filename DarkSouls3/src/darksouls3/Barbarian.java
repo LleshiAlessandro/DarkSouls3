@@ -13,10 +13,12 @@ public class Barbarian extends Character{
     public Barbarian(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }
-    
+
+
     @Override
-    public void specialAbility(Villain v){
-        if(life <= 35){
+    //modalità berserk
+    public void specialAbility(Villain v) {
+        if(life <= 10){
             v.setLife(0);
         }
     }

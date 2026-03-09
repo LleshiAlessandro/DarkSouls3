@@ -4,6 +4,8 @@
  */
 package darksouls3;
 
+import java.util.Random;
+
 /**
  *
  * @author lleshi.alessandro
@@ -14,8 +16,28 @@ public class Mage extends Character{
         super(mana, stamina, name, life, baseAtt);
     }
     
-    public int specialAbility(){
-        
-        return -1;
+    @Override
+    //lascia o raddoppia
+    public void specialAbility(Villain v){
+        Random rdn = new Random();
+        int i = rdn.nextInt(0, 2);
+
+        if(i == 1){
+            mana = 100;
+            if(stamina >=70){
+                stamina = 100;
+            }
+            else{
+                stamina = stamina +30;
+            }
+        }
+        else{
+            if(v.getLife() >= 70){
+                v.setLife(100);
+            }
+            else{
+                v.setLife(v.life = v.life + 30);
+            }
+        }
     }
 }

@@ -10,9 +10,9 @@ package darksouls3;
  */
 public abstract class Character extends PgStatsCommon{
     
-    private int mana;
-    private int stamina;
-    private Inventory inv = new Inventory(3, 3, 3);
+    protected int mana;
+    protected int stamina;
+    protected Inventory inv = new Inventory(3, 3, 3);
     
     
     public Character(int mana, int stamina, String name, int life, int baseAtt) {
@@ -70,5 +70,5 @@ public abstract class Character extends PgStatsCommon{
     
     
     
-    public abstract int specialAbility();
+    public abstract void specialAbility(Villain v);
 }
