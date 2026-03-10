@@ -4,25 +4,19 @@
  */
 package darksouls3;
 
-import javax.swing.ImageIcon;
-
-
-
 /**
  *
- * @author lleshi.alessandro
+ * @author aless
  */
-public class ChoiseCharacter extends javax.swing.JFrame {
+public class FIghtScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
-    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FIghtScreen.class.getName());
+
     /**
-     * Creates new form ChoiseCharacter
+     * Creates new form FIghtScreen
      */
-    public ChoiseCharacter() {
+    public FIghtScreen() {
         initComponents();
-        
-        
     }
 
     /**
@@ -35,7 +29,17 @@ public class ChoiseCharacter extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -62,7 +66,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ChoiseCharacter().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FIghtScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

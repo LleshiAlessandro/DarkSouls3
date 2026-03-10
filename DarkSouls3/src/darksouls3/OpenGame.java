@@ -4,26 +4,48 @@
  */
 package darksouls3;
 
-import javax.swing.ImageIcon;
-
-
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
- * @author lleshi.alessandro
+ * @author aless
  */
-public class ChoiseCharacter extends javax.swing.JFrame {
+public class OpenGame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OpenGame.class.getName());
+    
     
     /**
-     * Creates new form ChoiseCharacter
+     * Creates new form OpenGame
      */
-    public ChoiseCharacter() {
+    public OpenGame() {
         initComponents();
-        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        // Panel in NORTH con titolo
+        JPanel northPanel = new JPanel(new BorderLayout());
+        JLabel label1 = new JLabel("Titolo");
+        label1.setFont(new Font("Arial", Font.BOLD, 24));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);  // centra orizzontalmente
+        northPanel.add(label1, BorderLayout.CENTER);           // centra all’interno del panel
+        northPanel.setPreferredSize(new Dimension(0, 80));    // altezza del nord
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+
+        // Panel in WEST con bottone
+        JPanel westPanel = new JPanel(new BorderLayout());     // layout per centrare il bottone
+        JButton button = new JButton("New Game");
+        westPanel.add(button, BorderLayout.CENTER);           // centro del panel a sinistra
+        westPanel.setPreferredSize(new Dimension(120, 0));    // larghezza del panel
+        mainPanel.add(westPanel, BorderLayout.WEST);
+
+        // aggiungi il mainPanel al frame
+        this.add(mainPanel);
+        this.setSize(840, 420);
         
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +57,6 @@ public class ChoiseCharacter extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -62,7 +83,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ChoiseCharacter().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new OpenGame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
