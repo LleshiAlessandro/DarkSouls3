@@ -9,9 +9,9 @@ package darksouls3;
  * @author lleshi.alessandro
  */
 public class PgStatsCommon {
-    private String name;
+    protected String name;
     protected int life;
-    private int baseAtt;
+    protected int baseAtt;
 
     public PgStatsCommon(String name, int life, int baseAtt) {
         this.name = name;

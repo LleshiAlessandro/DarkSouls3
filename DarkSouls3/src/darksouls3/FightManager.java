@@ -30,7 +30,7 @@ public class FightManager {
             }
             //turni del nemico
             else{
-                //c.setLife(c.life = c.life - 33);
+                //c.setLife(c.life = c.life - v.baseAtt);
                 this.incrementTurn();
                 return false;
             }
