@@ -10,7 +10,6 @@ package darksouls3;
  */
 public enum Event {
     ITEM_FOUND,
-    CRAFT_BOSS_WEPON,
     NEW_LOCATION,
     NEW_NPC,
     RESTORE_HEALS,

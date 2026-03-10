@@ -13,12 +13,33 @@ import java.util.Random;
 public class EventManager {
     private Random rdn = new Random();
     private int randomEvent;
+    
 
-    public EventManager(Event e) {
-        randomEvent = rdn.nextInt(0, 6);
-        //da implementare tutti i metodi degli eventi
-        //nel costruttore in base al numero del random richiamo un metodo di un evento
-        //cosi quando costruisco l'evento ne prendo 1 a caso
+    public EventManager() {
+
     }
     
+    public Event eventRandom(){
+        randomEvent = rdn.nextInt(0, 5);
+        switch (randomEvent) {
+            case 0 -> {
+                return Event.NEW_BOSS;
+            }
+            case 1 -> {
+                return Event.ITEM_FOUND;
+            }
+            case 2 -> {
+                return Event.NEW_LOCATION;
+            }
+            case 3 -> {
+                return Event.NEW_NPC;
+            }
+            case 4 -> {
+                return Event.RESTORE_HEALS;
+            }
+            default -> {
+            }
+        }
+        return null;
+    }
 }
