@@ -21,12 +21,20 @@ public class OpenGame extends javax.swing.JFrame {
      */
     public OpenGame() {
         initComponents();
-        JPanel mainPanel = new JPanel();
+        //non lo devo usare nel mainPanel ma nel panel che inserirò successivamente nel centro, come nel mio mockup
+        JPanel mainPanel = new JPanel(){
+            Image sfondo = new ImageIcon("immagini/sfondo_schermata_principale.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, this);
+            }
+        };
         mainPanel.setLayout(new BorderLayout());
-
+        
         // Panel in NORTH con titolo
         JPanel northPanel = new JPanel(new BorderLayout());
-        JLabel label1 = new JLabel("Titolo");
+        JLabel label1 = new JLabel("Dark Souls 3");
         label1.setFont(new Font("Arial", Font.BOLD, 24));
         label1.setHorizontalAlignment(SwingConstants.CENTER);  // centra orizzontalmente
         northPanel.add(label1, BorderLayout.CENTER);           // centra all’interno del panel
@@ -34,12 +42,40 @@ public class OpenGame extends javax.swing.JFrame {
         mainPanel.add(northPanel, BorderLayout.NORTH);
 
         // Panel in WEST con bottone
-        JPanel westPanel = new JPanel(new BorderLayout());     // layout per centrare il bottone
-        JButton button = new JButton("New Game");
-        westPanel.add(button, BorderLayout.CENTER);           // centro del panel a sinistra
-        westPanel.setPreferredSize(new Dimension(120, 0));    // larghezza del panel
+        JPanel westPanel = new JPanel();
+        
+        westPanel.setLayout(new GridLayout(4,1,10,10));
+        JButton button1 = new JButton("New Game");
+        JButton button2 = new JButton("Load Game");
+        JButton button3 = new JButton("Settings");
+        JButton button4 = new JButton("Exit");
+        
+        northPanel.setOpaque(false);
+        westPanel.setOpaque(false);
+        
+        
+        //aggiungo i bottoni
+        westPanel.add(button1);
+        westPanel.add(button2);
+        westPanel.add(button3);
+        westPanel.add(button4);
+        
+        //come nel button1, tolgo tutta la grafica tranne la scritta del bottone
+        /*
+        button1.setBackground(null);
+        button1.setOpaque(false);
+        button1.setContentAreaFilled(false);
+        button1.setBorderPainted(false);
+        button2.setOpaque(false);
+        button3.setOpaque(false);
+        button4.setOpaque(false);
+        */
+        
+        westPanel.setPreferredSize(new Dimension(220, 0));//larghezza del panel
         mainPanel.add(westPanel, BorderLayout.WEST);
-
+        
+        
+        
         // aggiungi il mainPanel al frame
         this.add(mainPanel);
         this.setSize(840, 420);
