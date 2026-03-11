@@ -22,23 +22,62 @@ public class OpenGame extends javax.swing.JFrame {
     public OpenGame() {
         initComponents();
         //non lo devo usare nel mainPanel ma nel panel che inserirò successivamente nel centro, come nel mio mockup
-        JPanel mainPanel = new JPanel(){
-            Image sfondo = new ImageIcon("immagini/sfondo_schermata_principale.jpg").getImage();
+        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(Color.black);
+        mainPanel.setLayout(new BorderLayout());
+        
+        
+        JPanel imgPanel = new JPanel(new GridLayout(2, 2));
+
+        JPanel pane1 = new JPanel() {
+            Image sfondo = new ImageIcon("immagini/prima_immagine_mockup.jpg").getImage();
             @Override
-            protected void paintComponent(Graphics g){
+            protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(sfondo, 0, 0, this);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        mainPanel.setLayout(new BorderLayout());
+        JPanel pane2 = new JPanel() {
+            Image sfondo = new ImageIcon("immagini/seconda_immagine_mockup.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JPanel pane3 = new JPanel() {
+            Image sfondo = new ImageIcon("immagini/terza_immagine_mockup.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JPanel pane4 = new JPanel() {
+            Image sfondo = new ImageIcon("immagini/quarta_immagine_mockup.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        imgPanel.add(pane1);
+        imgPanel.add(pane2);
+        imgPanel.add(pane3);
+        imgPanel.add(pane4);
+        
+        mainPanel.add(imgPanel, BorderLayout.CENTER);
         
         // Panel in NORTH con titolo
         JPanel northPanel = new JPanel(new BorderLayout());
         JLabel label1 = new JLabel("Dark Souls 3");
-        label1.setFont(new Font("Arial", Font.BOLD, 24));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);  // centra orizzontalmente
-        northPanel.add(label1, BorderLayout.CENTER);           // centra all’interno del panel
-        northPanel.setPreferredSize(new Dimension(0, 80));    // altezza del nord
+        
+        label1.setFont(new Font("Arial", Font.BOLD, 44));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        northPanel.add(label1, BorderLayout.CENTER);
+        northPanel.setPreferredSize(new Dimension(0, 180));    // altezza del nord
         mainPanel.add(northPanel, BorderLayout.NORTH);
 
         // Panel in WEST con bottone
