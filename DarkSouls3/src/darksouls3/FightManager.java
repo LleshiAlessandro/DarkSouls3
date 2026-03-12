@@ -65,4 +65,5 @@ public class FightManager {
             System.out.println(" Errore ");
         }
     }
+    //nel form del fight dovrò inserire in ogni pulsante la sua kewWord
 }
