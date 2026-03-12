@@ -89,8 +89,7 @@ public class OpenGame extends javax.swing.JFrame {
         JButton button3 = new JButton("Settings");
         JButton button4 = new JButton("Exit");
         
-        northPanel.setOpaque(false);
-        westPanel.setOpaque(false);
+        
         
         
         //aggiungo i bottoni
@@ -99,22 +98,19 @@ public class OpenGame extends javax.swing.JFrame {
         westPanel.add(button3);
         westPanel.add(button4);
         
-        //come nel button1, tolgo tutta la grafica tranne la scritta del bottone
-        /*
-        button1.setBackground(null);
-        button1.setOpaque(false);
-        button1.setContentAreaFilled(false);
-        button1.setBorderPainted(false);
-        button2.setOpaque(false);
-        button3.setOpaque(false);
-        button4.setOpaque(false);
-        */
-        
         westPanel.setPreferredSize(new Dimension(220, 0));//larghezza del panel
         mainPanel.add(westPanel, BorderLayout.WEST);
         
+        JPanel southPanel = new JPanel();
+        JPanel eastPanel = new JPanel();
         
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
+        mainPanel.add(eastPanel, BorderLayout.EAST);
         
+        northPanel.setOpaque(false);
+        westPanel.setOpaque(false);
+        southPanel.setOpaque(false);
+        eastPanel.setOpaque(false);
         // aggiungi il mainPanel al frame
         this.add(mainPanel);
         this.setSize(840, 420);
