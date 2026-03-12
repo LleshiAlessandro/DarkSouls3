@@ -67,7 +67,7 @@ public class OpenGame extends javax.swing.JFrame {
         imgPanel.add(pane3);
         imgPanel.add(pane4);
         
-        mainPanel.add(imgPanel, BorderLayout.CENTER);
+        
         
         // Panel in NORTH con titolo
         JPanel northPanel = new JPanel(new BorderLayout());
@@ -105,6 +105,7 @@ public class OpenGame extends javax.swing.JFrame {
         
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         mainPanel.add(eastPanel, BorderLayout.EAST);
+        mainPanel.add(imgPanel, BorderLayout.CENTER);
         
         northPanel.setOpaque(false);
         westPanel.setOpaque(false);
@@ -154,6 +155,8 @@ public class OpenGame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new OpenGame().setVisible(true));
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

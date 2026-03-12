@@ -23,7 +23,14 @@ public class ChoiseCharacter extends javax.swing.JFrame {
      */
     public ChoiseCharacter() {
         initComponents();
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout()){
+            Image sfondo = new ImageIcon("immagini/sfondo_scelta_pg_giusto.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };;
         JPanel northPanel = new JPanel();
         JLabel title = new JLabel("SCEGLI IL TUO AVVENTURIERO");
         
@@ -40,7 +47,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         JPanel pg1 = new JPanel(new BorderLayout());
 
         // panel per l'immagine
-        JPanel imagePanel = new JPanel() {
+        JPanel imagePanel1 = new JPanel() {
             Image sfondo = new ImageIcon("immagini/barbarian.png").getImage();
             @Override
             protected void paintComponent(Graphics g) {
@@ -48,11 +55,11 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        pg1.add(imagePanel, BorderLayout.CENTER);
+        pg1.add(imagePanel1, BorderLayout.CENTER);
         // pulsante sotto
         JButton history = new JButton("HISTORY");
         pg1.add(history, BorderLayout.SOUTH);
-        imagePanel.addMouseListener(new MouseAdapter() {
+        imagePanel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE BARBARIAN");
@@ -126,6 +133,23 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         pg2.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pg3.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pg4.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+        pg1.setOpaque(false);
+        pg2.setOpaque(false);
+        pg3.setOpaque(false);
+        pg4.setOpaque(false);
+        
+        
+        imagePanel1.setOpaque(false);
+        imagePanel2.setOpaque(false);
+        imagePanel3.setOpaque(false);
+        imagePanel4.setOpaque(false);
+        
+        
+        pg2.setOpaque(false);
+        pg3.setOpaque(false);
+        pg4.setOpaque(false);
+        centerPanel.setOpaque(false);
         
         centerPanel.add(pg1);
         centerPanel.add(pg2);
