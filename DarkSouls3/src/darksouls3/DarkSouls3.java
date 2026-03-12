@@ -14,12 +14,14 @@ public class DarkSouls3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         OpenGame oG = new OpenGame();
         oG.setVisible(true);
-        /*
-        ChoiseCharacter cC = new ChoiseCharacter();
-        cC.setVisible(false);
         */
+        
+        ChoiseCharacter cC = new ChoiseCharacter();
+        cC.setVisible(true);
+        
         
     }
     

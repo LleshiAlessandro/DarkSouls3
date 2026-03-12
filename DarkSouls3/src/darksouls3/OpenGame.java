@@ -21,7 +21,6 @@ public class OpenGame extends javax.swing.JFrame {
      */
     public OpenGame() {
         initComponents();
-        //non lo devo usare nel mainPanel ma nel panel che inserirò successivamente nel centro, come nel mio mockup
         
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.black);
