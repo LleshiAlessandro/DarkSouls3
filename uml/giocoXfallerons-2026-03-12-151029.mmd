@@ -137,12 +137,6 @@ direction LR
 	    +getLife() int
     }
 
-    class GameManager {
-	    +GameManager()
-	    +EventManaging() void
-	    +start()
-    }
-
     class Character {
 	    -int mana
 	    -int stamina
@@ -168,6 +162,15 @@ direction LR
 	    -int randEvent
 	    +EventManager(Event e)
 	    +EventRandom() Event
+    }
+
+    class GameManager {
+	    +GameManager()
+	    +eventManaging() void
+	    +loadSave() void
+	    +save() void
+	    +fight(Character c, Villain v) void
+	    +start() void
     }
 
 	<<enum>> Ending
