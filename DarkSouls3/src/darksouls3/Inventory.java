@@ -16,10 +16,10 @@ public class Inventory {
     protected int greenBlossom;
     private ArrayList <Item> items = new ArrayList();
 
-    public Inventory(int numberEstus, int numberAshenEstus, int greenBlossom) {
-        this.numberEstus = numberEstus;
-        this.numberAshenEstus = numberAshenEstus;
-        this.greenBlossom = greenBlossom;
+    public Inventory() {
+        this.numberEstus = 5;
+        this.numberAshenEstus = 5;
+        this.greenBlossom = 5;
     }
     
     public void addItem(Item i){

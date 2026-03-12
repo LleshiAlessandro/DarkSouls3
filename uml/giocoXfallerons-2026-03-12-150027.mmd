@@ -5,9 +5,6 @@ config:
 ---
 classDiagram
 direction LR
-    class Form {
-    }
-
     class Knight {
 	    +Knight()
 	    +SpecialAbility() int
@@ -70,30 +67,6 @@ direction LR
 	    +Villain()
     }
 
-    class FightManager {
-	    -int turno
-	    +FightManager()
-	    +incrementTurn() void
-	    +fight(Character c, Villain v)
-    }
-
-    class PgStatsCommon {
-	    -String name;
-	    -int life
-	    -int baseAtt
-	    +PgStatsCommon(String name, int life, int baseAtt)
-	    +attac() int
-	    +takeDamage() int
-    }
-
-    class ItemEquippable {
-	    -String name
-	    -int damage
-	    +ItemEquippable(int damage, String name)
-	    +getDamage() int
-	    +getName() String
-    }
-
     class FileManager {
 	    -Gestore g
 	    +SaveSerialized()
@@ -120,37 +93,6 @@ direction LR
 	    NEW_VILLAIN
     }
 
-    class Character {
-	    -int mana
-	    -int stamina
-	    +Character(int mana, int stamina)
-	    +restoreMana() void
-	    +restoreStamina() void
-	    +abstract specialAbility() int
-	    +useItem() void
-	    +useEstus() int
-	    +restoreEstus() int
-	    +addItem() void
-	    +removeItem() void
-    }
-
-    class GameManager {
-	    +GameManager()
-	    +start()
-    }
-
-    class EventManager {
-	    -Random rdn
-	    -int randEvent
-	    +EventManager(Event e)
-	    +villainAppear()
-	    +itemFound()
-	    +newLocation()
-	    +craftNewWepon()
-	    +newNPC()
-	    +restoreHewals()
-    }
-
     class Map {
 	    FIRELINK_SHRINE
 	    FARRON_KEEP
@@ -163,18 +105,86 @@ direction LR
 	    THE_RINGED_CITY
     }
 
+    class FightScreen {
+    }
+
+    class OpenGame {
+    }
+
+    class GameScreen {
+    }
+
+    class ChooseCharacter {
+    }
+
+    class FightManager {
+	    -String[] keyWords
+	    -Random escape
+	    -int escapeResult
+	    -int turno
+	    +FightManager()
+	    +incrementTurn() void
+	    +chooseTurn(Character c, Villain v)
+	    +fight(Character c, Villain v, String keyWord)
+    }
+
+    class PgStatsCommon {
+	    -String name;
+	    -int life
+	    -int baseAtt
+	    +PgStatsCommon(String name, int life, int baseAtt)
+	    +setLife() void
+	    +getLife() int
+    }
+
+    class GameManager {
+	    +GameManager()
+	    +EventManaging() void
+	    +start()
+    }
+
+    class Character {
+	    -int mana
+	    -int stamina
+	    +Character(int mana, int stamina)
+	    +abstract specialAbility() int
+	    +useEstus() int
+	    +useAshenEstus() int
+	    +useGreenBlossom() int
+	    +restoreEstus() int
+	    +useItem() void
+	    +addItem() void
+	    +removeItem() void
+    }
+
+    class ItemEquippable {
+	    -int damage
+	    +ItemEquippable(int damage)
+	    +getDamage() int
+    }
+
+    class EventManager {
+	    -Random rdn
+	    -int randEvent
+	    +EventManager(Event e)
+	    +EventRandom() Event
+    }
+
 	<<enum>> Ending
 	<<enum>> Event
-	<<Abstract>> Character
-	<<static>> EventManager
 	<<enum>> Map
+	<<form>> FightScreen
+	<<form>> OpenGame
+	<<form>> GameScreen
+	<<form>> ChooseCharacter
+	<<Abstract>> Character
 
     Character <|-- Mage
     Character <|-- Barbarian
     Character "1" o--> "1" Inventory : -Inventory
     GameManager "1" --> "1" Player : -Player
     GameManager "1" --> "1" FileManager : -FileManager
-    Form -- GameManager : -GameManager g
+    ChooseCharacter -- GameManager : -GameManager g
     GameManager "1" ..> "1" EventManager
     GameManager "1" --> "1" FightManager : -FightManager
     GameManager "1" --> "1" Classific : -Classific
@@ -189,5 +199,8 @@ direction LR
     PgStatsCommon <|-- Character
     GameManager -- PgStatsCommon : -PgStatsCommon
     PgStatsCommon <|-- Villain
-    EventManager -- NPC : -ArrayList NPC
-    EventManager -- Map : -Map
+    FightScreen -- GameManager : -GameManager g
+    GameScreen -- GameManager : -GameManager g
+    OpenGame -- GameManager : -GameManager g
+    GameManager -- Map : -Map m
+    GameManager -- NPC : -ArrayList NPC

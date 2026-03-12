@@ -19,7 +19,4 @@ public class ItemEquippable extends Item{
     public int getDamage() {
         return damage;
     }
-    
-    
-    
 }

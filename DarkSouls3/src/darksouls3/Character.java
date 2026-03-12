@@ -12,7 +12,7 @@ public abstract class Character extends PgStatsCommon{
     
     protected int mana;
     protected int stamina;
-    protected Inventory inv = new Inventory(3, 3, 3);
+    protected Inventory inv = new Inventory();
     
     
     public Character(int mana, int stamina, String name, int life, int baseAtt) {
@@ -69,6 +69,7 @@ public abstract class Character extends PgStatsCommon{
         }
     }
     
+    //use,add,remove Item da implementare
     
     
     public abstract void specialAbility(Villain v);
