@@ -109,19 +109,27 @@ public class OpenGame extends javax.swing.JFrame {
                 ChoiseCharacter cC = new ChoiseCharacter();
                 cC.setVisible(true);
             }
-        };
-        ActionListener Istruction = new ActionListener(){
+        }; //primo bottpne
+        
+        ActionListener istruction = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(OpenGame.this, instructions, "Instructions", JOptionPane.INFORMATION_MESSAGE);
             }
             
-        };
-        
+        }; //terzo bottone
+        ActionListener exit = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+            
+        }; //quarto bottone
         
         button1.addActionListener(newGame);
         
-        button3.addActionListener(Istruction);
+        button3.addActionListener(istruction);
+        button4.addActionListener(exit);
         
         //aggiungo i bottoni
         westPanel.add(button1);
@@ -145,7 +153,7 @@ public class OpenGame extends javax.swing.JFrame {
         eastPanel.setOpaque(false);
         // aggiungi il mainPanel al frame
         this.add(mainPanel);
-        this.setSize(840, 420);
+        this.setSize(1000, 500);
         
     }
 
