@@ -4,16 +4,19 @@
  */
 package darksouls3;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author aless
  */
 public class NPC {
-    private String name;
-
-    public NPC(String name) {
-        this.name = name;
+    private ArrayList<NPC_Name> npcs = new ArrayList();
+        
+    public ArrayList<NPC_Name> getNPC_Name(){
+        for(NPC_Name n: NPC_Name.values()){
+            npcs.add(n);
+        }
+        return npcs;
     }
-    
-    
 }
