@@ -4,17 +4,37 @@
  */
 package darksouls3;
 
+
 /**
  *
  * @author aless
  */
 public class GameManager {
+    private Character c;    // = new PgStatsCommon("character", 100,25);
+    private Villain v ;   //= new Villain("enemie", 100,33);
+    private Map m;
+    private Player p;
+    private FileManager fileM;
+    private EventManager eventM;
+    private FightManager fightM;
+    private EndingManager endingM;
     
     
     
+    public void eventManaging(){
+        eventM.eventRandom();
+        //dopo aver chiamato l'evento randomico, devo fare tutte le if di controllo, ma prima devo capire
+        //se gli attributi che ho inserito vanno bene e devo capire come impostare le if
+    }
+    
+    //gli passo la keyWord perché così fancendo quando andrò a cliccare il pulsante attacca la keyWord diventerà
+    //attacca e di conseguenza adrò a togliere vita al boss
+    public void fight(String keyWord){
+        fightM.chooseTurn(c, v);
+        fightM.fightManaged(c, v, keyWord);
+    }
     
     
-    /*
     //NEW BOSS
     public boolean newBoss(){
         return true;
@@ -38,5 +58,5 @@ public class GameManager {
         c.inv.greenBlossom = 3;
     }
     
-    */
+    
 }

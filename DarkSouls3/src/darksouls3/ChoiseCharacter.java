@@ -65,8 +65,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE BARBARIAN");
                 Character c = new Barbarian(20, 90, nameCharacter, 100, 25);
-                dispose();
-                gS.setVisible(true);
+                
             }
         });
         
@@ -91,8 +90,6 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE KNIGHT");
                 Character c = new Knight(35, 75, nameCharacter, 100, 22);
-                dispose();
-                gS.setVisible(true);
             }
         });
 
@@ -114,8 +111,6 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE MAGE");
                 Character c = new Mage(90, 25, nameCharacter, 100, 28);
-                dispose();
-                gS.setVisible(true);
             }
         });
 
@@ -137,8 +132,6 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE PRIEST");
                 Character c = new Priest(60, 60, nameCharacter, 100, 20);
-                dispose();
-                gS.setVisible(true);
             }
         });
         
@@ -170,6 +163,9 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         centerPanel.add(pg4);
         
         
+        
+        
+        
         JPanel southPanel = new JPanel();
         
         northPanel.setOpaque(false);
@@ -179,6 +175,16 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         JButton start = new JButton("START ADVENTURE");
         start.setMaximumSize(new Dimension(200, 50));
         southPanel.add(start);
+        
+        //quando clicco avvia avventura chiude il form e apre la schermata di gioco
+        ActionListener startAdventure = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                gS.setVisible(true);
+            }
+        }; 
+        start.addActionListener(startAdventure);
         
         
         mainPanel.add(northPanel, BorderLayout.NORTH);
