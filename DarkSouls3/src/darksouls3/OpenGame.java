@@ -5,6 +5,8 @@
 package darksouls3;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -14,7 +16,18 @@ import javax.swing.*;
 public class OpenGame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OpenGame.class.getName());
-    
+    String instructions = "Welcome to Lothric, brave traveler.\n\n\n"
+                + "Before beginning your journey, choose your hero: Barbarian, Knight, Priest, or Mage.\n"
+                + "Each has unique abilities that will shape your playstyle.\n\n\n"
+                + "Once you start your adventure with the Travel button, you will explore the dark and mysterious lands of Lothric,\n"
+                + "where danger lurks at every turn. Encounter powerful bosses, deadly enemies, and random events—\n"
+                + "some will aid you, others will challenge you severely.\n\n\n"
+                + "Throughout your journey, you will have access to:\n\n"
+                + "5 healing potions for each stat, to be used wisely\n\n"
+                + "1 special ability, capable of turning the tide of battle\n\n\n"
+                + "Every journey will test your strategy, courage, and survival skills.\n"
+                + "Will you defeat the bosses, overcome unexpected events, and save the bonfire flame,\n"
+                + "the last hope of Lothric, Ashen One?";
     
     /**
      * Creates new form OpenGame
@@ -85,11 +98,30 @@ public class OpenGame extends javax.swing.JFrame {
         westPanel.setLayout(new GridLayout(4,1,10,10));
         JButton button1 = new JButton("New Game");
         JButton button2 = new JButton("Load Game");
-        JButton button3 = new JButton("Settings");
+        JButton button3 = new JButton("Instruction");
         JButton button4 = new JButton("Exit");
         
+        //implemento funzioni dei bottoni
+        ActionListener newGame = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ChoiseCharacter cC = new ChoiseCharacter();
+                cC.setVisible(true);
+            }
+        };
+        ActionListener Istruction = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(OpenGame.this, instructions, "Instructions", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        };
         
         
+        button1.addActionListener(newGame);
+        
+        button3.addActionListener(Istruction);
         
         //aggiungo i bottoni
         westPanel.add(button1);

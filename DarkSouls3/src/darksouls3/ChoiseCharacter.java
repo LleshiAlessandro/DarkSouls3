@@ -30,7 +30,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 super.paintComponent(g);
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
-        };;
+        };
         JPanel northPanel = new JPanel();
         JLabel title = new JLabel("SCEGLI IL TUO AVVENTURIERO");
         
