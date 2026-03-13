@@ -9,8 +9,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-
-
 /**
  *
  * @author lleshi.alessandro
@@ -18,6 +16,9 @@ import javax.swing.*;
 public class ChoiseCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
+    String nameCharacter;
+    boolean characterChoose;
+    GameScreen gS = new GameScreen();
     /**
      * Creates new form ChoiseCharacter
      */
@@ -63,6 +64,9 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE BARBARIAN");
+                Character c = new Barbarian(20, 90, nameCharacter, 100, 25);
+                dispose();
+                gS.setVisible(true);
             }
         });
         
@@ -86,6 +90,9 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE KNIGHT");
+                Character c = new Knight(35, 75, nameCharacter, 100, 22);
+                dispose();
+                gS.setVisible(true);
             }
         });
 
@@ -106,6 +113,9 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE MAGE");
+                Character c = new Mage(90, 25, nameCharacter, 100, 28);
+                dispose();
+                gS.setVisible(true);
             }
         });
 
@@ -126,6 +136,9 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("YOU HAVE CLICKED THE PRIEST");
+                Character c = new Priest(60, 60, nameCharacter, 100, 20);
+                dispose();
+                gS.setVisible(true);
             }
         });
         
