@@ -18,6 +18,123 @@ public class ChoiseCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
     String nameCharacter;
+    String hystoriPg1 =  "In the dying lands of Lothric, where ash falls like silent snow,\n" +
+    "a legend is whispered among the fading fires.\n" +
+    "\n" +
+    "It speaks of a barbarian born far from crowns and kingdoms,\n" +
+    "raised beneath merciless winds and frozen skies.\n" +
+    "\n" +
+    "His body was that of a titan, scarred by countless battles,\n" +
+    "each mark a memory of blood and survival.\n" +
+    "In his hands he carried a massive axe,\n" +
+    "heavy enough to break shields, bone, and destiny alike.\n" +
+    "\n" +
+    "He walked through the cursed streets of the Undead Settlement,\n" +
+    "where hollow souls wander without hope.\n" +
+    "He crossed the poisoned swamps of Farron Keep,\n" +
+    "where even the strongest warriors lose their will to fight.\n" +
+    "\n" +
+    "And when he reached the cold moonlit city of Irithyll,\n" +
+    "the shadows themselves trembled before his wrath.\n" +
+    "\n" +
+    "He fought not for glory.\n" +
+    "He fought not for a throne.\n" +
+    "\n" +
+    "He fought because defying the darkness\n" +
+    "was written into his very soul.\n" +
+    "\n" +
+    "And so, beneath fading flames and endless grey skies,\n" +
+    "his name began to spread among the last survivors.\n" +
+    "\n" +
+    "A warrior born from ash.\n" +
+    "A barbarian destined to challenge even the gods.";
+    
+    String knightLore =
+    "In the fading kingdom of Lothric, where the fire grows weak\n" +
+    "and the bells of fate echo through broken towers,\n" +
+    "there marches a lone knight.\n" +
+    "\n" +
+    "Clad in steel scarred by countless battles,\n" +
+    "he was once sworn to defend the ancient throne.\n" +
+    "His armor bears the marks of war,\n" +
+    "each dent a memory of loyalty and sacrifice.\n" +
+    "\n" +
+    "Through the ruined gates of Lothric Castle he walks,\n" +
+    "shield raised against the darkness of a dying world.\n" +
+    "\n" +
+    "He crossed the silent bridges of Irithyll,\n" +
+    "where moonlight reflects upon frozen stone\n" +
+    "and ancient knights lie forgotten.\n" +
+    "\n" +
+    "Though the kingdoms have fallen\n" +
+    "and the lords have abandoned their thrones,\n" +
+    "his oath remains unbroken.\n" +
+    "\n" +
+    "For a knight does not fight for glory.\n" +
+    "A knight fights for honor.\n" +
+    "\n" +
+    "And even in a world swallowed by ash,\n" +
+    "his blade will never fall.";
+    
+    
+    String mageLore =
+    "Beyond the crumbling halls of the Grand Archives,\n" +
+    "where forbidden knowledge sleeps among ancient tomes,\n" +
+    "there walks a sorcerer of terrible wisdom.\n" +
+    "\n" +
+    "His path was not forged by steel,\n" +
+    "but by the silent study of lost spells\n" +
+    "and the whispers of fading magic.\n" +
+    "\n" +
+    "Within his hands burns the cold light of sorcery,\n" +
+    "a power drawn from the very soul of the world.\n" +
+    "\n" +
+    "He wandered through the cursed lands of Lothric,\n" +
+    "seeking secrets buried beneath centuries of ash.\n" +
+    "The dead rose against him,\n" +
+    "yet arcane fire answered their hollow rage.\n" +
+    "\n" +
+    "In Irithyll's pale moonlight,\n" +
+    "his spells illuminated the darkness\n" +
+    "like stars in a dying sky.\n" +
+    "\n" +
+    "For while swords may shatter\n" +
+    "and kingdoms may fall,\n" +
+    "knowledge endures.\n" +
+    "\n" +
+    "And in the hands of a true mage,\n" +
+    "knowledge becomes power.";
+    
+    
+    
+    String priestLore =
+    "In the shadow of the Cathedral of the Deep,\n" +
+    "where fading prayers echo through hollow halls,\n" +
+    "there walks a humble priest.\n" +
+    "\n" +
+    "Clad not in armor, but in faith,\n" +
+    "he carries only a sacred talisman\n" +
+    "and the light of ancient miracles.\n" +
+    "\n" +
+    "The world around him is dying.\n" +
+    "Ash falls upon broken kingdoms\n" +
+    "and hope grows ever dim.\n" +
+    "\n" +
+    "Yet still he travels through Lothric,\n" +
+    "healing the wounded\n" +
+    "and guiding lost souls through the darkness.\n" +
+    "\n" +
+    "When the undead rise\n" +
+    "and despair threatens to consume the land,\n" +
+    "his prayers become radiant power.\n" +
+    "\n" +
+    "For miracles are not born from strength,\n" +
+    "nor from knowledge.\n" +
+    "\n" +
+    "They are born from faith.\n" +
+    "\n" +
+    "And as long as even a single prayer remains,\n" +
+    "the light of the gods shall never truly fade.";
     GameScreen gS = new GameScreen();
     /**
      * Creates new form ChoiseCharacter
@@ -64,6 +181,15 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 Character c = new Barbarian(20, 90, nameCharacter, 125, 25);
             }
         });
+        //implemento funzioni dei bottoni
+        ActionListener historyBarbarian = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ChoiseCharacter.this, hystoriPg1, "BARBARIAN HISTORY", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        history.addActionListener(historyBarbarian);
+        
         pg1.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
         Border originalBorder1 = pg1.getBorder();//salva il bordo originale
@@ -106,6 +232,13 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 Character c = new Knight(35, 75, nameCharacter, 115, 22);
             }
         });
+        ActionListener historyKnight = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ChoiseCharacter.this, knightLore, "KNIGHT HISTORY", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        history2.addActionListener(historyKnight);
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
         Border originalBorder2 = pg2.getBorder();//salva il bordo originale
         MouseAdapter glowAdapter2 = new MouseAdapter() {
@@ -145,6 +278,13 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 Character c = new Mage(90, 25, nameCharacter, 95, 28);
             }
         });
+        ActionListener historyMage = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ChoiseCharacter.this, mageLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        history3.addActionListener(historyMage);
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
         Border originalBorder3 = pg3.getBorder();//salva il bordo originale
         MouseAdapter glowAdapter3 = new MouseAdapter() {
@@ -184,6 +324,14 @@ public class ChoiseCharacter extends javax.swing.JFrame {
                 Character c = new Priest(60, 60, nameCharacter, 100, 20);
             }
         });
+        ActionListener historyPriest = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ChoiseCharacter.this, priestLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        history4.addActionListener(historyPriest);
+        
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
         Border originalBorder4 = pg4.getBorder();//salva il bordo originale
         MouseAdapter glowAdapter4 = new MouseAdapter() {
