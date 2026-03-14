@@ -18,14 +18,12 @@ public class ChoiseCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
     String nameCharacter;
-    boolean characterChoose;
     GameScreen gS = new GameScreen();
     /**
      * Creates new form ChoiseCharacter
      */
     public ChoiseCharacter() {
         initComponents();
-
         JPanel mainPanel = new JPanel(new BorderLayout()){
             Image sfondo = new ImageIcon("immagini/sfondo_scelta_pg_giusto.jpg").getImage();
             @Override
@@ -63,8 +61,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE BARBARIAN");
-                Character c = new Barbarian(20, 90, nameCharacter, 100, 25);
-                
+                Character c = new Barbarian(20, 90, nameCharacter, 125, 25);
             }
         });
         pg1.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -106,7 +103,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE KNIGHT");
-                Character c = new Knight(35, 75, nameCharacter, 100, 22);
+                Character c = new Knight(35, 75, nameCharacter, 115, 22);
             }
         });
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
@@ -145,7 +142,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE MAGE");
-                Character c = new Mage(90, 25, nameCharacter, 100, 28);
+                Character c = new Mage(90, 25, nameCharacter, 95, 28);
             }
         });
         //aggiunge un bordo luminoso quando passo sopra all'pamnel dell'immagine 1
@@ -253,21 +250,20 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         southPanel.add(start);
         
         //quando clicco avvia avventura chiude il form e apre la schermata di gioco
-        ActionListener startAdventure = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                gS.setVisible(true);
-            }
-        }; 
-        start.addActionListener(startAdventure);
-        
+            ActionListener startAdventure = new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                    gS.setVisible(true);
+                }
+            }; 
+            start.addActionListener(startAdventure);
         
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         this.add(mainPanel);
-        this.setSize(840, 420);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
     /**

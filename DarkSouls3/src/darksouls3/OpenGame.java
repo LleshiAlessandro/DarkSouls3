@@ -153,7 +153,7 @@ public class OpenGame extends javax.swing.JFrame {
         eastPanel.setOpaque(false);
         // aggiungi il mainPanel al frame
         this.add(mainPanel);
-        this.setSize(1000, 500);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
     }
 

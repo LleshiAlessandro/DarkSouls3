@@ -4,6 +4,9 @@
  */
 package darksouls3;
 
+import java.awt.*;
+import javax.swing.*;
+
 /**
  *
  * @author lleshi.alessandro
@@ -17,6 +20,22 @@ public class GameScreen extends javax.swing.JFrame {
      */
     public GameScreen() {
         initComponents();
+        
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel northPanel = new JPanel();
+        JLabel title = new JLabel("Dark Souls 3");
+
+        title.setFont(new Font("Arial", Font.BOLD, 40));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        northPanel.add(title, BorderLayout.CENTER);
+        northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
+        
+        
+        
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+        this.add(mainPanel);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -29,17 +48,6 @@ public class GameScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

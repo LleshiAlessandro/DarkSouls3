@@ -28,4 +28,9 @@ public class Inventory {
     public void removeitem(Item i){
         items.remove(i);
     }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+    
 }

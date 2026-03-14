@@ -5,6 +5,7 @@
 package darksouls3;
 
 
+
 /**
  *
  * @author aless
@@ -18,13 +19,35 @@ public class GameManager {
     private EventManager eventM;
     private FightManager fightM;
     private EndingManager endingM;
+
+    public GameManager(Character c, Villain v, Map m, Player p, FileManager fileM, EventManager eventM, FightManager fightM, EndingManager endingM) {
+        this.c = c;
+        this.v = v;
+        this.m = m;
+        this.p = p;
+        this.fileM = fileM;
+        this.eventM = eventM;
+        this.fightM = fightM;
+        this.endingM = endingM;
+    }
     
     
     
-    public void eventManaging(){
+    public void eventManaging(Item i, NPC n, String keyWord){
         eventM.eventRandom();
         //dopo aver chiamato l'evento randomico, devo fare tutte le if di controllo, ma prima devo capire
         //se gli attributi che ho inserito vanno bene e devo capire come impostare le if
+        switch (eventM.eventRandom()) {
+            case ITEM_FOUND -> this.itemFound(c, i);
+            case RESTORE_HEALS -> this.restoreHeals(c);
+            case NEW_NPC -> this.newNPC(n);
+            case NEW_LOCATION -> this.newLocation();
+            case NEW_BOSS -> {
+                this.newBoss();
+                this.fight(keyWord);
+            }
+            default -> System.out.println("errore");
+        }
     }
     
     //gli passo la keyWord perché così fancendo quando andrò a cliccare il pulsante attacca la keyWord diventerà
