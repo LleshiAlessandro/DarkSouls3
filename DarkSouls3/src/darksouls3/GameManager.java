@@ -4,6 +4,8 @@
  */
 package darksouls3;
 
+import java.util.Random;
+
 
 
 /**
@@ -19,6 +21,8 @@ public class GameManager {
     private EventManager eventM;
     private FightManager fightM;
     private EndingManager endingM;
+    private Random rnd = new Random();
+
 
     public GameManager(Character c, Villain v, Map m, Player p, FileManager fileM, EventManager eventM, FightManager fightM, EndingManager endingM) {
         this.c = c;
@@ -57,22 +61,17 @@ public class GameManager {
         fightM.fightManaged(c, v, keyWord);
     }
     
-    
     //NEW BOSS
-    public boolean newBoss(){
-        return true;
+    public void newBoss(){
+        Villain v = new Villain("Boss", 150, 33);
     }
     //ITEM FOUND
     public void itemFound(Character c, Item i){
         c.inv.addItem(i);
     }
-    //NEW LOCATION
-    public boolean newLocation(){
-        return true;
-    }
     //NEW NPC
-    public NPC newNPC(NPC n){
-        return n;
+    public void newNPC(NPC n){
+        //da implementare
     }
     //RESTORE HEALS
     public void restoreHeals(Character c){
@@ -80,6 +79,25 @@ public class GameManager {
         c.inv.numberEstus = 3;
         c.inv.greenBlossom = 3;
     }
-    
+    //NEW LOCATION
+    public void newLocation(){
+        Map[] maps = Map.values();
+        int currentIndex = -1;
+
+        for (int i = 0; i < maps.length; i++){
+            if (maps[i] == m){
+                currentIndex = i;
+                break;
+            }
+        }
+
+        int rand = rnd.nextInt(maps.length - 1); // genera un numero tra 0 e maps.length-2
+
+        if (rand >= currentIndex){
+            rand++;
+        }
+
+        m = maps[rand];
+    }
     
 }
