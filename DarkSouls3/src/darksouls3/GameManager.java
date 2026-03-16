@@ -106,9 +106,9 @@ public class GameManager {
         m = maps[rand];
     }
     
-    
-    //gestire ending
+    //gestione ending
     public void ending(){
         endingM.ending();
     }
+    //da implementare il load e il save
 }
