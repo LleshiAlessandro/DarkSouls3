@@ -18,6 +18,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseCharacter.class.getName());
     String nameCharacter;
+    Character c;
     String hystoriPg1 =  "In the dying lands of Lothric, where ash falls like silent snow,\n" +
     "a legend is whispered among the fading fires.\n" +
     "\n" +
@@ -141,6 +142,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
      */
     public FormChoiseCharacter() {
         initComponents();
+        JButton start = new JButton("START ADVENTURE");
         JPanel mainPanel = new JPanel(new BorderLayout()){
             Image sfondo = new ImageIcon("immagini/sfondo_scelta_pg_giusto.jpg").getImage();
             @Override
@@ -178,7 +180,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE BARBARIAN");
-                Character c = new Barbarian(20, 90, nameCharacter, 125, 25);
+                c = new Barbarian(20, 90, nameCharacter, 125, 25);
+                start.setEnabled(true);
             }
         });
         //implemento funzioni dei bottoni
@@ -196,7 +199,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         MouseAdapter glowAdapter1 = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                pg1.setBorder(BorderFactory.createLineBorder(Color.CYAN, 5, true));
+                pg1.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2, true));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -229,7 +232,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE KNIGHT");
-                Character c = new Knight(35, 75, nameCharacter, 115, 22);
+                c = new Knight(35, 75, nameCharacter, 115, 22);
+                start.setEnabled(true);
             }
         });
         ActionListener historyKnight = new ActionListener(){
@@ -244,7 +248,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         MouseAdapter glowAdapter2 = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                pg2.setBorder(BorderFactory.createLineBorder(Color.CYAN, 5, true));
+                pg2.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2, true));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -275,7 +279,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE MAGE");
-                Character c = new Mage(90, 25, nameCharacter, 95, 28);
+                c = new Mage(90, 25, nameCharacter, 95, 28);
+                start.setEnabled(true);
             }
         });
         ActionListener historyMage = new ActionListener(){
@@ -290,7 +295,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         MouseAdapter glowAdapter3 = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                pg3.setBorder(BorderFactory.createLineBorder(Color.CYAN, 5, true));
+                pg3.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2, true));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -321,7 +326,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE PRIEST");
-                Character c = new Priest(60, 60, nameCharacter, 100, 20);
+                c = new Priest(60, 60, nameCharacter, 100, 20);
+                start.setEnabled(true);
             }
         });
         ActionListener historyPriest = new ActionListener(){
@@ -337,7 +343,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         MouseAdapter glowAdapter4 = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                pg4.setBorder(BorderFactory.createLineBorder(Color.CYAN, 5, true));
+                pg4.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2, true));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -393,25 +399,29 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         southPanel.setOpaque(false);
         
         northPanel.add(title);
-        JButton start = new JButton("START ADVENTURE");
+        
+        start.setEnabled(false);
         start.setMaximumSize(new Dimension(200, 50));
         southPanel.add(start);
         
         //quando clicco avvia avventura chiude il form e apre la schermata di gioco
-            ActionListener startAdventure = new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                    gS.setVisible(true);
-                }
-            }; 
-            start.addActionListener(startAdventure);
-        
+        ActionListener startAdventure = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                gS.setVisible(true);
+            }
+        }; 
+        start.addActionListener(startAdventure);
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        
+        
+        
+        //prendere in input il nome dell avventuriero per poi stamparlo a schermo
     }
 
     /**

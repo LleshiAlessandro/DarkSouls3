@@ -19,8 +19,7 @@ public class FormGameScreen extends javax.swing.JFrame {
      * Creates new form GameScreen
      */
     public FormGameScreen() {
-        initComponents();
-        
+        initComponents();        
         
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel northPanel = new JPanel();
@@ -31,8 +30,19 @@ public class FormGameScreen extends javax.swing.JFrame {
         northPanel.add(title, BorderLayout.CENTER);
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
         
+        JPanel westPanel = new JPanel(new BorderLayout());
+        JPanel imgCharacter = new JPanel() {
+            Image sfondo = new ImageIcon("immagini/priest.png").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        westPanel.add(imgCharacter, BorderLayout.NORTH);
         
         
+        mainPanel.add(westPanel, BorderLayout.WEST);
         mainPanel.add(northPanel, BorderLayout.NORTH);
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
