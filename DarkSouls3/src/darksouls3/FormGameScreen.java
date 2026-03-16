@@ -16,11 +16,20 @@ public class FormGameScreen extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
     
     GameManager g;
+    Villain  v;
+    Player p;
     /**
      * Creates new form GameScreen
      */
-    public FormGameScreen(String imgPath) {
+    /**
+     * 
+     * @param imgPath serve perché se non gli passo il percorso dell immagine non posso sapere quale immagine prendere per questo form 
+     * @param c serve perché se non passo il character io non so le sue statistiche
+     */
+    public FormGameScreen(String imgPath, Character c) {
         initComponents();        
+        
+        g = new GameManager(c,v, p);
         
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel northPanel = new JPanel();
@@ -40,7 +49,13 @@ public class FormGameScreen extends javax.swing.JFrame {
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        JPanel characterSpec = new JPanel(new BorderLayout());
+        JPanel characterSpec = new JPanel(new GridLayout(3,1,10,10));
+        JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
+        JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
+        JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
+        characterSpec.add(life);
+        characterSpec.add(mana);
+        characterSpec.add(stamina);
         westPanel.setPreferredSize(new Dimension(200, 400));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
@@ -89,7 +104,7 @@ public class FormGameScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
         //immagini/priest.png immagine di default
-        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png").setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png", null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

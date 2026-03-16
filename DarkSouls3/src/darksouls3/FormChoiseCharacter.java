@@ -176,14 +176,15 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         // pulsante sotto
         JButton history = new JButton("HISTORY");
         pg1.add(history, BorderLayout.SOUTH);
-        imagePanel1.addMouseListener(new MouseAdapter() {
+        MouseAdapter m1 = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 c = new Barbarian(20, 90, nameCharacter, 125, 25);
                 imgPath = "immagini/barbarian.png";
                 start.setEnabled(true);
             }
-        });
+        };
+        imagePanel1.addMouseListener(m1);
         //implemento funzioni dei bottoni
         ActionListener historyBarbarian = new ActionListener(){
             @Override
@@ -228,7 +229,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         // pulsante sotto
         JButton history2 = new JButton("HISTORY");
         pg2.add(history2, BorderLayout.SOUTH);
-        imagePanel2.addMouseListener(new MouseAdapter() {
+        MouseAdapter m2 = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE KNIGHT");
@@ -236,7 +237,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
                 imgPath = "immagini/knight.png";
                 start.setEnabled(true);
             }
-        });
+        };
+        imagePanel2.addMouseListener(m2);
         ActionListener historyKnight = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -276,7 +278,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         pg3.add(imagePanel3, BorderLayout.CENTER);
         JButton history3 = new JButton("HISTORY");
         pg3.add(history3, BorderLayout.SOUTH);
-        imagePanel3.addMouseListener(new MouseAdapter() {
+        MouseAdapter m3 = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE MAGE");
@@ -284,7 +286,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
                 imgPath = "immagini/mage.png";
                 start.setEnabled(true);
             }
-        });
+        };
+        imagePanel3.addMouseListener(m3);
         ActionListener historyMage = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -324,7 +327,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         pg4.add(imagePanel4, BorderLayout.CENTER);
         JButton history4 = new JButton("HISTORY");
         pg4.add(history4, BorderLayout.SOUTH);
-        imagePanel4.addMouseListener(new MouseAdapter() {
+        MouseAdapter m4 = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE PRIEST");
@@ -332,7 +335,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
                 imgPath = "immagini/priest.png";
                 start.setEnabled(true);
             }
-        });
+        };
+        imagePanel4.addMouseListener(m4);
         ActionListener historyPriest = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -412,7 +416,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                FormGameScreen gS = new FormGameScreen(imgPath);
+                FormGameScreen gS = new FormGameScreen(imgPath, c);
                 gS.setVisible(true);
             }
         }; 
@@ -420,7 +424,14 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
-
+        
+        //così il giocatore può scegliere una sola volta il personaggio
+        if(c != null){
+            imagePanel1.removeMouseListener(m1);
+            imagePanel2.removeMouseListener(m2);
+            imagePanel3.removeMouseListener(m3);
+            imagePanel4.removeMouseListener(m4);
+        }
         
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);

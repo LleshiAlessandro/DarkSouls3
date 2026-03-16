@@ -21,7 +21,7 @@ public class GameManager {
     private EventManager eventM;
     private FightManager fightM;
     private EndingManager endingM;
-    private NPC n;
+    private NPC n = new NPC();
     private Random rnd = new Random();
     private int npcRandom;
     private NPC_Name[] npcName = n.getNPC_Name();
