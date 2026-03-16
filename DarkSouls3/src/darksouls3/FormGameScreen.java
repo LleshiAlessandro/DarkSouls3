@@ -53,9 +53,11 @@ public class FormGameScreen extends javax.swing.JFrame {
         JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
         JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
         JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
+        JLabel att = new JLabel("base attac: " + String.valueOf(g.c.baseAtt));
         characterSpec.add(life);
         characterSpec.add(mana);
         characterSpec.add(stamina);
+        characterSpec.add(att);
         westPanel.setPreferredSize(new Dimension(200, 400));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
