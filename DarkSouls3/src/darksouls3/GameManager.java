@@ -62,7 +62,7 @@ public class GameManager {
     //gli passo la keyWord perché così fancendo quando andrò a cliccare il pulsante attacca la keyWord diventerà
     //attacca e di conseguenza adrò a togliere vita al boss
     public void fight(String keyWord){
-        fightM.chooseTurn(c, v);
+        fightM.chooseTurn(c, v, keyWord);
         fightM.fightManaged(c, v, keyWord);
     }
     //NEW BOSS

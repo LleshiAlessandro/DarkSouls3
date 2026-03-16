@@ -11,4 +11,17 @@ package darksouls3;
 public class Salvataggio {
     //dovrò inserire tutti i dati che dorvò salvare, così che con la serializzazione inserirò 1 solo oggetto Salvataggio nel fileManager e salverò tutto
     //con 1 solo oggetto
+    private Character c;
+    private Villain v;
+    private FightManager fightM;
+    private EventManager eventM;
+
+    public Salvataggio(Character c, Villain v, FightManager fightM, EventManager eventM) {
+        this.c = c;
+        this.v = v;
+        this.fightM = fightM;
+        this.eventM = eventM;
+    }
+    
+    
 }
