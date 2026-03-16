@@ -4,6 +4,7 @@
  */
 package darksouls3;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -13,16 +14,18 @@ import java.util.Random;
  * @author aless
  */
 public class GameManager {
-    private Character c;    // = new PgStatsCommon("character", 100,25);
-    private Villain v ;   //= new Villain("enemie", 100,33);
+    private Character c;
+    private Villain v ;
     private Map m;
     private Player p;
     private FileManager fileM;
     private EventManager eventM;
     private FightManager fightM;
     private EndingManager endingM;
+    private NPC n;
     private Random rnd = new Random();
-
+    private int npcRandom;
+    private NPC_Name[] npcName = n.getNPC_Name();
 
     public GameManager(Character c, Villain v, Map m, Player p, FileManager fileM, EventManager eventM, FightManager fightM, EndingManager endingM) {
         this.c = c;
@@ -44,7 +47,9 @@ public class GameManager {
         switch (eventM.eventRandom()) {
             case ITEM_FOUND -> this.itemFound(c, i);
             case RESTORE_HEALS -> this.restoreHeals(c);
-            case NEW_NPC -> this.newNPC(n);
+            case NEW_NPC -> {
+                this.newNPC(n);
+            }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
                 this.newBoss();
@@ -60,7 +65,6 @@ public class GameManager {
         fightM.chooseTurn(c, v);
         fightM.fightManaged(c, v, keyWord);
     }
-    
     //NEW BOSS
     public void newBoss(){
         Villain v = new Villain("Boss", 150, 33);
@@ -70,8 +74,10 @@ public class GameManager {
         c.inv.addItem(i);
     }
     //NEW NPC
-    public void newNPC(NPC n){
-        //da implementare
+    public NPC_Name newNPC(NPC n){
+        //mi fa incontrare un npc randomico
+        npcRandom = rnd.nextInt();
+        return npcName[npcRandom];
     }
     //RESTORE HEALS
     public void restoreHeals(Character c){
@@ -100,4 +106,9 @@ public class GameManager {
         m = maps[rand];
     }
     
+    
+    //gestire ending
+    public void ending(){
+        endingM.ending();
+    }
 }

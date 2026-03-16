@@ -31,6 +31,7 @@ public class FightManager {
             //turni del character
             if(turni %2 != 0){
                 this.incrementTurn();
+                
                 return true;
             }
             //turni del nemico
@@ -52,7 +53,7 @@ public class FightManager {
         }
         else if(keyWord.equals(keyWords[2])){
             escape = new Random();
-            escapeResult = escape.nextInt(0, 2);
+            escapeResult = escape.nextInt(0, 6);
             if(escapeResult == 0){
                 c.setLife(c.life = c.life - v.baseAtt);
             }
