@@ -8,14 +8,14 @@ package darksouls3;
  *
  * @author aless
  */
-public class FightScreen extends javax.swing.JFrame {
+public class FormFightScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FightScreen.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormFightScreen.class.getName());
 
     /**
      * Creates new form FIghtScreen
      */
-    public FightScreen() {
+    public FormFightScreen() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class FightScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FightScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormFightScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

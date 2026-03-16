@@ -14,9 +14,9 @@ import javax.swing.border.Border;
  *
  * @author lleshi.alessandro
  */
-public class ChoiseCharacter extends javax.swing.JFrame {
+public class FormChoiseCharacter extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChoiseCharacter.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseCharacter.class.getName());
     String nameCharacter;
     String hystoriPg1 =  "In the dying lands of Lothric, where ash falls like silent snow,\n" +
     "a legend is whispered among the fading fires.\n" +
@@ -135,11 +135,11 @@ public class ChoiseCharacter extends javax.swing.JFrame {
     "\n" +
     "And as long as even a single prayer remains,\n" +
     "the light of the gods shall never truly fade.";
-    GameScreen gS = new GameScreen();
+    FormGameScreen gS = new FormGameScreen();
     /**
      * Creates new form ChoiseCharacter
      */
-    public ChoiseCharacter() {
+    public FormChoiseCharacter() {
         initComponents();
         JPanel mainPanel = new JPanel(new BorderLayout()){
             Image sfondo = new ImageIcon("immagini/sfondo_scelta_pg_giusto.jpg").getImage();
@@ -185,7 +185,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         ActionListener historyBarbarian = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ChoiseCharacter.this, hystoriPg1, "BARBARIAN HISTORY", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormChoiseCharacter.this, hystoriPg1, "BARBARIAN HISTORY", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         history.addActionListener(historyBarbarian);
@@ -235,7 +235,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         ActionListener historyKnight = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ChoiseCharacter.this, knightLore, "KNIGHT HISTORY", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormChoiseCharacter.this, knightLore, "KNIGHT HISTORY", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         history2.addActionListener(historyKnight);
@@ -281,7 +281,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         ActionListener historyMage = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ChoiseCharacter.this, mageLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormChoiseCharacter.this, mageLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         history3.addActionListener(historyMage);
@@ -327,7 +327,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         ActionListener historyPriest = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ChoiseCharacter.this, priestLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormChoiseCharacter.this, priestLore, "MAGE HISTORY", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         history4.addActionListener(historyPriest);
@@ -450,7 +450,7 @@ public class ChoiseCharacter extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ChoiseCharacter().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormChoiseCharacter().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

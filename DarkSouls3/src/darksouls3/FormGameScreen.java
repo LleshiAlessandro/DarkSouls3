@@ -11,14 +11,14 @@ import javax.swing.*;
  *
  * @author lleshi.alessandro
  */
-public class GameScreen extends javax.swing.JFrame {
+public class FormGameScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GameScreen.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
 
     /**
      * Creates new form GameScreen
      */
-    public GameScreen() {
+    public FormGameScreen() {
         initComponents();
         
         
@@ -74,7 +74,7 @@ public class GameScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GameScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormGameScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

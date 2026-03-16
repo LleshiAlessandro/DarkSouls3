@@ -13,9 +13,9 @@ import javax.swing.*;
  *
  * @author aless
  */
-public class OpenGame extends javax.swing.JFrame {
+public class FormOpenGame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OpenGame.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormOpenGame.class.getName());
     String instructions = "Welcome to Lothric, brave traveler.\n\n\n"
                 + "Before beginning your journey, choose your hero: Barbarian, Knight, Priest, or Mage.\n"
                 + "Each has unique abilities that will shape your playstyle.\n\n\n"
@@ -32,7 +32,7 @@ public class OpenGame extends javax.swing.JFrame {
     /**
      * Creates new form OpenGame
      */
-    public OpenGame() {
+    public FormOpenGame() {
         initComponents();
         
         JPanel mainPanel = new JPanel();
@@ -106,7 +106,7 @@ public class OpenGame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                ChoiseCharacter cC = new ChoiseCharacter();
+                FormChoiseCharacter cC = new FormChoiseCharacter();
                 cC.setVisible(true);
             }
         }; //primo bottpne
@@ -114,7 +114,7 @@ public class OpenGame extends javax.swing.JFrame {
         ActionListener istruction = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(OpenGame.this, instructions, "Instructions", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormOpenGame.this, instructions, "Instructions", JOptionPane.INFORMATION_MESSAGE);
             }
             
         }; //terzo bottone
@@ -194,7 +194,7 @@ public class OpenGame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new OpenGame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormOpenGame().setVisible(true));
         
         
     }

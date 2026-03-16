@@ -15,7 +15,7 @@ public class DarkSouls3 {
      */
     public static void main(String[] args) {
         
-        OpenGame oG = new OpenGame();
+        FormOpenGame oG = new FormOpenGame();
         oG.setVisible(true);
         
         
