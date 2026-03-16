@@ -4,7 +4,6 @@
  */
 package darksouls3;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -14,8 +13,8 @@ import java.util.Random;
  * @author aless
  */
 public class GameManager {
-    private Character c;
-    private Villain v ;
+    protected Character c;
+    protected Villain v ;
     private Map m;
     private Player p;
     private FileManager fileM;
@@ -27,15 +26,10 @@ public class GameManager {
     private int npcRandom;
     private NPC_Name[] npcName = n.getNPC_Name();
 
-    public GameManager(Character c, Villain v, Map m, Player p, FileManager fileM, EventManager eventM, FightManager fightM, EndingManager endingM) {
+    public GameManager(Character c, Villain v,Player p) {
         this.c = c;
         this.v = v;
-        this.m = m;
         this.p = p;
-        this.fileM = fileM;
-        this.eventM = eventM;
-        this.fightM = fightM;
-        this.endingM = endingM;
     }
     
     

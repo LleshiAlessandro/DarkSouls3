@@ -14,11 +14,12 @@ import javax.swing.*;
 public class FormGameScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
-
+    
+    GameManager g;
     /**
      * Creates new form GameScreen
      */
-    public FormGameScreen() {
+    public FormGameScreen(String imgPath) {
         initComponents();        
         
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -30,16 +31,19 @@ public class FormGameScreen extends javax.swing.JFrame {
         northPanel.add(title, BorderLayout.CENTER);
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
         
-        JPanel westPanel = new JPanel(new BorderLayout());
+        JPanel westPanel = new JPanel(new GridLayout(2,1,10,10));
         JPanel imgCharacter = new JPanel() {
-            Image sfondo = new ImageIcon("immagini/priest.png").getImage();
+            Image sfondo = new ImageIcon(imgPath).getImage();
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        westPanel.add(imgCharacter, BorderLayout.NORTH);
+        JPanel characterSpec = new JPanel(new BorderLayout());
+        westPanel.setPreferredSize(new Dimension(200, 400));
+        westPanel.add(imgCharacter);
+        westPanel.add(characterSpec);
         
         
         mainPanel.add(westPanel, BorderLayout.WEST);
@@ -84,7 +88,8 @@ public class FormGameScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormGameScreen().setVisible(true));
+        //immagini/priest.png immagine di default
+        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png").setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

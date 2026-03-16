@@ -17,8 +17,9 @@ import javax.swing.border.Border;
 public class FormChoiseCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseCharacter.class.getName());
-    String nameCharacter;
-    Character c;
+    private String nameCharacter;
+    protected Character c;
+    String imgPath;
     String hystoriPg1 =  "In the dying lands of Lothric, where ash falls like silent snow,\n" +
     "a legend is whispered among the fading fires.\n" +
     "\n" +
@@ -136,7 +137,6 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
     "\n" +
     "And as long as even a single prayer remains,\n" +
     "the light of the gods shall never truly fade.";
-    FormGameScreen gS = new FormGameScreen();
     /**
      * Creates new form ChoiseCharacter
      */
@@ -179,8 +179,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         imagePanel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //System.out.println("YOU HAVE CLICKED THE BARBARIAN");
                 c = new Barbarian(20, 90, nameCharacter, 125, 25);
+                imgPath = "immagini/barbarian.png";
                 start.setEnabled(true);
             }
         });
@@ -233,6 +233,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE KNIGHT");
                 c = new Knight(35, 75, nameCharacter, 115, 22);
+                imgPath = "immagini/knight.png";
                 start.setEnabled(true);
             }
         });
@@ -280,6 +281,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE MAGE");
                 c = new Mage(90, 25, nameCharacter, 95, 28);
+                imgPath = "immagini/mage.png";
                 start.setEnabled(true);
             }
         });
@@ -327,6 +329,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE PRIEST");
                 c = new Priest(60, 60, nameCharacter, 100, 20);
+                imgPath = "immagini/priest.png";
                 start.setEnabled(true);
             }
         });
@@ -409,6 +412,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                FormGameScreen gS = new FormGameScreen(imgPath);
                 gS.setVisible(true);
             }
         }; 
@@ -416,6 +420,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
+
+        
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
