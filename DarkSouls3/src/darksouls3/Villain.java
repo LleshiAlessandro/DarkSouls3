@@ -10,8 +10,8 @@ package darksouls3;
  */
 public class Villain extends PgStatsCommon{
     
-    public Villain(String name, int life, int baseAtt) {
-        super(name, life, baseAtt);
+    public Villain(EnumVillain bossEnum) {
+        super(bossEnum.getDisplayName(), bossEnum.getLife(), bossEnum.getBaseAtt());
     }
     
 }

@@ -61,7 +61,8 @@ public class GameManager {
     }
     //NEW BOSS
     public void newBoss(){
-        Villain v = new Villain("Boss", 150, 33);
+        EnumVillain[] bosses = EnumVillain.values();
+        this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
     }
     //ITEM FOUND
     public void itemFound(Character c, Item i){

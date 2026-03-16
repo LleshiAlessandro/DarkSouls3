@@ -143,6 +143,19 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
     public FormChoiseCharacter() {
         initComponents();
         JButton start = new JButton("START ADVENTURE");
+        
+        nameCharacter = JOptionPane.showInputDialog(
+            null,                       // parent component (null = finestra centrale)
+            "Inserisci il nome del tuo personaggio:", // messaggio
+            "Nome Personaggio",         // titolo finestra
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (nameCharacter == null || nameCharacter.trim().isEmpty()) {
+            nameCharacter = "Avventuriero"; // nome di default se l'utente non inserisce nulla
+        }
+        
+        
         JPanel mainPanel = new JPanel(new BorderLayout()){
             Image sfondo = new ImageIcon("immagini/sfondo_scelta_pg_giusto.jpg").getImage();
             @Override

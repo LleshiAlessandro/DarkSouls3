@@ -18,6 +18,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     GameManager g;
     Villain  v;
     Player p;
+    String namePlayer;
     /**
      * Creates new form GameScreen
      */
@@ -28,8 +29,19 @@ public class FormGameScreen extends javax.swing.JFrame {
      */
     public FormGameScreen(String imgPath, Character c) {
         initComponents();        
+        namePlayer = JOptionPane.showInputDialog(
+            null,                       // parent component (null = finestra centrale)
+            "Inserisci il tuo nome:",
+            "Nome Player",
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if (namePlayer == null || namePlayer.trim().isEmpty()) {
+            namePlayer = "Player"; // nome di default se l'utente non inserisce nulla
+        }
         
+        p = new Player(namePlayer);
         g = new GameManager(c,v, p);
+        
         
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel northPanel = new JPanel();
@@ -49,19 +61,43 @@ public class FormGameScreen extends javax.swing.JFrame {
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        JPanel characterSpec = new JPanel(new GridLayout(3,1,10,10));
+        JPanel characterSpec = new JPanel(new GridLayout(5,1,10,10));
         JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
         JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
         JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
         JLabel att = new JLabel("base attac: " + String.valueOf(g.c.baseAtt));
+        JLabel name = new JLabel("name: " + g.c.name);
+        characterSpec.add(name);
         characterSpec.add(life);
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-        westPanel.setPreferredSize(new Dimension(200, 400));
+        westPanel.setPreferredSize(new Dimension(200, 350));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
         
+        
+        /*
+        JPanel eastPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel imgBoss = new JPanel() {
+            Image sfondo = new ImageIcon("boss path").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JPanel bossSpec = new JPanel(new GridLayout(3,1,10,10));
+        JLabel bossLife = new JLabel("boss life: " + String.valueOf(g.v.getLife()));
+        JLabel bossAtt = new JLabel("boss base attac: " + String.valueOf(g.v.baseAtt));
+        JLabel bossName = new JLabel("boss name: " + g.v.name);
+        bossSpec.add(bossName);
+        bossSpec.add(bossLife);
+        bossSpec.add(bossAtt);
+        eastPanel.add(imgBoss);
+        */
+        //mainPanel.add(eastPanel, BorderLayout.EAST);
+        //tutto l'east panel va fatto solo in caso trovo un boss nell'evento e nel fight form va
         
         mainPanel.add(westPanel, BorderLayout.WEST);
         mainPanel.add(northPanel, BorderLayout.NORTH);
