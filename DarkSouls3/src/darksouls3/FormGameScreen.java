@@ -6,6 +6,7 @@ package darksouls3;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -16,7 +17,6 @@ public class FormGameScreen extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
     
     GameManager g;
-    Villain  v;
     Player p;
     String namePlayer;
     /**
@@ -40,7 +40,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         }
         
         p = new Player(namePlayer);
-        g = new GameManager(c,v, p);
+        g = new GameManager(c, p);
         
         
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -72,33 +72,33 @@ public class FormGameScreen extends javax.swing.JFrame {
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-        westPanel.setPreferredSize(new Dimension(200, 350));
+        westPanel.setPreferredSize(new Dimension(250, 500));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
+        westPanel.setBorder(new EmptyBorder(20,20,20,20));
         
         
-        /*
-        JPanel eastPanel = new JPanel(new GridLayout(2, 1, 10, 10));
-        JPanel imgBoss = new JPanel() {
-            Image sfondo = new ImageIcon("boss path").getImage();
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-        JPanel bossSpec = new JPanel(new GridLayout(3,1,10,10));
-        JLabel bossLife = new JLabel("boss life: " + String.valueOf(g.v.getLife()));
-        JLabel bossAtt = new JLabel("boss base attac: " + String.valueOf(g.v.baseAtt));
-        JLabel bossName = new JLabel("boss name: " + g.v.name);
-        bossSpec.add(bossName);
-        bossSpec.add(bossLife);
-        bossSpec.add(bossAtt);
-        eastPanel.add(imgBoss);
-        */
-        //mainPanel.add(eastPanel, BorderLayout.EAST);
-        //tutto l'east panel va fatto solo in caso trovo un boss nell'evento e nel fight form va
         
+        JPanel eastPanel = new JPanel(new BorderLayout());
+        eastPanel.setPreferredSize(new Dimension(350,100));
+        
+        JLabel titleEvent = new JLabel("exploits of your trip");
+        JTextArea eventArea = new JTextArea();
+        eventArea.setEditable(false);
+        
+        eastPanel.add(titleEvent, BorderLayout.NORTH);
+        eastPanel.add(eventArea, BorderLayout.CENTER);
+        eastPanel.setBorder(new EmptyBorder(10,10,10,10));
+        
+        JPanel southPanel = new JPanel(new BorderLayout());
+        JButton travel = new JButton("TRAVEL");
+        travel.setPreferredSize(new Dimension(50,50));
+        southPanel.add(travel, BorderLayout.CENTER);
+        southPanel.setBorder(new EmptyBorder(0,500,0,500));
+        
+        
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
+        mainPanel.add(eastPanel, BorderLayout.EAST);
         mainPanel.add(westPanel, BorderLayout.WEST);
         mainPanel.add(northPanel, BorderLayout.NORTH);
         this.add(mainPanel);

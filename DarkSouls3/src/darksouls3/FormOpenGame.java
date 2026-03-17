@@ -81,7 +81,6 @@ public class FormOpenGame extends javax.swing.JFrame {
         imgPanel.add(pane4);
         
         
-        
         // Panel in NORTH con titolo
         JPanel northPanel = new JPanel(new BorderLayout());
         JLabel label1 = new JLabel("Dark Souls 3");
@@ -127,9 +126,11 @@ public class FormOpenGame extends javax.swing.JFrame {
         }; //quarto bottone
         
         button1.addActionListener(newGame);
-        
+        //button2.addActionListener(loadGame);  da implementare
         button3.addActionListener(istruction);
         button4.addActionListener(exit);
+        
+
         
         //aggiungo i bottoni
         westPanel.add(button1);
@@ -151,6 +152,8 @@ public class FormOpenGame extends javax.swing.JFrame {
         westPanel.setOpaque(false);
         southPanel.setOpaque(false);
         eastPanel.setOpaque(false);
+        
+        
         // aggiungi il mainPanel al frame
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);

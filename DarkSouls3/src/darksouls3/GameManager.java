@@ -26,11 +26,60 @@ public class GameManager {
     private int npcRandom;
     private NPC_Name[] npcName = n.getNPC_Name();
 
-    public GameManager(Character c, Villain v,Player p) {
+    //costruttore
+    public GameManager(Character c,Player p) {
         this.c = c;
-        this.v = v;
         this.p = p;
     }
+
+    
+    
+    
+    //NEW BOSS
+    public void newBoss(){
+        EnumVillain[] bosses = EnumVillain.values();
+        this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
+    }
+    //ITEM FOUND
+    public void itemFound(Character c, Item i){
+        c.inv.addItem(i);
+    }
+    //NEW NPC
+    public NPC_Name newNPC(NPC n){
+        //mi fa incontrare un npc randomico
+        npcRandom = rnd.nextInt();
+        return npcName[npcRandom];
+    }
+    //RESTORE HEALS
+    public void restoreHeals(Character c){
+        c.inv.numberAshenEstus = 3;
+        c.inv.numberEstus = 3;
+        c.inv.greenBlossom = 3;
+    }
+    //NEW LOCATION
+    public void newLocation(){
+        Map[] maps = Map.values();
+        int currentIndex = -1;
+        for (int i = 0; i < maps.length; i++){
+            if (maps[i] == m){
+                currentIndex = i;
+                break;
+            }
+        }
+        int rand = rnd.nextInt(maps.length - 1); // genera un numero tra 0 e maps.length-2
+        if (rand >= currentIndex){
+            rand++;
+        }
+        m = maps[rand];
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -58,47 +107,6 @@ public class GameManager {
     public void fight(String keyWord){
         fightM.chooseTurn(c, v, keyWord);
         fightM.fightManaged(c, v, keyWord);
-    }
-    //NEW BOSS
-    public void newBoss(){
-        EnumVillain[] bosses = EnumVillain.values();
-        this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
-    }
-    //ITEM FOUND
-    public void itemFound(Character c, Item i){
-        c.inv.addItem(i);
-    }
-    //NEW NPC
-    public NPC_Name newNPC(NPC n){
-        //mi fa incontrare un npc randomico
-        npcRandom = rnd.nextInt();
-        return npcName[npcRandom];
-    }
-    //RESTORE HEALS
-    public void restoreHeals(Character c){
-        c.inv.numberAshenEstus = 3;
-        c.inv.numberEstus = 3;
-        c.inv.greenBlossom = 3;
-    }
-    //NEW LOCATION
-    public void newLocation(){
-        Map[] maps = Map.values();
-        int currentIndex = -1;
-
-        for (int i = 0; i < maps.length; i++){
-            if (maps[i] == m){
-                currentIndex = i;
-                break;
-            }
-        }
-
-        int rand = rnd.nextInt(maps.length - 1); // genera un numero tra 0 e maps.length-2
-
-        if (rand >= currentIndex){
-            rand++;
-        }
-
-        m = maps[rand];
     }
     
     //gestione ending

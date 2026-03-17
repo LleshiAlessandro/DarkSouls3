@@ -152,7 +152,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         );
 
         if (nameCharacter == null || nameCharacter.trim().isEmpty()) {
-            nameCharacter = "Avventuriero"; // nome di default se l'utente non inserisce nulla
+            nameCharacter = "Adventurer"; // nome di default se l'utente non inserisce nulla
         }
         
         
