@@ -15,8 +15,12 @@ public class FormFightScreen extends javax.swing.JFrame {
     /**
      * Creates new form FIghtScreen
      */
-    public FormFightScreen() {
+    public FormFightScreen(FormGameScreen fG) {
         initComponents();
+        fG.setEnabled(true);
+        this.toFront();
+        
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -66,7 +70,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormFightScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormFightScreen(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

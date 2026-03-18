@@ -18,13 +18,14 @@ public class GameManager {
     private Map m;
     private Player p;
     private FileManager fileM = new FileManager();
-    private EventManager eventM = new EventManager();
+    protected EventManager eventM = new EventManager();
     private FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();
     private NPC n = new NPC();
     private Random rnd = new Random();
     private int npcRandom;
-    private NPC_Name[] npcName = n.getNPC_Name();
+    private NPC_Name[] npcName;
+    protected boolean inFight = false;
 
     //costruttore
     public GameManager(Character c,Player p) {
@@ -47,7 +48,8 @@ public class GameManager {
     //NEW NPC
     public NPC_Name newNPC(NPC n){
         //mi fa incontrare un npc randomico
-        npcRandom = rnd.nextInt();
+        npcName = n.getNPC_Name();
+        npcRandom = rnd.nextInt(npcName.length);
         return npcName[npcRandom];
     }
     //RESTORE HEALS
@@ -78,19 +80,13 @@ public class GameManager {
     
     
     
-    
-    
-    
-    
-    
     public void eventManaging(){
         Event e = eventM.eventRandom();
-        //dopo aver chiamato l'evento randomico, devo fare tutte le if di controllo, ma prima devo capire
-        //se gli attributi che ho inserito vanno bene e devo capire come impostare le if
         switch (e) {
             case ITEM_FOUND ->{
-                Item i = new Item("ciao");
-                this.itemFound(i);}
+                Item i = new Item("ciao");//devo capire che nome dare all'item
+                this.itemFound(i);
+            }
             case RESTORE_HEALS -> c.restoreHeals();
             case NEW_NPC -> {
                 
@@ -98,6 +94,7 @@ public class GameManager {
             }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
+                inFight = true;
                 this.newBoss();
                 //lo passo al form quando sono in combattimento this.fight(keyWord);
             }
@@ -108,7 +105,7 @@ public class GameManager {
     //gli passo la keyWord perché così fancendo quando andrò a cliccare il pulsante attacca la keyWord diventerà
     //attacca e di conseguenza adrò a togliere vita al boss
     public void fight(String keyWord){
-        fightM.chooseTurn(c, v, keyWord);
+        fightM.chooseTurn(c, v);
         fightM.fightManaged(c, v, keyWord);
     }
     
@@ -117,4 +114,10 @@ public class GameManager {
         endingM.ending();
     }
     //da implementare il load e il save
+    
+    
+    @Override
+    public String toString(){
+        return eventM.toString();
+    }
 }

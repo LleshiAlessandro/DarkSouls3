@@ -13,7 +13,7 @@ import java.util.Random;
 public class EventManager {
     private Random rdn = new Random();
     private int randomEvent;
-    
+    private Event lastEvent;
 
     public EventManager() {
 
@@ -23,23 +23,34 @@ public class EventManager {
         randomEvent = rdn.nextInt(0, 5);
         switch (randomEvent) {
             case 0 -> {
-                return Event.NEW_BOSS;
+                return lastEvent = Event.NEW_BOSS;
             }
             case 1 -> {
-                return Event.ITEM_FOUND;
+                return lastEvent = Event.ITEM_FOUND;
             }
             case 2 -> {
-                return Event.NEW_LOCATION;
+                return lastEvent = Event.NEW_LOCATION;
             }
             case 3 -> {
-                return Event.NEW_NPC;
+                return lastEvent = Event.NEW_NPC;
             }
             case 4 -> {
-                return Event.RESTORE_HEALS;
+                return lastEvent = Event.RESTORE_HEALS;
             }
             default -> {
+                return lastEvent = Event.NEW_LOCATION;
             }
         }
-        return null;
+    }
+
+    public Event getLastEvent() {
+        return lastEvent;
+    }
+    
+    
+    
+    @Override
+    public String toString(){
+        return "l'evento che è uscito è: " + getLastEvent() +"\n";
     }
 }

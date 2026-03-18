@@ -25,13 +25,12 @@ public class FightManager {
     }
     
     //controlla di chi è il turno, nel gestore dovrò gestire cosa succede nel turno del giocatore e del boss
-    public boolean chooseTurn(Character c, Villain v, String keyWord){
+    public boolean chooseTurn(Character c, Villain v){
         if(c.getLife() > 0 && v.getLife() > 0){
             
             //turni del character
             if(turni %2 != 0){
                 this.incrementTurn();
-                this.fightManaged(c, v, keyWord);
                 return true;
             }
             //turni del nemico
@@ -44,7 +43,7 @@ public class FightManager {
     }
     
     public void fightManaged(Character c, Villain v, String keyWord){
-        this.chooseTurn(c, v, keyWord);
+        this.chooseTurn(c, v);
         if(keyWord.equals(keyWords[0])){
             c.useEstus();
         }

@@ -10,14 +10,8 @@ package darksouls3;
  * @author aless
  */
 public class NPC {
-    private NPC_Name[] npcs = new NPC_Name[NPC_Name.values().length];
-        
+
     public NPC_Name[] getNPC_Name(){
-        for(NPC_Name n: NPC_Name.values()){
-            for(int i = 0; i <  NPC_Name.values().length; i++){
-                npcs[i] = NPC_Name.values()[i];
-            }
-        }
-        return npcs;
+        return NPC_Name.values();
     }
 }

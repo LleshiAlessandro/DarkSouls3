@@ -74,7 +74,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-        westPanel.setPreferredSize(new Dimension(250, 500));
+        westPanel.setPreferredSize(new Dimension(200, 650));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
         westPanel.setBorder(new EmptyBorder(20,20,20,20));
@@ -105,6 +105,14 @@ public class FormGameScreen extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.eventManaging();
+                eventArea.append(g.eventM.toString());
+                if(g.inFight == true){
+                    travel.setEnabled(false);
+                    exit.setEnabled(false);
+                    FormFightScreen fF = new FormFightScreen(FormGameScreen.this);
+                    fF.setVisible(true);
+                }
+                
             }
         };
         ActionListener actionExit = new ActionListener(){
