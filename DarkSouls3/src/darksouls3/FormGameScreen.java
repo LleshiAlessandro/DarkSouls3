@@ -5,6 +5,8 @@
 package darksouls3;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -92,10 +94,27 @@ public class FormGameScreen extends javax.swing.JFrame {
         
         JPanel southPanel = new JPanel(new BorderLayout());
         JButton travel = new JButton("TRAVEL");
+        JButton exit = new JButton("EXIT");
         travel.setPreferredSize(new Dimension(50,50));
         southPanel.add(travel, BorderLayout.CENTER);
+        southPanel.add(exit, BorderLayout.EAST);
         southPanel.setBorder(new EmptyBorder(0,500,0,500));
         
+        //implemento funzioni dei bottoni
+        ActionListener actionTravel = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                g.eventManaging();
+            }
+        };
+        ActionListener actionExit = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        };
+        travel.addActionListener(actionTravel);
+        exit.addActionListener(actionExit);
         
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         mainPanel.add(eastPanel, BorderLayout.EAST);

@@ -17,10 +17,10 @@ public class GameManager {
     protected Villain v ;
     private Map m;
     private Player p;
-    private FileManager fileM;
-    private EventManager eventM;
-    private FightManager fightM;
-    private EndingManager endingM;
+    private FileManager fileM = new FileManager();
+    private EventManager eventM = new EventManager();
+    private FightManager fightM = new FightManager();
+    private EndingManager endingM = new EndingManager();
     private NPC n = new NPC();
     private Random rnd = new Random();
     private int npcRandom;
@@ -41,7 +41,7 @@ public class GameManager {
         this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
     }
     //ITEM FOUND
-    public void itemFound(Character c, Item i){
+    public void itemFound(Item i){
         c.inv.addItem(i);
     }
     //NEW NPC
@@ -83,20 +83,23 @@ public class GameManager {
     
     
     
-    public void eventManaging(Item i, NPC n, String keyWord){
-        eventM.eventRandom();
+    public void eventManaging(){
+        Event e = eventM.eventRandom();
         //dopo aver chiamato l'evento randomico, devo fare tutte le if di controllo, ma prima devo capire
         //se gli attributi che ho inserito vanno bene e devo capire come impostare le if
-        switch (eventM.eventRandom()) {
-            case ITEM_FOUND -> this.itemFound(c, i);
-            case RESTORE_HEALS -> this.restoreHeals(c);
+        switch (e) {
+            case ITEM_FOUND ->{
+                Item i = new Item("ciao");
+                this.itemFound(i);}
+            case RESTORE_HEALS -> c.restoreHeals();
             case NEW_NPC -> {
+                
                 this.newNPC(n);
             }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
                 this.newBoss();
-                this.fight(keyWord);
+                //lo passo al form quando sono in combattimento this.fight(keyWord);
             }
             default -> System.out.println("errore");
         }
