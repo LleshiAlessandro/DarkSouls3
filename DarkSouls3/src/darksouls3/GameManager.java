@@ -25,7 +25,7 @@ public class GameManager {
     private Random rnd = new Random();
     private int npcRandom;
     private NPC_Name[] npcName;
-    protected boolean inFight = false;
+    protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
 
     //costruttore
     public GameManager(Character c,Player p) {
@@ -105,7 +105,6 @@ public class GameManager {
     //gli passo la keyWord perché così fancendo quando andrò a cliccare il pulsante attacca la keyWord diventerà
     //attacca e di conseguenza adrò a togliere vita al boss
     public void fight(String keyWord){
-        fightM.chooseTurn(c, v);
         fightM.fightManaged(c, v, keyWord);
     }
     

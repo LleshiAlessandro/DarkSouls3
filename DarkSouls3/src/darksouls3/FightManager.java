@@ -43,26 +43,28 @@ public class FightManager {
     }
     
     public void fightManaged(Character c, Villain v, String keyWord){
-        this.chooseTurn(c, v);
-        if(keyWord.equals(keyWords[0])){
-            c.useEstus();
-        }
-        else if(keyWord.equals(keyWords[1])){
-            v.setLife(v.life = v.life - 20);
-        }
-        else if(keyWord.equals(keyWords[2])){
-            escape = new Random();
-            escapeResult = escape.nextInt(0, 6);
-            if(escapeResult == 0){
-                c.setLife(c.life = c.life - v.baseAtt);
+        boolean turn = this.chooseTurn(c, v);
+        if(turn == true){
+            if(keyWord.equals(keyWords[0])){
+                c.useEstus();
+            }
+            else if(keyWord.equals(keyWords[1])){
+                v.setLife(v.life = v.life - 20);
+            }
+            else if(keyWord.equals(keyWords[2])){
+                escape = new Random();
+                escapeResult = escape.nextInt(0, 6);
+                if(escapeResult == 0){
+                    c.setLife(c.life = c.life - v.baseAtt);
+                }
+                else{
+                    c.stamina -= 10;
+                    c.setLife(c.life = c.life + 10);
+                }
             }
             else{
-                c.stamina -= 10;
-                c.setLife(c.life = c.life + 10);
+                System.out.println(" Errore ");
             }
-        }
-        else{
-            System.out.println(" Errore ");
         }
     }
     //nel form del fight dovrò inserire in ogni pulsante la sua kewWord

@@ -33,7 +33,31 @@ public class FormFightScreen extends javax.swing.JFrame {
         this.add(mainPanel);
 
         JPanel bossPanel = new JPanel();
-        bossPanel.setBackground(Color.BLACK);
+        JPanel bossImg_and_StatsPanel = new JPanel(new BorderLayout());
+        bossPanel.add(bossImg_and_StatsPanel, BorderLayout.CENTER);
+        
+        
+        JPanel bossStatsPanel = new JPanel(new GridLayout(5,1));
+        bossStatsPanel.add(new JLabel("Name: " + g.v.name));
+        bossStatsPanel.add(new JLabel("Life: " + g.v.getLife()));
+        bossStatsPanel.add(new JLabel("Base Att: " + g.v.baseAtt));
+       
+        JPanel bossImgPanel = new JPanel() {
+            Image sfondo = new ImageIcon(imgPath).getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        bossImgPanel.setPreferredSize(new Dimension(300,650));
+        
+        
+        
+        
+        
+        bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.WEST);
+        bossPanel.add(bossStatsPanel);
         mainPanel.add(bossPanel);
 
         JPanel characterPanel = new JPanel(new BorderLayout());
@@ -70,7 +94,6 @@ public class FormFightScreen extends javax.swing.JFrame {
         characterPanel.add(azioniCharacterPanel, BorderLayout.SOUTH);
 
         JPanel buttonsPanel = new JPanel(new GridLayout(1,3, 10,0));
-        buttonsPanel.setOpaque(false);
 
         JButton heal = new JButton("Heal");
         JButton attac = new JButton("Attack");
@@ -96,7 +119,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         ActionListener actionAttac = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                keyWord = "attac";
+                keyWord = "attack";
             }
         };
         ActionListener actionRoll = new ActionListener() {
