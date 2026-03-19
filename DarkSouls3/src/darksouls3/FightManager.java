@@ -49,7 +49,7 @@ public class FightManager {
                 c.useEstus();
             }
             else if(keyWord.equals(keyWords[1])){
-                v.setLife(v.life = v.life - 20);
+                v.setLife(v.life = v.life - c.baseAtt);
             }
             else if(keyWord.equals(keyWords[2])){
                 escape = new Random();

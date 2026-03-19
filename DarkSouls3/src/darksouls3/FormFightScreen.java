@@ -218,6 +218,7 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "roll";
                 g.fight(keyWord);
+                
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
             }
         };
@@ -250,7 +251,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
             g.inFight = false;
-            this.dispose();
+            dispose();
         }
         else if (g.c.life <= 0) {
             JOptionPane.showMessageDialog(this,
@@ -258,7 +259,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
             g.inFight = false;
-            this.dispose();
+            dispose();
         }
         else if (g.v.life <= 0) {
             JOptionPane.showMessageDialog(this,
@@ -266,7 +267,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
             g.inFight = false;
-            this.dispose();
+            dispose();
         }
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
