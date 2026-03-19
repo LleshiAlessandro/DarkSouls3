@@ -17,21 +17,16 @@ public class Knight extends Character{
     @Override
     //il prescelto
     public void specialAbility(Villain v){
+        //+50 vita
+        this.life = life + 50;
+
         //+50 mana
-        if(mana >= 50){
-            mana = 100;
-        }
-        else{
-            mana = mana + 50;
-        }
-        
+        this.mana = mana + 50;
+        if(mana >= 100){mana = 100;}
         //+50 stamina
-        if(stamina >= 50){
-            stamina = 100;
-        }
-        else{
-            stamina = stamina +50;
-        }
+        this.stamina = stamina + 50;
+        if(stamina >= 100){stamina = 100;}
+        
         
         //prendi 1 cura, 1 cura del mana e 1 della stamina
         inv.numberEstus = inv.numberEstus + 1;
