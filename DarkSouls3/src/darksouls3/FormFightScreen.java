@@ -18,9 +18,10 @@ import javax.swing.border.EmptyBorder;
 public class FormFightScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormFightScreen.class.getName());
-    String keyWord;
+    String keyWord = "";
     String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
     String bossPath;
+    boolean used = false;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -34,14 +35,22 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         JPanel mainPanel = new JPanel(new GridLayout(2,1)); // divide lo schermo in due righe
         this.add(mainPanel);
-
+        
+        
         JPanel bossImg_and_StatsPanel = new JPanel(new BorderLayout());
         
-        
         JPanel bossStatsPanel = new JPanel(new GridLayout(5,1));
-        bossStatsPanel.add(new JLabel("Name: " + g.v.name));
-        bossStatsPanel.add(new JLabel("Life: " + g.v.getLife()));
-        bossStatsPanel.add(new JLabel("Base Att: " + g.v.baseAtt));
+        JLabel bossName = new JLabel("  Name: " + g.v.name);
+        bossName.setForeground(Color.white);
+        JLabel bossLife = new JLabel("  Life: " + g.v.getLife());
+        bossLife.setForeground(Color.white);
+        JLabel bossAtt = new JLabel("   Base Att: " + g.v.baseAtt);
+        bossAtt.setForeground(Color.white);
+        bossStatsPanel.add(bossName);
+        bossStatsPanel.add(bossLife);
+        bossStatsPanel.add(bossAtt);
+        bossStatsPanel.setBackground(Color.black);
+        
         
         
         //tutte le immagini dei boss
@@ -104,6 +113,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         JPanel panelVuoto = new JPanel();
+        panelVuoto.setBackground(Color.black);
         panelVuoto.setPreferredSize(new Dimension(150,150));
         bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.CENTER);
         bossImgPanel.setBorder(new EmptyBorder(20,20,20,20));
@@ -129,12 +139,28 @@ public class FormFightScreen extends javax.swing.JFrame {
         characterImgPanel.setPreferredSize(new Dimension(300,650));
         characterImg_and_StatsPanel.add(characterImgPanel, BorderLayout.WEST);
 
+        
+        //character stats
         JPanel characterStatsPanel = new JPanel(new GridLayout(5,1));
-        characterStatsPanel.add(new JLabel("Name: " + g.c.name));
-        characterStatsPanel.add(new JLabel("Life: " + g.c.getLife()));
-        characterStatsPanel.add(new JLabel("Mana: " + g.c.mana));
-        characterStatsPanel.add(new JLabel("Stamina: " + g.c.stamina));
-        characterStatsPanel.add(new JLabel("Base Att: " + g.c.baseAtt));
+        JLabel nameCharacter = new JLabel(" Name: " + g.c.name);
+        nameCharacter.setForeground(Color.white);
+        JLabel lifeCharacter = new JLabel(" Life: " + g.c.getLife());
+        lifeCharacter.setForeground(Color.white);
+        JLabel manaCharacter = new JLabel(" Mana: " + g.c.mana);
+        manaCharacter.setForeground(Color.white);
+        JLabel staminaCharacter = new JLabel("  Stamina: " + g.c.stamina);
+        staminaCharacter.setForeground(Color.white);
+        JLabel attCharacter = new JLabel("  Base Att: " + g.c.baseAtt);
+        attCharacter.setForeground(Color.white);
+        
+        characterStatsPanel.add(nameCharacter);
+        characterStatsPanel.add(lifeCharacter);
+        characterStatsPanel.add(manaCharacter);
+        characterStatsPanel.add(staminaCharacter);
+        characterStatsPanel.add(attCharacter);
+        characterImg_and_StatsPanel.setBackground(Color.black);
+        characterStatsPanel.setBackground(Color.black);
+        characterImgPanel.setBackground(Color.black);
         characterImg_and_StatsPanel.add(characterStatsPanel, BorderLayout.EAST);
         characterImg_and_StatsPanel.setBorder(new EmptyBorder(20,20,20,20));
 
@@ -149,61 +175,98 @@ public class FormFightScreen extends javax.swing.JFrame {
         JButton heal = new JButton("Heal");
         JButton attac = new JButton("Attack");
         JButton roll = new JButton("Roll");
+        JButton specialAbility = new JButton("Special Ab.");
 
         Dimension buttonSize = new Dimension(120,40);
         heal.setPreferredSize(buttonSize);
         attac.setPreferredSize(buttonSize);
         roll.setPreferredSize(buttonSize);
-
+        specialAbility.setPreferredSize(buttonSize);
+        
+        
         buttonsPanel.add(heal);
         buttonsPanel.add(attac);
         buttonsPanel.add(roll);
+        buttonsPanel.add(specialAbility);
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
-
+        
         ActionListener actionHeal = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 keyWord = "heal";
+                g.fight(keyWord);
+                g.c.useEstus();
+                g.c.useAshenEstus();
+                g.c.useGreenblossom();
+                lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
+                manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
+                staminaCharacter.setText(String.valueOf("   Stamina: " + g.c.getStamina()));
             }
         };
         ActionListener actionAttac = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 keyWord = "attack";
+                g.fight(keyWord);
+                bossLife.setText(String.valueOf("   Life: " + g.v.getLife()));
+                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
             }
         };
         ActionListener actionRoll = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 keyWord = "roll";
+                g.fight(keyWord);
+                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
             }
         };
-
+        ActionListener actionAbility = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                g.c.specialAbility(g.v);
+                g.fight(keyWord);
+                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                used = true;
+            }
+        };
+        
         heal.addActionListener(actionHeal);
         attac.addActionListener(actionAttac);
         roll.addActionListener(actionRoll);
-
-        keyWord = "attack";
-        g.fight(keyWord);
+        if(used == true){
+            specialAbility.setEnabled(false);
+        }
+        else{
+            specialAbility.addActionListener(actionAbility);
+        }
+        
+        
+        
 
         if (g.c.life <= 0 && g.v.life <= 0) {
             JOptionPane.showMessageDialog(this,
                 "Both you and your foe have fallen… The fire fades.",
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
+            g.inFight = false;
+            this.dispose();
         }
         else if (g.c.life <= 0) {
             JOptionPane.showMessageDialog(this,
                 "You have met your end… Ashes to ashes, ember to darkness.",
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
+            g.inFight = false;
+            this.dispose();
         }
         else if (g.v.life <= 0) {
             JOptionPane.showMessageDialog(this,
                 "The foe crumbles to dust… Victory is yours, but the journey continues.",
                 "DARK SOULS 3",
                 JOptionPane.INFORMATION_MESSAGE);
+            g.inFight = false;
+            this.dispose();
         }
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);

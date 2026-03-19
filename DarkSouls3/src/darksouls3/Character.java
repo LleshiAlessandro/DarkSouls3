@@ -25,8 +25,8 @@ public abstract class Character extends PgStatsCommon{
     public void useEstus(){
         if(inv.numberEstus > 0){
             inv.numberEstus--;
-            if(getLife() >= 70){
-                setLife(100);
+            if(getLife() >= 120){
+                setLife(150);
             }
             else{
                 setLife(life = life +30);
@@ -70,6 +70,14 @@ public abstract class Character extends PgStatsCommon{
     }
     
     //use,add,remove Item da implementare
+
+    public int getMana() {
+        return mana;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
     
     
     public abstract void specialAbility(Villain v);

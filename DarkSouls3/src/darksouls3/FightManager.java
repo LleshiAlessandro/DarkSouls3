@@ -66,6 +66,9 @@ public class FightManager {
                 System.out.println(" Errore ");
             }
         }
+        else{
+            c.setLife(c.life = c.life - v.getBaseAtt());
+        }
     }
     //nel form del fight dovrò inserire in ogni pulsante la sua kewWord
 }

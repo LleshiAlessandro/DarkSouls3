@@ -21,6 +21,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     GameManager g;
     Player p;
     String namePlayer;
+    FormFightScreen fF;
     /**
      * Creates new form GameScreen
      */
@@ -109,8 +110,9 @@ public class FormGameScreen extends javax.swing.JFrame {
                 if(g.inFight == true){
                     travel.setEnabled(false);
                     exit.setEnabled(false);
-                    FormFightScreen fF = new FormFightScreen(FormGameScreen.this, g, imgPath);
+                    fF = new FormFightScreen(FormGameScreen.this, g, imgPath);
                     fF.setVisible(true);
+                    g.inFight = false;
                 }
                 
             }

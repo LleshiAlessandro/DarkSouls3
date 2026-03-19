@@ -26,6 +26,10 @@ public class PgStatsCommon {
     public int getLife() {
         return life;
     }
+
+    public int getBaseAtt() {
+        return baseAtt;
+    }
     
     
     
