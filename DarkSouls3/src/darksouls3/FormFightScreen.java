@@ -112,13 +112,16 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-        JPanel panelVuoto = new JPanel();
-        panelVuoto.setBackground(Color.black);
-        panelVuoto.setPreferredSize(new Dimension(150,150));
+        JPanel turnPanel = new JPanel();
+        turnPanel.setBackground(Color.black);
+        turnPanel.setPreferredSize(new Dimension(150,150));
         bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.CENTER);
         bossImgPanel.setBorder(new EmptyBorder(20,20,20,20));
         bossImg_and_StatsPanel.add(bossStatsPanel, BorderLayout.EAST);
-        bossImg_and_StatsPanel.add(panelVuoto, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
+        JLabel turn = new JLabel("turn: " + String.valueOf(g.fightM.getTurni()));
+        turn.setForeground(Color.white);
+        turnPanel.add(turn);
+        bossImg_and_StatsPanel.add(turnPanel, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
         mainPanel.add(bossImg_and_StatsPanel);
 
         JPanel characterPanel = new JPanel(new BorderLayout());
@@ -205,6 +208,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
+                if(g.fightM.getTurni() %2 == 0){
+                    turn.setForeground(Color.white);
+                }
+                else{
+                    turn.setForeground(Color.red);
+                }
+                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -243,6 +253,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                if(g.fightM.getTurni() %2 == 0){
+                    turn.setForeground(Color.white);
+                }
+                else{
+                    turn.setForeground(Color.red);
+                }
+                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -278,6 +295,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 keyWord = "roll";
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                if(g.fightM.getTurni() %2 == 0){
+                    turn.setForeground(Color.white);
+                }
+                else{
+                    turn.setForeground(Color.red);
+                }
+                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -316,6 +340,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
+                if(g.fightM.getTurni() %2 == 0){
+                    turn.setForeground(Color.white);
+                }
+                else{
+                    turn.setForeground(Color.red);
+                }
+                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 used = true;
                 if(used == true){
                     specialAbility.setEnabled(false);

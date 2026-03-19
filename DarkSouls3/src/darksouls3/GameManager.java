@@ -95,6 +95,7 @@ public class GameManager {
             }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
+                fightM.turni = 1;
                 this.newBoss();
                 //lo passo al form quando sono in combattimento this.fight(keyWord);
             }

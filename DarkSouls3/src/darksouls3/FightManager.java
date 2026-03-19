@@ -11,7 +11,7 @@ import java.util.Random;
  * @author aless
  */
 public class FightManager {
-    private int turni;
+    protected int turni;
     private String[] keyWords = {"heal", "attack", "roll", "ability"};
     private Random escape;
     int escapeResult;
@@ -86,5 +86,8 @@ public class FightManager {
             }
         return -1;
     }
-    //nel form del fight dovrò inserire in ogni pulsante la sua kewWord
+    public int getTurni() {
+        return turni;
+    }
+    
 }
