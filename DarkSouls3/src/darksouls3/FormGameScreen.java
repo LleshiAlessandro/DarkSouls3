@@ -74,7 +74,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-        westPanel.setPreferredSize(new Dimension(200, 650));
+        westPanel.setPreferredSize(new Dimension(300, 650));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
         westPanel.setBorder(new EmptyBorder(20,20,20,20));

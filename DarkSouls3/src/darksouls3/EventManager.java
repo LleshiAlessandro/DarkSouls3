@@ -20,27 +20,23 @@ public class EventManager {
     }
     
     public Event eventRandom(){
-        randomEvent = rdn.nextInt(0, 5);
-        switch (randomEvent) {
-            case 0 -> {
-                return lastEvent = Event.NEW_BOSS;
-            }
-            case 1 -> {
-                return lastEvent = Event.ITEM_FOUND;
-            }
-            case 2 -> {
-                return lastEvent = Event.NEW_LOCATION;
-            }
-            case 3 -> {
-                return lastEvent = Event.NEW_NPC;
-            }
-            case 4 -> {
-                return lastEvent = Event.RESTORE_HEALS;
-            }
-            default -> {
-                return lastEvent = Event.NEW_LOCATION;
-            }
+        randomEvent = rdn.nextInt(0, 101);
+        if(randomEvent <= 30){
+            return lastEvent = Event.NEW_BOSS;
         }
+        else if(randomEvent >= 31 && randomEvent <= 45){
+            return lastEvent = Event.RESTORE_HEALS;
+        }
+        else if(randomEvent >= 46 && randomEvent <= 70){
+            return lastEvent = Event.NEW_LOCATION;
+        }
+        else if(randomEvent >= 71 && randomEvent <= 85){
+            return lastEvent = Event.NEW_NPC;
+        }
+        else if(randomEvent >= 86 && randomEvent <= 100){
+             return lastEvent = Event.ITEM_FOUND;
+        }
+        return lastEvent = Event.NEW_LOCATION;
     }
 
     public Event getLastEvent() {

@@ -51,7 +51,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        characterImgPanel.setPreferredSize(new Dimension(200,650));
+        characterImgPanel.setPreferredSize(new Dimension(300,650));
         characterImg_and_StatsPanel.add(characterImgPanel, BorderLayout.WEST);
 
         JPanel characterStatsPanel = new JPanel(new GridLayout(5,1));
