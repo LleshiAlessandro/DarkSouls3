@@ -28,12 +28,24 @@ public class FormOpenGame extends javax.swing.JFrame {
                 + "Every journey will test your strategy, courage, and survival skills.\n"
                 + "Will you defeat the bosses, overcome unexpected events, and save the bonfire flame,\n"
                 + "the last hope of Lothric, Ashen One?";
-    
+    String namePlayer;
     /**
      * Creates new form OpenGame
      */
     public FormOpenGame() {
         initComponents();
+        
+        namePlayer = JOptionPane.showInputDialog(
+            null,                       // parent component (null = finestra centrale)
+            "Inserisci il tuo nome:",
+            "Nome Player",
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if (namePlayer == null || namePlayer.trim().isEmpty()) {
+            namePlayer = "Player"; // nome di default se l'utente non inserisce nulla
+        }
+        Player p = new Player(namePlayer);
+        
         
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.black);
@@ -84,10 +96,13 @@ public class FormOpenGame extends javax.swing.JFrame {
         // Panel in NORTH con titolo
         JPanel northPanel = new JPanel(new BorderLayout());
         JLabel label1 = new JLabel("Dark Souls 3");
-        
+        JLabel labeNamePlayer = new JLabel("player name: " + p.getName());
+        label1.setForeground(Color.white);
+        labeNamePlayer.setForeground(Color.white);
         label1.setFont(new Font("Arial", Font.BOLD, 44));
         label1.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(label1, BorderLayout.CENTER);
+        northPanel.add(labeNamePlayer, BorderLayout.WEST);
         northPanel.setPreferredSize(new Dimension(0, 180));    // altezza del nord
         mainPanel.add(northPanel, BorderLayout.NORTH);
 
@@ -105,7 +120,7 @@ public class FormOpenGame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                FormChoiseCharacter cC = new FormChoiseCharacter();
+                FormChoiseCharacter cC = new FormChoiseCharacter(p);
                 cC.setVisible(true);
             }
         }; //primo bottpne

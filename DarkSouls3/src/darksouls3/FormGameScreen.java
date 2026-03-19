@@ -20,13 +20,13 @@ public class FormGameScreen extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
     
     GameManager g;
-    Player p;
-    String namePlayer;
     FormFightScreen fF;
     protected JButton travel;
     protected JButton exit;
     protected JLabel att;
     ArrayList <String> item = new ArrayList();
+    String mapPath;
+    Image sfondoAgg;
     /**
      * Creates new form GameScreen
      */
@@ -34,28 +34,31 @@ public class FormGameScreen extends javax.swing.JFrame {
      * 
      * @param imgPath serve perché se non gli passo il percorso dell immagine non posso sapere quale immagine prendere per questo form 
      * @param c serve perché se non passo il character io non so le sue statistiche
+     * @param p serve perché il gestore di gioco richiede un player e io a me serve nel FormChoiseCharacter e nel form FormOpenGame
      */
-    public FormGameScreen(String imgPath, Character c) {
+    public FormGameScreen(String imgPath, Character c, Player p) {
         initComponents();        
-        namePlayer = JOptionPane.showInputDialog(
-            null,                       // parent component (null = finestra centrale)
-            "Inserisci il tuo nome:",
-            "Nome Player",
-            JOptionPane.QUESTION_MESSAGE
-        );
-        if (namePlayer == null || namePlayer.trim().isEmpty()) {
-            namePlayer = "Player"; // nome di default se l'utente non inserisce nulla
-        }
         
-        p = new Player(namePlayer);
+        
         g = new GameManager(c, p);
         
         
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if(sfondoAgg != null){
+                    g.drawImage(sfondoAgg, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+        mainPanel.setBackground(Color.black);
         JPanel northPanel = new JPanel();
         JLabel title = new JLabel("Dark Souls 3");
 
         title.setFont(new Font("Arial", Font.BOLD, 40));
+        title.setForeground(Color.white);
+
         title.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(title, BorderLayout.CENTER);
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
@@ -141,6 +144,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         
         JPanel southPanel = new JPanel(new BorderLayout());
         travel = new JButton("TRAVEL");
+        
         exit = new JButton("EXIT");
         travel.setPreferredSize(new Dimension(50,50));
         southPanel.add(travel, BorderLayout.CENTER);
@@ -163,6 +167,78 @@ public class FormGameScreen extends javax.swing.JFrame {
                 else{
                     travel.setEnabled(true);
                     exit.setEnabled(true);
+                }
+                if(g.eventM.getLastEvent().equals(Event.NEW_LOCATION)){
+                    if(g.m.equals(Map.CEMETERY_OF_ASH)){
+                        mapPath = "immagini/satuarioDelVincolo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.FIRELINK_SHRINE)){
+                        mapPath = "immagini/fire_link.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.FIRELINK_SHRINE_ALT)){
+                        mapPath = "immagini/fire.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.LOTHRIC_CASTLE_INTERIOR)){
+                        mapPath = "immagini/dentroMura.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.HIGH_WALL_OF_LOTHRIC)){
+                        mapPath = "immagini/muraAlte.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.MOCKUP_THIRD_AREA)){
+                        mapPath = "immagini/terza_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.MOCKUP_SECOND_AREA)){
+                        mapPath = "immagini/seconda_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.ANOR_LONDO)){
+                        mapPath = "immagini/anorLondo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.MOCKUP_FIRST_AREA)){
+                        mapPath = "immagini/prima_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.ARCHDRAGON_PEAK)){
+                        mapPath = "immagini/vettDeiDraghi.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.PAINTED_WORLD_OF_ARIANDEL)){
+                        mapPath = "immagini/ariandel.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.MOCKUP_FOURTH_AREA)){
+                        mapPath = "immagini/quarta_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else if(g.m.equals(Map.THE_RINGED_CITY)){
+                        mapPath = "immagini/ringedCity.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                    }
+                    else{
+                        mapPath =  "immagini/satuarioDelVincolo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        mainPanel.repaint();
+                        }
                 }
             }
         };
@@ -221,7 +297,7 @@ public class FormGameScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
         //immagini/priest.png immagine di default
-        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png", null).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png", null, null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

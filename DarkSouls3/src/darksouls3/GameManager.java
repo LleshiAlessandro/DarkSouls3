@@ -15,7 +15,7 @@ import java.util.Random;
 public class GameManager {
     protected Character c;
     protected Villain v ;
-    private Map m;
+    protected Map m;
     private Player p;
     private FileManager fileM = new FileManager();
     protected EventManager eventM = new EventManager();

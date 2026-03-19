@@ -9,13 +9,17 @@ package darksouls3;
  * @author aless
  */
 public enum Map {
-    FIRELINK_SHRINE,
-    FARRON_KEEP,
-    IRITHYLL_OF_THE_BOREAL_VALLEY,
-    ANOR_LONDO,
-    LOTHRIC_CASTLE,
-    ARCHDRAGON_PEAK,
-    KILN_OF_THE_FIRST_FLAME,
-    PAINTED_WORLD_OF_ARIANDEL,
-    THE_RINGED_CITY;
+    CEMETERY_OF_ASH,                // satuarioDelVincolo
+    FIRELINK_SHRINE,                // fire_link 
+    FIRELINK_SHRINE_ALT,            // fire
+    LOTHRIC_CASTLE_INTERIOR,        // dentroMura
+    HIGH_WALL_OF_LOTHRIC,           // muraAlte
+    MOCKUP_THIRD_AREA,              // terza_immagine_mockup
+    MOCKUP_SECOND_AREA,             // seconda_immagine_mockup
+    ANOR_LONDO,                     // anorLondo
+    MOCKUP_FIRST_AREA,              // prima_immagine_mockup
+    ARCHDRAGON_PEAK,                // vettDeiDraghi
+    PAINTED_WORLD_OF_ARIANDEL,      // ariandel
+    MOCKUP_FOURTH_AREA,             // quarta_immagine_mockup
+    THE_RINGED_CITY                 // ringedCity
 }

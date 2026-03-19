@@ -140,7 +140,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
     /**
      * Creates new form ChoiseCharacter
      */
-    public FormChoiseCharacter() {
+    public FormChoiseCharacter(Player p) {
         initComponents();
         JButton start = new JButton("START ADVENTURE");
         
@@ -166,7 +166,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         };
         JPanel northPanel = new JPanel();
         JLabel title = new JLabel("CHOOSE YOUR ADVENTURER");
-
+        title.setForeground(Color.white);
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(title, BorderLayout.CENTER);
@@ -429,7 +429,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                FormGameScreen gS = new FormGameScreen(imgPath, c);
+                FormGameScreen gS = new FormGameScreen(imgPath, c, p);
                 gS.setVisible(true);
             }
         }; 
@@ -490,7 +490,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormChoiseCharacter().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormChoiseCharacter(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
