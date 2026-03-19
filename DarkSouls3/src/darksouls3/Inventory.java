@@ -32,5 +32,35 @@ public class Inventory {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public int getNumberEstus() {
+        return numberEstus;
+    }
+
+    public int getNumberAshenEstus() {
+        return numberAshenEstus;
+    }
+
+    public int getGreenBlossom() {
+        return greenBlossom;
+    }
+
+    public void addNumberEstus() {
+        this.numberEstus = numberEstus + 1;
+    }
+
+    public void addNumberAshenEstus() {
+        this.numberAshenEstus = numberAshenEstus + 1;
+    }
+
+    public void addGreenBlossom() {
+        this.greenBlossom = greenBlossom + 1;
+    }
     
+    
+    
+    @Override
+    public String toString(){
+        return "items: " + getItems();
+    }
 }

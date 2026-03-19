@@ -22,9 +22,9 @@ public class Mage extends Character{
         Random rdn = new Random();
         int i = rdn.nextInt(0, 2);
 
-        if(i == 1){
+        if(i == 0){
             mana = 100;
-            if(stamina >=70){
+            if(getStamina() >=70){
                 stamina = 100;
             }
             else{
@@ -36,8 +36,20 @@ public class Mage extends Character{
                 v.setLife(100);
             }
             else{
-                v.setLife(v.life = v.life + 30);
+                v.setLife(v.life = v.getLife() + 30);
             }
         }
+    }
+    @Override
+    public String toString(){
+        return "\"Gamble of Fate\"\n" +
+    "\"The Mage toys with the threads of chance and destiny.\n" +
+    "One moment, mana and stamina are replenished, invigorating the body and soul.\n" +
+    "The next, the enemy’s vitality may surge or wane, subject to the whims of fortune.\n" +
+    "No outcome is certain; only the brave manipulate fate itself.\"\n\n" +
+    "Effect:\n" +
+    "  Randomly:\n" +
+    "    - Restore mana to 100 and stamina (+30 or 100 if >=70)\n" +
+    "    - Enemy gains 30 Life (or 100 if enemy life >=70)";
     }
 }

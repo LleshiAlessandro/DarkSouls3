@@ -24,7 +24,7 @@ public abstract class Character extends PgStatsCommon{
     //uso le cure
     public void useEstus(){
         if(inv.numberEstus > 0){
-            inv.numberEstus--;
+            inv.numberEstus = inv.numberEstus - 1;
             if(getLife() >= 120){
                 setLife(150);
             }
@@ -34,9 +34,8 @@ public abstract class Character extends PgStatsCommon{
         }
     }
     public void useAshenEstus(){
-        
         if(inv.numberAshenEstus > 0){
-            inv.numberAshenEstus--;
+            inv.numberAshenEstus = inv.numberAshenEstus - 1;
             if(mana >= 50){
                 mana = 100;
             }
@@ -47,7 +46,7 @@ public abstract class Character extends PgStatsCommon{
     }
     public void useGreenblossom(){
         if(inv.greenBlossom > 0){
-            inv.greenBlossom--;
+            inv.greenBlossom = inv.greenBlossom - 1;
             if(stamina >= 50){
                 stamina = 100;
             }

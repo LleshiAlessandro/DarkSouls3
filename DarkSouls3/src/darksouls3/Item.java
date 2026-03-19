@@ -4,20 +4,39 @@
  */
 package darksouls3;
 
+import java.util.Random;
+
 /**
  *
  * @author lleshi.alessandro
  */
 public class Item {
-    private String name;
+    private Random rdn = new Random();
+    private EnumItem name;
+    private int damage;
+    private int quantity;
 
-    public Item(String name) {
-        this.name = name;
+    // Costruttore che sceglie randomicamente un item
+    public Item() {
+        EnumItem[] Items = EnumItem.values();
+        int index = rdn.nextInt(Items.length);
+        this.name = Items[index];
+
+        this.damage = name.getBaseDamage();
+        this.quantity = name.getQuantity();
     }
 
-    public String getName() {
-        return name;
+    public EnumItem getName() { return name; }
+    public int getDamage() { return damage; }
+    public int getQuantity() { return quantity; }
+
+    @Override
+    public String toString() {
+        if(damage > 0) {
+            return "Item: " + name + " (Damage: " + damage + ")";
+        } else {
+            return "Item: " + name + " (Quantity: " + quantity + ")";
+        }
     }
-    
     
 }

@@ -11,8 +11,7 @@ package darksouls3;
 public class ItemEquippable extends Item{
     private int damage;
 
-    public ItemEquippable(int damage, String name) {
-        super(name);
+    public ItemEquippable(int damage) {
         this.damage = damage;
     }
 

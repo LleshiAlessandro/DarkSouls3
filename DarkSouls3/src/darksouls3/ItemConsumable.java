@@ -11,8 +11,7 @@ package darksouls3;
 public class ItemConsumable extends Item{
     private int quantity;
 
-    public ItemConsumable(int quantity, String name) {
-        super(name);
+    public ItemConsumable(int quantity) {
         this.quantity = quantity;
     }
 

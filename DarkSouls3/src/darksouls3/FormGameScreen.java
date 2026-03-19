@@ -7,6 +7,7 @@ package darksouls3;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -24,6 +25,8 @@ public class FormGameScreen extends javax.swing.JFrame {
     FormFightScreen fF;
     protected JButton travel;
     protected JButton exit;
+    protected JLabel att;
+    ArrayList <String> item = new ArrayList();
     /**
      * Creates new form GameScreen
      */
@@ -58,7 +61,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
         
         JPanel westPanel = new JPanel(new GridLayout(2,1,10,10));
-        JPanel imgCharacter = new JPanel() {
+        JPanel imgCharacter = new JPanel(new BorderLayout()) {
             Image sfondo = new ImageIcon(imgPath).getImage();
             @Override
             protected void paintComponent(Graphics g) {
@@ -70,26 +73,67 @@ public class FormGameScreen extends javax.swing.JFrame {
         JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
         JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
         JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
-        JLabel att = new JLabel("base attac: " + String.valueOf(g.c.baseAtt));
+        att = new JLabel("base attac: " + String.valueOf(g.c.getBaseAtt()));
         JLabel name = new JLabel("name: " + g.c.name);
         characterSpec.add(name);
         characterSpec.add(life);
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-        westPanel.setPreferredSize(new Dimension(300, 650));
+        
+        JPanel eastButtonPanel = new JPanel(new GridLayout(6,1,10,10));
+        JButton specialAb = new JButton("info special ability");
+        ActionListener actionAbility = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(FormGameScreen.this, g.c.toString(), "Inventory", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        specialAb.addActionListener(actionAbility);
+        
+        
+        JButton inv = new JButton("inventory");
+        ActionListener actionInv = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(Item i : g.c.inv.getItems()){
+                    item.add(i.toString() + ", ") ;
+                }
+                JOptionPane.showMessageDialog(FormGameScreen.this, item, "Inventory", JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
+        inv.addActionListener(actionInv);
+        
+        
+        JButton saveCsv = new JButton("save CSV");
+        JButton loadCsv = new JButton("load CSV");
+        JButton save = new JButton("save");
+        JButton load = new JButton("load");
+        imgCharacter.setPreferredSize(new Dimension(175,550));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
         westPanel.setBorder(new EmptyBorder(20,20,20,20));
         
         
+        eastButtonPanel.add(specialAb);
+        eastButtonPanel.add(inv);
+        eastButtonPanel.add(saveCsv);
+        eastButtonPanel.add(loadCsv);
+        eastButtonPanel.add(save);
+        eastButtonPanel.add(load);
+        westPanel.add(eastButtonPanel, BorderLayout.EAST);
+        
         
         JPanel eastPanel = new JPanel(new BorderLayout());
+
+        
+        
         eastPanel.setPreferredSize(new Dimension(350,100));
         
         JLabel titleEvent = new JLabel("exploits of your trip");
         JTextArea eventArea = new JTextArea();
         eventArea.setEditable(false);
+        
         
         eastPanel.add(titleEvent, BorderLayout.NORTH);
         eastPanel.add(eventArea, BorderLayout.CENTER);

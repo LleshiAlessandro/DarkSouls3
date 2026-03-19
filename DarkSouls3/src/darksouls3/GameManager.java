@@ -85,8 +85,11 @@ public class GameManager {
         Event e = eventM.eventRandom();
         switch (e) {
             case ITEM_FOUND ->{
-                Item i = new Item("ciao");//devo capire che nome dare all'item
+                Item i = new Item();//devo capire che nome dare all'item
                 this.itemFound(i);
+                if(i.getDamage() >= c.getBaseAtt()){
+                    c.setBaseAtt(i.getDamage());
+                }
             }
             case RESTORE_HEALS -> c.restoreHeals();
             case NEW_NPC -> {

@@ -30,6 +30,11 @@ public class PgStatsCommon {
     public int getBaseAtt() {
         return baseAtt;
     }
+
+    public void setBaseAtt(int baseAtt) {
+        this.baseAtt = baseAtt;
+    }
+    
     
     
     

@@ -112,16 +112,27 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-        JPanel turnPanel = new JPanel();
-        turnPanel.setBackground(Color.black);
-        turnPanel.setPreferredSize(new Dimension(150,150));
+        JPanel infoPanel = new JPanel();
+        infoPanel.setBackground(Color.black);
+        infoPanel.setPreferredSize(new Dimension(150,150));
         bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.CENTER);
         bossImgPanel.setBorder(new EmptyBorder(20,20,20,20));
         bossImg_and_StatsPanel.add(bossStatsPanel, BorderLayout.EAST);
         JLabel turn = new JLabel("turn: " + String.valueOf(g.fightM.getTurni()));
+        JLabel numEstus = new JLabel("number of estus: " + String.valueOf(g.c.inv.numberEstus));
+        JLabel numAshenEstus = new JLabel("number of ashen estus: " + String.valueOf(g.c.inv.numberAshenEstus));
+        JLabel numGreenBlossom = new JLabel("number of GreenBlossom: " + String.valueOf(g.c.inv.greenBlossom));
+        
         turn.setForeground(Color.white);
-        turnPanel.add(turn);
-        bossImg_and_StatsPanel.add(turnPanel, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
+        numEstus.setForeground(Color.white);
+        numAshenEstus.setForeground(Color.white);
+        numGreenBlossom.setForeground(Color.white);
+        
+        infoPanel.add(turn);
+        infoPanel.add(numEstus);
+        infoPanel.add(numAshenEstus);
+        infoPanel.add(numGreenBlossom);
+        bossImg_and_StatsPanel.add(infoPanel, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
         mainPanel.add(bossImg_and_StatsPanel);
 
         JPanel characterPanel = new JPanel(new BorderLayout());
@@ -214,7 +225,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                 else{
                     turn.setForeground(Color.red);
                 }
-                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
+                turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
+                numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -222,6 +237,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
                 fG.travel.setEnabled(false);
                 fG.exit.setEnabled(true);
+                fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                 FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -231,6 +247,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -241,6 +258,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                     
                 }
@@ -253,13 +271,17 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                
                 if(g.fightM.getTurni() %2 == 0){
                     turn.setForeground(Color.white);
                 }
                 else{
                     turn.setForeground(Color.red);
                 }
-                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
+                turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
+                numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -267,6 +289,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -276,6 +299,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -285,6 +309,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
             }
@@ -302,6 +327,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                     turn.setForeground(Color.red);
                 }
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
+                numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                 if(g.getResult() == 0){
                 JOptionPane.showMessageDialog(FormFightScreen.this,
                     "Both you and your opponent have fallen… The fire fades.",
@@ -309,6 +337,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -318,6 +347,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -327,6 +357,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
             }
@@ -347,6 +378,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                     turn.setForeground(Color.red);
                 }
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
+                numEstus.setText("number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                numAshenEstus.setText("number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                numGreenBlossom.setText("number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                 used = true;
                 if(used == true){
                     specialAbility.setEnabled(false);
@@ -358,6 +392,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -367,6 +402,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -376,6 +412,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
                     FormFightScreen.this.dispose();
                 }
             }
