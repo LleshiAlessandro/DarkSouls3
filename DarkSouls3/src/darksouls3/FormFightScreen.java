@@ -142,11 +142,11 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         //character stats
         JPanel characterStatsPanel = new JPanel(new GridLayout(5,1));
-        JLabel nameCharacter = new JLabel(" Name: " + g.c.name);
+        JLabel nameCharacter = new JLabel("  Name: " + g.c.name);
         nameCharacter.setForeground(Color.white);
-        JLabel lifeCharacter = new JLabel(" Life: " + g.c.getLife());
+        JLabel lifeCharacter = new JLabel("  Life: " + g.c.getLife());
         lifeCharacter.setForeground(Color.white);
-        JLabel manaCharacter = new JLabel(" Mana: " + g.c.mana);
+        JLabel manaCharacter = new JLabel("  Mana: " + g.c.mana);
         manaCharacter.setForeground(Color.white);
         JLabel staminaCharacter = new JLabel("  Stamina: " + g.c.stamina);
         staminaCharacter.setForeground(Color.white);
@@ -201,7 +201,36 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.c.useGreenblossom();
                 lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
-                staminaCharacter.setText(String.valueOf("   Stamina: " + g.c.getStamina()));
+                staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
+                if(g.getResult() == 0){
+                JOptionPane.showMessageDialog(FormFightScreen.this,
+                    "Both you and your opponent have fallen… The fire fades.",
+                    "DARK SOULS 3",
+                    JOptionPane.INFORMATION_MESSAGE);
+                fG.travel.setEnabled(true);
+                fG.exit.setEnabled(true);
+                FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "You have met your end… Ashes to ashes, ember to darkness.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 2) {
+                    
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                    
+                }
             }
         };
         ActionListener actionAttac = new ActionListener() {
@@ -209,8 +238,35 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "attack";
                 g.fight(keyWord);
-                bossLife.setText(String.valueOf("   Life: " + g.v.getLife()));
+                bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                if(g.getResult() == 0){
+                JOptionPane.showMessageDialog(FormFightScreen.this,
+                    "Both you and your foe have fallen… The fire fades.",
+                    "DARK SOULS 3",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "You have met your end… Ashes to ashes, ember to darkness.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 2) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
             }
         };
         ActionListener actionRoll = new ActionListener() {
@@ -218,17 +274,70 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "roll";
                 g.fight(keyWord);
-                
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                if(g.getResult() == 0){
+                JOptionPane.showMessageDialog(FormFightScreen.this,
+                    "Both you and your foe have fallen… The fire fades.",
+                    "DARK SOULS 3",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "You have met your end… Ashes to ashes, ember to darkness.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 2) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
             }
         };
         ActionListener actionAbility = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                g.c.specialAbility(g.v);
+                keyWord = "special ability";
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 used = true;
+                if(g.getResult() == 0){
+                JOptionPane.showMessageDialog(FormFightScreen.this,
+                    "Both you and your foe have fallen… The fire fades.",
+                    "DARK SOULS 3",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "You have met your end… Ashes to ashes, ember to darkness.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 2) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
             }
         };
         
@@ -244,37 +353,13 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-
-        if (g.c.life <= 0 && g.v.life <= 0) {
-            JOptionPane.showMessageDialog(this,
-                "Both you and your foe have fallen… The fire fades.",
-                "DARK SOULS 3",
-                JOptionPane.INFORMATION_MESSAGE);
-            g.inFight = false;
-            dispose();
-        }
-        else if (g.c.life <= 0) {
-            JOptionPane.showMessageDialog(this,
-                "You have met your end… Ashes to ashes, ember to darkness.",
-                "DARK SOULS 3",
-                JOptionPane.INFORMATION_MESSAGE);
-            g.inFight = false;
-            dispose();
-        }
-        else if (g.v.life <= 0) {
-            JOptionPane.showMessageDialog(this,
-                "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                "DARK SOULS 3",
-                JOptionPane.INFORMATION_MESSAGE);
-            g.inFight = false;
-            dispose();
-        }
-
+        
+        
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
-
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

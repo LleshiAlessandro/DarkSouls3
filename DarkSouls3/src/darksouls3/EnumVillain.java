@@ -11,7 +11,7 @@ package darksouls3;
 public enum EnumVillain {
     IUDEX_GUNDYR("Iudex Gundyr", 80, 22),
     VORDT_OF_THE_BOREAL_VALLEY("Vordt of the Boreal Valley", 85, 23),
-    DANCER_OF_THE_BOREAL_VALLEY("Dancer of the Boreal Valley", 90, 25),
+    DANCER_OF_THE_BOREAL_VALLEY("Dancer of the Boreal Valley", 90, 27),
     ABYSS_WATCHERS("Abyss Watchers", 88, 24),
     PONTIFF_SULYVAHN("Pontiff Sulyvahn", 95, 26),
     YHORM_THE_GIANT("Yhorm the Giant", 130, 20),

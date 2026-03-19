@@ -22,6 +22,8 @@ public class FormGameScreen extends javax.swing.JFrame {
     Player p;
     String namePlayer;
     FormFightScreen fF;
+    protected JButton travel;
+    protected JButton exit;
     /**
      * Creates new form GameScreen
      */
@@ -94,8 +96,8 @@ public class FormGameScreen extends javax.swing.JFrame {
         eastPanel.setBorder(new EmptyBorder(10,10,10,10));
         
         JPanel southPanel = new JPanel(new BorderLayout());
-        JButton travel = new JButton("TRAVEL");
-        JButton exit = new JButton("EXIT");
+        travel = new JButton("TRAVEL");
+        exit = new JButton("EXIT");
         travel.setPreferredSize(new Dimension(50,50));
         southPanel.add(travel, BorderLayout.CENTER);
         southPanel.add(exit, BorderLayout.EAST);
@@ -114,9 +116,13 @@ public class FormGameScreen extends javax.swing.JFrame {
                     fF.setVisible(true);
                     g.inFight = false;
                 }
-                
+                else{
+                    travel.setEnabled(true);
+                    exit.setEnabled(true);
+                }
             }
         };
+        
         ActionListener actionExit = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

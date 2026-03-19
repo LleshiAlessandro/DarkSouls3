@@ -19,14 +19,14 @@ public class GameManager {
     private Player p;
     private FileManager fileM = new FileManager();
     protected EventManager eventM = new EventManager();
-    private FightManager fightM = new FightManager();
+    protected FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();
     private NPC n = new NPC();
     private Random rnd = new Random();
     private int npcRandom;
     private NPC_Name[] npcName;
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
-
+    protected int result = -1;
     //costruttore
     public GameManager(Character c,Player p) {
         this.c = c;
@@ -40,6 +40,7 @@ public class GameManager {
     public void newBoss(){
         EnumVillain[] bosses = EnumVillain.values();
         this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
+        inFight = true;
     }
     //ITEM FOUND
     public void itemFound(Item i){
@@ -94,7 +95,6 @@ public class GameManager {
             }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
-                inFight = true;
                 this.newBoss();
                 //lo passo al form quando sono in combattimento this.fight(keyWord);
             }
@@ -106,6 +106,8 @@ public class GameManager {
     //attacca e di conseguenza adrò a togliere vita al boss
     public void fight(String keyWord){
         fightM.fightManaged(c, v, keyWord);
+        
+        result = fightM.fightResult(c, v);
     }
     
     //gestione ending
@@ -113,6 +115,14 @@ public class GameManager {
         endingM.ending();
     }
     //da implementare il load e il save
+
+    public int getResult() {
+        return result;
+    }
+
+    public boolean isInFight() {
+        return inFight;
+    }
     
     
     @Override

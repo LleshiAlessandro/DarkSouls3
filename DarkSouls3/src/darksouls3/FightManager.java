@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class FightManager {
     private int turni;
-    private String[] keyWords = {"heal", "attack", "roll"};
+    private String[] keyWords = {"heal", "attack", "roll", "ability"};
     private Random escape;
     int escapeResult;
 
@@ -54,13 +54,16 @@ public class FightManager {
             else if(keyWord.equals(keyWords[2])){
                 escape = new Random();
                 escapeResult = escape.nextInt(0, 6);
-                if(escapeResult == 0){
+                if(escapeResult <= 2){
                     c.setLife(c.life = c.life - v.baseAtt);
                 }
                 else{
                     c.stamina -= 10;
                     c.setLife(c.life = c.life + 10);
                 }
+            }
+            else if(keyWord.equals(keyWords[3])){
+                c.specialAbility(v);
             }
             else{
                 System.out.println(" Errore ");
@@ -69,6 +72,19 @@ public class FightManager {
         else{
             c.setLife(c.life = c.life - v.getBaseAtt());
         }
+    }
+    public int fightResult(Character c, Villain v){
+    if (c.getLife() <= 0 && v.getLife() <= 0) {
+                return 0;//fight pareggiato
+            }
+            else if (c.getLife() <= 0) {
+                return 1;//fight vinto dal boss
+                
+            }
+            else if (v.getLife() <= 0) {
+                return 2;//fight vinto
+            }
+        return -1;
     }
     //nel form del fight dovrò inserire in ogni pulsante la sua kewWord
 }
