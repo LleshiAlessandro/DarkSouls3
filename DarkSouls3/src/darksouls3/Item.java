@@ -33,9 +33,9 @@ public class Item {
     @Override
     public String toString() {
         if(damage > 0) {
-            return "Item: " + name + " (Damage: " + damage + ")";
+            return "Item: " + name + " (Damage: " + damage + ")" + "\n";
         } else {
-            return "Item: " + name + " (Quantity: " + quantity + ")";
+            return "Item: " + name + " (Quantity: " + quantity + ")" + "\n";
         }
     }
     
