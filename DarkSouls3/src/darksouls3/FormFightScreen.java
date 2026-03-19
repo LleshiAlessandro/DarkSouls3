@@ -19,6 +19,9 @@ public class FormFightScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormFightScreen.class.getName());
     String keyWord;
+    String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
+    String bossPath;
+//immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
      * @param fG mi serve perché almeno il form non viene chiuso e il form corrente sa da chi è stato aperto
@@ -32,18 +35,64 @@ public class FormFightScreen extends javax.swing.JFrame {
         JPanel mainPanel = new JPanel(new GridLayout(2,1)); // divide lo schermo in due righe
         this.add(mainPanel);
 
-        JPanel bossPanel = new JPanel();
         JPanel bossImg_and_StatsPanel = new JPanel(new BorderLayout());
-        bossPanel.add(bossImg_and_StatsPanel, BorderLayout.CENTER);
         
         
         JPanel bossStatsPanel = new JPanel(new GridLayout(5,1));
         bossStatsPanel.add(new JLabel("Name: " + g.v.name));
         bossStatsPanel.add(new JLabel("Life: " + g.v.getLife()));
         bossStatsPanel.add(new JLabel("Base Att: " + g.v.baseAtt));
-       
+        
+        
+        //tutte le immagini dei boss
+        if(g.v.getName().equals(EnumVillain.IUDEX_GUNDYR.getDisplayName())){
+            bossPath = bossPaths[0];
+        }
+        else if(g.v.getName().equals(EnumVillain.VORDT_OF_THE_BOREAL_VALLEY.getDisplayName())){
+            bossPath = bossPaths[1];
+        }
+        else if(g.v.getName().equals(EnumVillain.DANCER_OF_THE_BOREAL_VALLEY.getDisplayName())){
+            bossPath = bossPaths[2];
+        }
+        else if(g.v.getName().equals(EnumVillain.ABYSS_WATCHERS.getDisplayName())){
+            bossPath = bossPaths[3];
+        }
+        else if(g.v.getName().equals(EnumVillain.PONTIFF_SULYVAHN.getDisplayName())){
+            bossPath = bossPaths[4];
+        }
+        else if(g.v.getName().equals(EnumVillain.YHORM_THE_GIANT.getDisplayName())){
+            bossPath = bossPaths[5];
+        }
+        else if(g.v.getName().equals(EnumVillain.ALDRICH_DEVOURER_OF_GODS.getDisplayName())){
+            bossPath = bossPaths[6];
+        }
+        else if(g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())){
+            bossPath = bossPaths[7];
+        }
+        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName())){
+            bossPath = bossPaths[8];
+        }
+        else if(g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())){
+            bossPath = bossPaths[9];
+        }
+        else if(g.v.getName().equals(EnumVillain.NAMELESS_KING.getDisplayName())){
+            bossPath = bossPaths[10];
+        }
+        else if(g.v.getName().equals(EnumVillain.DEMON_PRINCE.getDisplayName())){
+            bossPath = bossPaths[11];
+        }
+        else if(g.v.getName().equals(EnumVillain.DARK_EATER_MIDIR.getDisplayName())){
+            bossPath = bossPaths[12];
+        }
+        else if(g.v.getName().equals(EnumVillain.SLAVE_KNIGHT_GAEL.getDisplayName())){
+            bossPath = bossPaths[13];
+        }
+        else{
+            bossPath = bossPaths[1];//di default
+        }
         JPanel bossImgPanel = new JPanel() {
-            Image sfondo = new ImageIcon(imgPath).getImage();
+            
+            Image sfondo = new ImageIcon(bossPath).getImage();
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -54,11 +103,13 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-        
-        
-        bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.WEST);
-        bossPanel.add(bossStatsPanel);
-        mainPanel.add(bossPanel);
+        JPanel panelVuoto = new JPanel();
+        panelVuoto.setPreferredSize(new Dimension(150,150));
+        bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.CENTER);
+        bossImgPanel.setBorder(new EmptyBorder(20,20,20,20));
+        bossImg_and_StatsPanel.add(bossStatsPanel, BorderLayout.EAST);
+        bossImg_and_StatsPanel.add(panelVuoto, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
+        mainPanel.add(bossImg_and_StatsPanel);
 
         JPanel characterPanel = new JPanel(new BorderLayout());
         characterPanel.setBackground(Color.GREEN);

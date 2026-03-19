@@ -13,5 +13,9 @@ public class Villain extends PgStatsCommon{
     public Villain(EnumVillain bossEnum) {
         super(bossEnum.getDisplayName(), bossEnum.getLife(), bossEnum.getBaseAtt());
     }
+
+    public String getName() {
+        return name;
+    }
     
 }
