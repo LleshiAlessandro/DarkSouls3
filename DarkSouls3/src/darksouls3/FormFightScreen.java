@@ -229,9 +229,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                 }
                 keyWord = "heal";
                 g.fight(keyWord);
-                g.c.useEstus();
-                g.c.useAshenEstus();
-                g.c.useGreenblossom();
+                if(g.fightM.getTurni() %2 != 0){
+                    g.c.useEstus();
+                    g.c.useAshenEstus();
+                    g.c.useGreenblossom();
+                }
                 lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
