@@ -25,6 +25,9 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected JButton exit;
     protected JLabel att;
     protected JTextArea eventArea;
+    protected JLabel numEstus ;
+    protected JLabel numAshenEstus ;
+    protected JLabel numGreenBlossom ;
     ArrayList <String> item = new ArrayList();
     String mapPath;
     Image sfondoAgg;
@@ -54,13 +57,29 @@ public class FormGameScreen extends javax.swing.JFrame {
             }
         };
         mainPanel.setBackground(Color.black);
-        JPanel northPanel = new JPanel();
+        JPanel northPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel("Dark Souls 3");
         northPanel.setBackground(Color.black);
         
+        JPanel numberHeals = new JPanel(new GridLayout(3,1,10,10));
+        
+        numEstus = new JLabel("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+        numAshenEstus = new JLabel("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+        numGreenBlossom = new JLabel("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+        numEstus.setForeground(Color.white);
+        numAshenEstus.setForeground(Color.white);
+        numGreenBlossom.setForeground(Color.white);
+        
+        numberHeals.add(numEstus);
+        numberHeals.add(numAshenEstus);
+        numberHeals.add(numGreenBlossom);
+        numberHeals.setBackground(Color.black);
+        
+        northPanel.add(numberHeals, BorderLayout.WEST);
+        
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setForeground(Color.white);
-
+        
         title.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(title, BorderLayout.CENTER);
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
