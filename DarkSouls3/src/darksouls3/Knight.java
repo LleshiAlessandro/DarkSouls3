@@ -17,16 +17,23 @@ public class Knight extends Character{
     //il prescelto
     public void specialAbility(Villain v){
         //+50 vita
-        if(getLife() >= 120){life = 150;}
-        this.life = life + 50;
-
+        if(getLife() >= 100){
+            life = 150;
+        }
+        else{
+            this.life = life + 50;
+        }
         //+50 mana
-        if(getMana() >= 50){mana = 100;}
+        if(getMana() >= 50){
+            mana = 100;
+        }
         else{
             this.mana = mana + 50;
         }
         //+50 stamina
-        if(getStamina() >= 100){stamina = 100;}
+        if(getStamina() >= 50){
+            stamina = 100;
+        }
         else{
             this.stamina = stamina + 50;
         }

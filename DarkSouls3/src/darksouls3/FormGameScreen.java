@@ -24,6 +24,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected JButton travel;
     protected JButton exit;
     protected JLabel att;
+    protected JTextArea eventArea;
     ArrayList <String> item = new ArrayList();
     String mapPath;
     Image sfondoAgg;
@@ -145,7 +146,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         
         JLabel titleEvent = new JLabel("exploits of your trip");
         titleEvent.setForeground(Color.white);
-        JTextArea eventArea = new JTextArea();
+        eventArea = new JTextArea();
         eventArea.setForeground(Color.white);
         eventArea.setBackground(Color.black);
         eventArea.setEditable(false);

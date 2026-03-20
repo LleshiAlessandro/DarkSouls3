@@ -22,6 +22,7 @@ public class FormFightScreen extends javax.swing.JFrame {
     String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
     String bossPath;
     boolean used = false;
+    int value;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -132,6 +133,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         infoPanel.add(numEstus);
         infoPanel.add(numAshenEstus);
         infoPanel.add(numGreenBlossom);
+        infoPanel.setPreferredSize(new Dimension(200,200));
         bossImg_and_StatsPanel.add(infoPanel, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
         mainPanel.add(bossImg_and_StatsPanel);
 
@@ -160,6 +162,17 @@ public class FormFightScreen extends javax.swing.JFrame {
         nameCharacter.setForeground(Color.white);
         JLabel lifeCharacter = new JLabel("  Life: " + g.c.getLife());
         lifeCharacter.setForeground(Color.white);
+        
+        
+        JProgressBar lifeBar = new JProgressBar(0, g.c.life); // crea una barra
+        lifeBar.setValue(g.c.life); // valore iniziale
+        lifeBar.setStringPainted(true); // mostra il numero % sulla barra
+        lifeBar.setBackground(Color.red);
+        lifeBar.setForeground(Color.green);
+        characterStatsPanel.add(lifeBar);
+        
+        
+        
         JLabel manaCharacter = new JLabel("  Mana: " + g.c.mana);
         manaCharacter.setForeground(Color.white);
         JLabel staminaCharacter = new JLabel("  Stamina: " + g.c.stamina);
@@ -249,6 +262,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    fG.eventArea.setText("");
+                    fG.eventArea.append("YOU DIED");
+                    fG.eventArea.setForeground(Color.red);
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -275,10 +291,22 @@ public class FormFightScreen extends javax.swing.JFrame {
                 
                 if(g.fightM.getTurni() %2 == 0){
                     turn.setForeground(Color.red);
+                    value = lifeBar.getValue();
+                    lifeBar.setValue(value - g.v.getBaseAtt());
+                    if(actionHeal.equals(true)){
+                        lifeBar.setValue(value + 30);
+                    }
                 }
                 else{
                     turn.setForeground(Color.green);
                 }
+                
+                //è sbagliato perché ogni volta che clicco mi toglie vita alla bar anche se il turno è mio
+                //int value = lifeBar.getValue();
+                //lifeBar.setValue(value - g.v.getBaseAtt());
+                
+                
+                
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
@@ -301,6 +329,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    fG.eventArea.setText("");
+                    fG.eventArea.append("YOU DIED");
+                    fG.eventArea.setForeground(Color.red);
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -349,6 +380,10 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    fG.eventArea.setText("");
+                    fG.eventArea.append("YOU DIED");
+                    fG.eventArea.setForeground(Color.red);
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -358,7 +393,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    
                     FormFightScreen.this.dispose();
                 }
             }
@@ -404,6 +439,10 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    
+                    fG.eventArea.setText("");
+                    fG.eventArea.append("YOU DIED");
+                    fG.eventArea.setForeground(Color.red);
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -430,15 +469,13 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
-    }
-    
-    
-    /**
+        /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
+    
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -450,6 +487,7 @@ public class FormFightScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

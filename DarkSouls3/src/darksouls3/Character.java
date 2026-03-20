@@ -77,6 +77,14 @@ public abstract class Character extends PgStatsCommon{
     public int getStamina() {
         return stamina;
     }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
     
     
     public abstract void specialAbility(Villain v);
