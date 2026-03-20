@@ -55,7 +55,8 @@ public class FormGameScreen extends javax.swing.JFrame {
         mainPanel.setBackground(Color.black);
         JPanel northPanel = new JPanel();
         JLabel title = new JLabel("Dark Souls 3");
-
+        northPanel.setBackground(Color.black);
+        
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setForeground(Color.white);
 
@@ -64,6 +65,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
         
         JPanel westPanel = new JPanel(new GridLayout(2,1,10,10));
+        westPanel.setBackground(Color.black);
         JPanel imgCharacter = new JPanel(new BorderLayout()) {
             Image sfondo = new ImageIcon(imgPath).getImage();
             @Override
@@ -72,12 +74,19 @@ public class FormGameScreen extends javax.swing.JFrame {
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        imgCharacter.setBackground(Color.black);
         JPanel characterSpec = new JPanel(new GridLayout(5,1,10,10));
+        characterSpec.setBackground(Color.black);
         JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
+        life.setForeground(Color.white);
         JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
+        mana.setForeground(Color.white);
         JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
+        stamina.setForeground(Color.white);
         att = new JLabel("base attac: " + String.valueOf(g.c.getBaseAtt()));
+        att.setForeground(Color.white);
         JLabel name = new JLabel("name: " + g.c.name);
+        name.setForeground(Color.white);
         characterSpec.add(name);
         characterSpec.add(life);
         characterSpec.add(mana);
@@ -85,6 +94,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         characterSpec.add(att);
         
         JPanel eastButtonPanel = new JPanel(new GridLayout(6,1,10,10));
+        eastButtonPanel.setBackground(Color.black);
         JButton specialAb = new JButton("info special ability");
         ActionListener actionAbility = new ActionListener(){
             @Override
@@ -131,17 +141,20 @@ public class FormGameScreen extends javax.swing.JFrame {
 
         
         
-        eastPanel.setPreferredSize(new Dimension(350,100));
+        eastPanel.setPreferredSize(new Dimension(250,100));
         
         JLabel titleEvent = new JLabel("exploits of your trip");
+        titleEvent.setForeground(Color.white);
         JTextArea eventArea = new JTextArea();
+        eventArea.setForeground(Color.white);
+        eventArea.setBackground(Color.black);
         eventArea.setEditable(false);
         
         
         eastPanel.add(titleEvent, BorderLayout.NORTH);
         eastPanel.add(eventArea, BorderLayout.CENTER);
         eastPanel.setBorder(new EmptyBorder(10,10,10,10));
-        
+        eastPanel.setBackground(Color.black);
         JPanel southPanel = new JPanel(new BorderLayout());
         travel = new JButton("TRAVEL");
         
@@ -150,7 +163,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         southPanel.add(travel, BorderLayout.CENTER);
         southPanel.add(exit, BorderLayout.EAST);
         southPanel.setBorder(new EmptyBorder(0,500,0,500));
-        
+        southPanel.setBackground(Color.black);
         //implemento funzioni dei bottoni
         ActionListener actionTravel = new ActionListener(){
             @Override

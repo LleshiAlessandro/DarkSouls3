@@ -21,14 +21,15 @@ public class Knight extends Character{
         this.life = life + 50;
 
         //+50 mana
-        if(getMana() >= 100){mana = 100;}
-        this.mana = mana + 50;
-        
+        if(getMana() >= 50){mana = 100;}
+        else{
+            this.mana = mana + 50;
+        }
         //+50 stamina
         if(getStamina() >= 100){stamina = 100;}
-        this.stamina = stamina + 50;
-        
-        
+        else{
+            this.stamina = stamina + 50;
+        }
         
         //prendi 1 cura, 1 cura del mana e 1 della stamina
         inv.addNumberEstus();

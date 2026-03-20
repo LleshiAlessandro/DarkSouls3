@@ -123,7 +123,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         JLabel numAshenEstus = new JLabel("number of ashen estus: " + String.valueOf(g.c.inv.numberAshenEstus));
         JLabel numGreenBlossom = new JLabel("number of GreenBlossom: " + String.valueOf(g.c.inv.greenBlossom));
         
-        turn.setForeground(Color.white);
+        turn.setForeground(Color.green);
         numEstus.setForeground(Color.white);
         numAshenEstus.setForeground(Color.white);
         numGreenBlossom.setForeground(Color.white);
@@ -211,6 +211,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                 if(g.c.inv.numberEstus <= 0){
                     heal.setEnabled(false);
                 }
+                else{
+                    turn.setForeground(Color.green);
+                }
                 keyWord = "heal";
                 g.fight(keyWord);
                 g.c.useEstus();
@@ -220,11 +223,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
                 if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.white);
-                }
-                else{
                     turn.setForeground(Color.red);
                 }
+
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
@@ -273,10 +274,10 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 
                 if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.white);
+                    turn.setForeground(Color.red);
                 }
                 else{
-                    turn.setForeground(Color.red);
+                    turn.setForeground(Color.green);
                 }
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
@@ -321,10 +322,10 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.white);
+                    turn.setForeground(Color.red);
                 }
                 else{
-                    turn.setForeground(Color.red);
+                    turn.setForeground(Color.green);
                 }
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
@@ -372,10 +373,10 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.white);
+                    turn.setForeground(Color.red);
                 }
                 else{
-                    turn.setForeground(Color.red);
+                    turn.setForeground(Color.green);
                 }
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
