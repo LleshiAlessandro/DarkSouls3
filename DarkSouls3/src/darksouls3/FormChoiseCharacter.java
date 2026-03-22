@@ -173,6 +173,25 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         northPanel.setPreferredSize(new Dimension(0, 140));    // altezza del nord
 
         //panel che conterrà 4 panel su una riga, che a loro volta conterranno l'icon del pg
+        
+        JPanel characterPanel = new JPanel(new BorderLayout());
+        JPanel characterNamePanel = new JPanel(new GridLayout(1,4));
+        JLabel barbarianLabel = new JLabel("barbarian");
+        barbarianLabel.setForeground(Color.white);
+        JLabel knightLabel = new JLabel("knight");
+        knightLabel.setForeground(Color.white);
+        JLabel mageLabel = new JLabel("mage");
+        mageLabel.setForeground(Color.white);
+        JLabel priestLabel = new JLabel("priest");
+        priestLabel.setForeground(Color.white);
+        
+        characterNamePanel.add(barbarianLabel);
+        characterNamePanel.add(knightLabel);
+        characterNamePanel.add(mageLabel);
+        characterNamePanel.add(priestLabel);
+        
+        
+        
         JPanel centerPanel = new JPanel(new GridLayout(1, 4, 20, 10));
         JPanel pg1 = new JPanel(new BorderLayout());
 
@@ -408,7 +427,8 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
         centerPanel.add(pg2);
         centerPanel.add(pg3);
         centerPanel.add(pg4);
-        
+        characterPanel.add(characterNamePanel, BorderLayout.NORTH);
+        characterPanel.add(centerPanel, BorderLayout.CENTER);
         
         
         
@@ -433,9 +453,11 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
                 gS.setVisible(true);
             }
         }; 
+        characterPanel.setOpaque(false);
+        characterNamePanel.setOpaque(false);
         start.addActionListener(startAdventure);
         mainPanel.add(northPanel, BorderLayout.NORTH);
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(characterPanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         
         //così il giocatore può scegliere una sola volta il personaggio

@@ -4,6 +4,7 @@
  */
 package darksouls3;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -21,10 +22,8 @@ public class GameManager {
     protected EventManager eventM = new EventManager();
     protected FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();
-    private NPC n = new NPC();
     private Random rnd = new Random();
-    private int npcRandom;
-    private NPC_Name[] npcName;
+    protected ArrayList <NPC> npcsMet = new ArrayList();
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
     protected int result = -1;
     //costruttore
@@ -47,11 +46,11 @@ public class GameManager {
         c.inv.addItem(i);
     }
     //NEW NPC
-    public NPC_Name newNPC(NPC n){
+    public void newNPC(){
         //mi fa incontrare un npc randomico
-        npcName = n.getNPC_Name();
-        npcRandom = rnd.nextInt(npcName.length);
-        return npcName[npcRandom];
+        rnd = new Random();
+        NPC_Name randomNpc = NPC_Name.values()[rnd.nextInt(NPC_Name.values().length)];
+        npcsMet.add(new NPC(randomNpc));
     }
     //RESTORE HEALS
     public void restoreHeals(Character c){
@@ -94,7 +93,7 @@ public class GameManager {
             case RESTORE_HEALS -> c.restoreHeals();
             case NEW_NPC -> {
                 
-                this.newNPC(n);
+                this.newNPC();
             }
             case NEW_LOCATION -> this.newLocation();
             case NEW_BOSS -> {
@@ -116,7 +115,7 @@ public class GameManager {
     
     //gestione ending
     public void ending(){
-        endingM.ending();
+        endingM.ending(npcsMet);
     }
     //da implementare il load e il save
 

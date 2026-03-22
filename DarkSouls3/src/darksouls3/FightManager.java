@@ -14,7 +14,8 @@ public class FightManager {
     protected int turni;
     private String[] keyWords = {"heal", "attack", "roll", "ability"};
     private Random escape;
-    int escapeResult;
+    private int escapeResult;
+    
 
     public FightManager() {
         this.turni = 1;
@@ -53,13 +54,14 @@ public class FightManager {
             }
             else if(keyWord.equals(keyWords[2])){
                 escape = new Random();
-                escapeResult = escape.nextInt(0, 6);
-                if(escapeResult <= 2){
+                escapeResult = escape.nextInt(0, 101);
+                if(escapeResult <= 33){
                     c.setLife(c.life = c.life - v.baseAtt);
+                    c.stamina -= 10;
                 }
                 else{
                     c.stamina -= 10;
-                    c.setLife(c.life = c.life + 10);
+                    c.setLife(c.life = c.life + 15);
                 }
             }
             else if(keyWord.equals(keyWords[3])){
@@ -68,9 +70,15 @@ public class FightManager {
             else{
                 System.out.println(" Errore ");
             }
+                    
+            if(fightResult(c, v) != -1){
+                return; // blocca il turno del boss
+            }
         }
         else{
-            c.setLife(c.life = c.life - v.getBaseAtt());
+            if(v.getLife() > 0){
+                c.setLife(c.life = c.life - v.getBaseAtt());
+            }
         }
     }
     public int fightResult(Character c, Villain v){

@@ -10,8 +10,20 @@ package darksouls3;
  * @author aless
  */
 public class NPC {
+    private NPC_Name name;
 
-    public NPC_Name[] getNPC_Name(){
-        return NPC_Name.values();
+    public NPC(NPC_Name name) {
+        this.name = name;
+    }
+
+    public NPC_Name getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        // Converte in una forma leggibile
+        return name.toString().replace("_", " ");
     }
 }
+

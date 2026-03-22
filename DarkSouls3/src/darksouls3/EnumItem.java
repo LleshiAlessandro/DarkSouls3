@@ -16,9 +16,9 @@ public enum EnumItem {
     GIANT_HAMMER(28, 0),
 
     // CONSUMABLE
-    FIREBOMB(0, 3),
-    THROWING_KNIFE(0, 5),
-    PURGING_CRYSTAL(0, 2);
+    SIEGBRAU(0, 1),
+    DIVINE_BLESSING(0, 1),
+    EMBER(0, 1);
 
     private int baseDamage;   // solo per equipaggiabili
     private int quantity;     // solo per consumabili
@@ -30,4 +30,5 @@ public enum EnumItem {
 
     public int getBaseDamage() { return baseDamage; }
     public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

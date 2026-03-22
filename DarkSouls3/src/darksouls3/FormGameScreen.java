@@ -29,6 +29,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected JLabel numAshenEstus ;
     protected JLabel numGreenBlossom ;
     ArrayList <String> item = new ArrayList();
+    ArrayList <String> npcName = new ArrayList();
     String mapPath;
     Image sfondoAgg;
     /**
@@ -113,7 +114,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         characterSpec.add(stamina);
         characterSpec.add(att);
         
-        JPanel eastButtonPanel = new JPanel(new GridLayout(6,1,10,10));
+        JPanel eastButtonPanel = new JPanel(new GridLayout(7,1,10,10));
         eastButtonPanel.setBackground(Color.black);
         JButton specialAb = new JButton("info special ability");
         ActionListener actionAbility = new ActionListener(){
@@ -138,6 +139,30 @@ public class FormGameScreen extends javax.swing.JFrame {
         inv.addActionListener(actionInv);
         
         
+        JButton npcs = new JButton("Familiar Faces");
+        ActionListener actionNpc = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(g.npcsMet.isEmpty()) {
+                    JOptionPane.showMessageDialog(FormGameScreen.this,
+                        "You haven't met any NPCs yet.",
+                        "Familiar Faces",
+                        JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    String names = "";
+                    for(NPC n : g.npcsMet) {
+                        names += n.toString() + "\n";
+                    }
+                    JOptionPane.showMessageDialog(FormGameScreen.this,
+                        names,
+                        "Familiar Faces",
+                        JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        };
+        npcs.addActionListener(actionNpc);
+        
         JButton saveCsv = new JButton("save CSV");
         JButton loadCsv = new JButton("load CSV");
         JButton save = new JButton("save");
@@ -150,6 +175,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         
         eastButtonPanel.add(specialAb);
         eastButtonPanel.add(inv);
+        eastButtonPanel.add(npcs);
         eastButtonPanel.add(saveCsv);
         eastButtonPanel.add(loadCsv);
         eastButtonPanel.add(save);

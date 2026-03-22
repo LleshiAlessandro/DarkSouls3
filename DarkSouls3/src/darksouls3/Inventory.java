@@ -14,7 +14,7 @@ public class Inventory {
     protected int numberEstus;
     protected int numberAshenEstus;
     protected int greenBlossom;
-    private ArrayList <Item> items = new ArrayList();
+    protected ArrayList <Item> items = new ArrayList();
 
     public Inventory() {
         this.numberEstus = 5;

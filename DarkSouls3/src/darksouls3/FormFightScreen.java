@@ -23,6 +23,7 @@ public class FormFightScreen extends javax.swing.JFrame {
     String bossPath;
     boolean used = false;
     int value;
+    int bossDefeated = 0;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -79,7 +80,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         else if(g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())){
             bossPath = bossPaths[7];
         }
-        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName())){
+        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && bossDefeated >= 3){
             bossPath = bossPaths[8];
         }
         else if(g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())){
@@ -203,18 +204,21 @@ public class FormFightScreen extends javax.swing.JFrame {
         JButton attac = new JButton("Attack");
         JButton roll = new JButton("Roll");
         JButton specialAbility = new JButton("Special Ab.");
+        JButton useConsumable = new JButton("Use Consumable");
 
         Dimension buttonSize = new Dimension(120,40);
         heal.setPreferredSize(buttonSize);
         attac.setPreferredSize(buttonSize);
         roll.setPreferredSize(buttonSize);
         specialAbility.setPreferredSize(buttonSize);
+        useConsumable.setPreferredSize(buttonSize);
         
         
         buttonsPanel.add(heal);
         buttonsPanel.add(attac);
         buttonsPanel.add(roll);
         buttonsPanel.add(specialAbility);
+        buttonsPanel.add(useConsumable);
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
         
@@ -229,21 +233,22 @@ public class FormFightScreen extends javax.swing.JFrame {
                 }
                 keyWord = "heal";
                 g.fight(keyWord);
-                if(g.fightM.getTurni() %2 != 0){
-                    g.c.useEstus();
-                    g.c.useAshenEstus();
-                    g.c.useGreenblossom();
-                    numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                if(g.c.getLife()>0 && g.v.getLife()>0){
+                    if(g.fightM.getTurni() %2 != 0){
+                        g.c.useEstus();
+                        g.c.useAshenEstus();
+                        g.c.useGreenblossom();
+                        numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                        numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                        numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    }
+                    lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
+                    manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
+                    staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
+                    if(g.fightM.getTurni() %2 == 0){
+                        turn.setForeground(Color.red);
+                    }
                 }
-                lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
-                manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
-                staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
-                if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.red);
-                }
-
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 
                 
@@ -288,6 +293,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                     
                 }
@@ -301,18 +307,19 @@ public class FormFightScreen extends javax.swing.JFrame {
                 bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 
-                if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.red);
-                    value = lifeBar.getValue();
-                    lifeBar.setValue(value - g.v.getBaseAtt());
-                    if(actionHeal.equals(true)){
-                        lifeBar.setValue(value + 30);
+                if(g.c.getLife()>0 && g.v.getLife()>0){
+                    if(g.fightM.getTurni() %2 == 0){
+                        turn.setForeground(Color.red);
+                        value = lifeBar.getValue();
+                        lifeBar.setValue(value - g.v.getBaseAtt());
+                        if(actionHeal.equals(true)){
+                            lifeBar.setValue(value + 30);
+                        }
+                    }
+                    else{
+                        turn.setForeground(Color.green);
                     }
                 }
-                else{
-                    turn.setForeground(Color.green);
-                }
-                
                 //è sbagliato perché ogni volta che clicco mi toglie vita alla bar anche se il turno è mio
                 //int value = lifeBar.getValue();
                 //lifeBar.setValue(value - g.v.getBaseAtt());
@@ -363,6 +370,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                 }
             }
@@ -373,11 +381,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 keyWord = "roll";
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.red);
-                }
-                else{
-                    turn.setForeground(Color.green);
+                if(g.c.getLife()>0 && g.v.getLife()> 0){
+                    if(g.fightM.getTurni() %2 == 0){
+                        turn.setForeground(Color.red);
+                    }
+                    else{
+                        turn.setForeground(Color.green);
+                    }
                 }
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
@@ -423,6 +433,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                 }
             }
@@ -436,12 +447,16 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                if(g.fightM.getTurni() %2 == 0){
-                    turn.setForeground(Color.red);
+                bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
+                if(g.c.getLife()>0 && g.v.getLife()> 0){
+                    if(g.fightM.getTurni() %2 == 0){
+                        turn.setForeground(Color.red);
+                    }
+                    else{
+                        turn.setForeground(Color.green);
+                    }
                 }
-                else{
-                    turn.setForeground(Color.green);
-                }
+                
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 used = true;
                 if(used == true){
@@ -491,16 +506,44 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                 }
             }
         };
+        ActionListener actionConsumable = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(g.c.inv.items.isEmpty() != true){
+                   for (Item item : g.c.inv.items) {
+                        if (item.getName() == EnumItem.DIVINE_BLESSING) {
+                            g.c.setLife(g.c.getLife() + 20);
+                            g.c.inv.items.remove(item);
+                        } else if (item.getName() == EnumItem.EMBER) {
+                            g.c.setLife(100);
+                            g.c.inv.items.remove(item);
+                        } else if (item.getName() == EnumItem.SIEGBRAU) {
+                            g.c.setLife(g.c.getLife() + 10);
+                            g.c.inv.items.remove(item);
+                        }
+                    }
+                    
+                    lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                    manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
+                    staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
+                }
+                else{
+                    JOptionPane.showMessageDialog(FormFightScreen.this, "INVENTORY EMPTY", "Inventory", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        };    
+        
         
         heal.addActionListener(actionHeal);
         attac.addActionListener(actionAttac);
         roll.addActionListener(actionRoll);
         specialAbility.addActionListener(actionAbility);
-        
+        useConsumable.addActionListener(actionConsumable);
         
         
         
