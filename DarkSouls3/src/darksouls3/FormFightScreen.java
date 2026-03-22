@@ -23,7 +23,6 @@ public class FormFightScreen extends javax.swing.JFrame {
     String bossPath;
     boolean used = false;
     int value;
-    int bossDefeated = 0;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -80,7 +79,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         else if(g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())){
             bossPath = bossPaths[7];
         }
-        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && bossDefeated >= 3){
+        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated >= 3){
             bossPath = bossPaths[8];
         }
         else if(g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())){
@@ -293,7 +292,6 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                     
                 }
@@ -370,7 +368,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    bossDefeated = bossDefeated +1;
+                    //DEVO FARE IL CONTROLLO CHE SE HO UCCISO IL SOUL OF CINDER MI CHIUDE IL FORM
+                    //MI CHIUDE L'ALTRO FORM E POI MI APRE QUELLO DOVE DECIDO IL FINALE IN BASE AGLI NPC
                     FormFightScreen.this.dispose();
                 }
             }
@@ -433,7 +432,6 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                 }
             }
@@ -506,7 +504,6 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    bossDefeated = bossDefeated +1;
                     FormFightScreen.this.dispose();
                 }
             }

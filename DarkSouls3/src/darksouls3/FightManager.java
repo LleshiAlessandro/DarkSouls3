@@ -15,6 +15,7 @@ public class FightManager {
     private String[] keyWords = {"heal", "attack", "roll", "ability"};
     private Random escape;
     private int escapeResult;
+    protected int bossesDefeated = 0;
     
 
     public FightManager() {
@@ -90,6 +91,7 @@ public class FightManager {
                 
             }
             else if (v.getLife() <= 0) {
+                bossesDefeated++;
                 return 2;//fight vinto
             }
         return -1;
