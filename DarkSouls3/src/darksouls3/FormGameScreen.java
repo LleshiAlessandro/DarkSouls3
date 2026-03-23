@@ -28,10 +28,10 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected JLabel numEstus ;
     protected JLabel numAshenEstus ;
     protected JLabel numGreenBlossom ;
-    ArrayList <String> item = new ArrayList();
-    ArrayList <String> npcName = new ArrayList();
-    String mapPath;
-    Image sfondoAgg;
+    private ArrayList <String> item = new ArrayList();
+    protected ArrayList <String> npcName = new ArrayList();
+    private String mapPath;
+    private Image sfondoAgg;
     /**
      * Creates new form GameScreen
      */
@@ -132,6 +132,11 @@ public class FormGameScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(Item i : g.c.inv.getItems()){
                     item.add(i.toString() + ", ") ;
+                    
+                    //da sistemare, perché trovata un arma non mi cambia subito la label
+                    if(i.getDamage() > 0 && g.c.getBaseAtt() < i.getDamage()){
+                        att.setText("base attac: " + String.valueOf(i.getDamage()));
+                    }
                 }
                 JOptionPane.showMessageDialog(FormGameScreen.this, item, "Inventory", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -194,6 +199,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         eventArea = new JTextArea();
         eventArea.setForeground(Color.white);
         eventArea.setBackground(Color.black);
+        eventArea.add(new JScrollPane());
         eventArea.setEditable(false);
         
         

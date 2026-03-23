@@ -18,11 +18,13 @@ import javax.swing.border.EmptyBorder;
 public class FormFightScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormFightScreen.class.getName());
-    String keyWord = "";
-    String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
-    String bossPath;
-    boolean used = false;
-    int value;
+    private String keyWord = "";
+    private String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
+    private String bossPath;
+    private boolean used = false;
+    private int value;
+    private boolean soulOfCinderDefeated = false;
+    private boolean soul_of_cinder = false;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -79,8 +81,10 @@ public class FormFightScreen extends javax.swing.JFrame {
         else if(g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())){
             bossPath = bossPaths[7];
         }
-        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated >= 3){
+        //non funziona
+        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
             bossPath = bossPaths[8];
+            soul_of_cinder = true;
         }
         else if(g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())){
             bossPath = bossPaths[9];
@@ -368,8 +372,16 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    //DEVO FARE IL CONTROLLO CHE SE HO UCCISO IL SOUL OF CINDER MI CHIUDE IL FORM
-                    //MI CHIUDE L'ALTRO FORM E POI MI APRE QUELLO DOVE DECIDO IL FINALE IN BASE AGLI NPC
+                    //funziona
+                    if(soul_of_cinder == true && g.v.getLife() <= 0){
+                        soulOfCinderDefeated = true;
+                        if(soulOfCinderDefeated == true){
+                            FormFightScreen.this.dispose();
+                            FormChoiseEnding cE = new FormChoiseEnding();
+                            fG.dispose();
+                            cE.setVisible(true);
+                        }
+                    }
                     FormFightScreen.this.dispose();
                 }
             }
