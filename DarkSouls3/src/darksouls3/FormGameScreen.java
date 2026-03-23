@@ -5,8 +5,7 @@
 package darksouls3;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -104,7 +103,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         mana.setForeground(Color.white);
         JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
         stamina.setForeground(Color.white);
-        att = new JLabel("base attac: " + String.valueOf(g.c.getBaseAtt()));
+        att = new JLabel("base attack: " + String.valueOf(g.c.getBaseAtt()));
         att.setForeground(Color.white);
         JLabel name = new JLabel("name: " + g.c.name);
         name.setForeground(Color.white);

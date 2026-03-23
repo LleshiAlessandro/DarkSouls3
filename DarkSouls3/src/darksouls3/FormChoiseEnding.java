@@ -4,7 +4,10 @@
  */
 package darksouls3;
 
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  *
@@ -17,10 +20,48 @@ public class FormChoiseEnding extends javax.swing.JFrame {
     /**
      * Creates new form FormChoiseEnding
      */
-    public FormChoiseEnding() {
+    public FormChoiseEnding(GameManager g) {
         initComponents();
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new GridLayout(1,3));
+        JButton badEnd = new JButton("choose the darkness path");
+        JButton classicEnd = new JButton("choose your path, your ideal");
+        JButton goodEnd = new JButton("choose the best path for Lothric");
+        
+        buttonPanel.add(badEnd);
+        buttonPanel.add(classicEnd);
+        buttonPanel.add(goodEnd);
+        
+        //da implementare i 3 bottoni, devo aggiungere il controllo degli npc e quinid se è possibile fare il finale, poi dovrò scegliere 3 immagini
+        ActionListener actionBadEnd = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        };
+        badEnd.addActionListener(actionBadEnd);
         
         
+        ActionListener actionClassicEnd = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        };
+        classicEnd.addActionListener(actionClassicEnd);
+        
+        
+        ActionListener actionGoodEnd = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        };
+        goodEnd.addActionListener(actionGoodEnd);
+        
+        
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+        this.add(mainPanel);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
@@ -72,7 +113,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormChoiseEnding().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormChoiseEnding(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

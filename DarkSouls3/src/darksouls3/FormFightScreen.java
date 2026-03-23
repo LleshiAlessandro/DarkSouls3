@@ -5,9 +5,7 @@
 package darksouls3;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -377,7 +375,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         soulOfCinderDefeated = true;
                         if(soulOfCinderDefeated == true){
                             FormFightScreen.this.dispose();
-                            FormChoiseEnding cE = new FormChoiseEnding();
+                            FormChoiseEnding cE = new FormChoiseEnding(g);
                             fG.dispose();
                             cE.setVisible(true);
                         }
