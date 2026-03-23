@@ -37,7 +37,15 @@ public class GameManager {
     
     //NEW BOSS
     public void newBoss(){
+        //creo 2 liste 1 dei non apparsi e 1 degli apparsi, e gestisco le duplicità così
         EnumVillain[] bosses = EnumVillain.values();
+        ArrayList<EnumVillain> bossesNotAppeared = new ArrayList();//pieno all'inizio
+        ArrayList<EnumVillain> bossesAppeared = new ArrayList();//vuoto all'inizio
+        for(EnumVillain e: bosses){
+            bossesNotAppeared.add(e);
+        }
+        
+        
         this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
         inFight = true;
     }
@@ -109,7 +117,6 @@ public class GameManager {
     //attacca e di conseguenza adrò a togliere vita al boss
     public void fight(String keyWord){
         fightM.fightManaged(c, v, keyWord);
-        
         result = fightM.fightResult(c, v);
     }
     
