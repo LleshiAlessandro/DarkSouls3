@@ -361,7 +361,6 @@ public class FormGameScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
         //immagini/priest.png immagine di default
-        java.awt.EventQueue.invokeLater(() -> new FormGameScreen("immagini/priest.png", null, null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

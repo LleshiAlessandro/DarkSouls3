@@ -19,6 +19,7 @@ public class Priest extends Character{
     public void specialAbility(Villain v){
         life = 100;
         v.setLife(v.life = v.getLife() -30);
+        this.setMana(this.getMana() - this.getMana()/4);
     }
     @Override
     public String toString(){

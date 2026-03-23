@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class FightManager {
     protected int turni;
-    private String[] keyWords = {"heal", "attack", "roll", "ability"};
+    private String[] keyWords = {"heal", "attack", "roll", "special ability"};
     private Random escape;
     private int escapeResult;
     protected int bossesDefeated = 0;
@@ -51,18 +51,18 @@ public class FightManager {
                 c.useEstus();
             }
             else if(keyWord.equals(keyWords[1])){
-                v.setLife(v.life = v.life - c.baseAtt);
+                v.setLife(v.getLife() - c.getBaseAtt());
             }
             else if(keyWord.equals(keyWords[2])){
                 escape = new Random();
                 escapeResult = escape.nextInt(0, 101);
                 if(escapeResult <= 33){
-                    c.setLife(c.life = c.life - v.baseAtt);
-                    c.stamina -= 10;
+                    c.setLife(c.getLife() - v.getBaseAtt());
+                    c.setStamina(-10);
                 }
                 else{
-                    c.stamina -= 10;
-                    c.setLife(c.life = c.life + 15);
+                    c.setStamina(-10);
+                    c.setLife(c.getLife() + 15);
                 }
             }
             else if(keyWord.equals(keyWords[3])){
@@ -78,7 +78,7 @@ public class FightManager {
         }
         else{
             if(v.getLife() > 0){
-                c.setLife(c.life = c.life - v.getBaseAtt());
+                c.setLife(c.getLife() - v.getBaseAtt());
             }
         }
     }

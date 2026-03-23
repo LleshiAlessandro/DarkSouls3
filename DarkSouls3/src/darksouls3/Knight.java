@@ -42,6 +42,7 @@ public class Knight extends Character{
         inv.addNumberEstus();
         inv.addNumberAshenEstus();
         inv.addGreenBlossom();
+        this.setMana(this.getMana() - this.getMana()/2);
     }
     @Override
     public String toString(){

@@ -310,11 +310,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 if(g.c.getLife()>0 && g.v.getLife()>0){
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);
-                        value = lifeBar.getValue();
-                        lifeBar.setValue(value - g.v.getBaseAtt());
-                        if(actionHeal.equals(true)){
-                            lifeBar.setValue(value + 30);
-                        }
+                        lifeBar.setValue(g.c.getLife());
                     }
                     else{
                         turn.setForeground(Color.green);
@@ -370,17 +366,20 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    //funziona
-                    if(soul_of_cinder == true && g.v.getLife() <= 0){
-                        soulOfCinderDefeated = true;
-                        if(soulOfCinderDefeated == true){
+                    //non funziona
+                    //System.out.println("Boss name: [" + g.v.getName() + "]");
+                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
+                    if(g.getResult() == 2){
+                        if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
                             FormFightScreen.this.dispose();
                             FormChoiseEnding cE = new FormChoiseEnding(g);
                             fG.dispose();
                             cE.setVisible(true);
+                            return;
                         }
+                        // altri boss normali
+                        FormFightScreen.this.dispose();
                     }
-                    FormFightScreen.this.dispose();
                 }
             }
         };
@@ -390,6 +389,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 keyWord = "roll";
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);
@@ -451,7 +451,6 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "special ability";
                 g.fight(keyWord);
-                g.c.specialAbility(g.v);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
@@ -514,7 +513,16 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    FormFightScreen.this.dispose();
+                    //System.out.println("Boss name: [" + g.v.getName() + "]");
+                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
+                    if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
+                            FormFightScreen.this.dispose();
+                            FormChoiseEnding cE = new FormChoiseEnding(g);
+                            fG.dispose();
+                            cE.setVisible(true);
+                            return;
+                        }
+                        FormFightScreen.this.dispose();
                 }
             }
         };
@@ -595,7 +603,6 @@ public class FormFightScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormFightScreen(null, null, null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

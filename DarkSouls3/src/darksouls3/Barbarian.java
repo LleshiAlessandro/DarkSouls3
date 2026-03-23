@@ -18,9 +18,11 @@ public class Barbarian extends Character{
     @Override
     //modalità berserk
     public void specialAbility(Villain v) {
+        
         if(this.getLife() <= 10){
             v.setLife(0);
         }
+        this.setMana(this.getMana() - this.getMana()/5);
     }
     @Override
     public String toString(){

@@ -16,51 +16,110 @@ import javax.swing.*;
 public class FormChoiseEnding extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseEnding.class.getName());
-
+    private boolean hasAnri = false;
+    private boolean hasYuria = false;
+    private boolean hasYoel = false;
+    private boolean hasFireKeeper = false;
+    private String endPath = "";
+    private JPanel img;
     /**
      * Creates new form FormChoiseEnding
      */
     public FormChoiseEnding(GameManager g) {
         initComponents();
+        
         JPanel mainPanel = new JPanel(new BorderLayout());
+        
         JPanel buttonPanel = new JPanel(new GridLayout(1,3));
-        JButton badEnd = new JButton("choose the darkness path");
-        JButton classicEnd = new JButton("choose your path, your ideal");
-        JButton goodEnd = new JButton("choose the best path for Lothric");
+        JButton badEnd = new JButton("<html>The flame has waned…<br>Shadows crawl where light once held sway.<br>From the ashes of fire, a new Lord of Darkness rises.<br>All shall kneel beneath the endless night… and the age of man fades into legend.</html>");
+        JButton classicEnd = new JButton("<html>The fire flickers, frail yet unbroken…<br>Through pain and sacrifice, the flame endures.<br>A fragile light against the encroaching dark, it burns once more.<br>And so the cycle continues, until the fire fades again.</html>");
+        JButton goodEnd = new JButton("<html>The flame trembles and then ebbs…<br>The fire fades, but not in despair.<br>In its absence, a quiet dawn breaks upon Lothric, and hope, long dormant, stirs once more.<br>The age of fire may end, yet life endures.</html>");
+        Dimension buttonDimension = new Dimension(20, 100);
+        
+        badEnd.setPreferredSize(buttonDimension);
+        classicEnd.setPreferredSize(buttonDimension);
+        goodEnd.setPreferredSize(buttonDimension);
+        
+        goodEnd.setEnabled(false);
+        badEnd.setEnabled(false);
+        
         
         buttonPanel.add(badEnd);
         buttonPanel.add(classicEnd);
         buttonPanel.add(goodEnd);
         
+        
+        for(NPC n : g.npcsMet){
+            if(n.getName().equals(NPC_Name.ANRI_OF_ASTORA)){
+                hasAnri = true;
+            }
+            else if(n.getName().equals(NPC_Name.YURIA_OF_LONDOR)){
+                hasYuria = true;
+            }
+            else if(n.getName().equals(NPC_Name.YOEL_OF_LONDOR)){
+                hasYoel = true;
+            }
+            else if(n.getName().equals(NPC_Name.FIRE_KEEPER)){
+                hasFireKeeper = true;
+            }
+        }
+
+        // abilita bottoni corretti
+        if(hasAnri  == true || hasYuria  == true || hasYoel == true){
+            badEnd.setEnabled(true);
+        }
+
+        if(hasFireKeeper == true){
+            goodEnd.setEnabled(true);
+        }
+
+        // classic sempre disponibile
+        classicEnd.setEnabled(true);
+
+        
         //da implementare i 3 bottoni, devo aggiungere il controllo degli npc e quinid se è possibile fare il finale, poi dovrò scegliere 3 immagini
-        ActionListener actionBadEnd = new ActionListener() {
+        badEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                endPath = "immagini/badEnd.png";
+                buttonPanel.setVisible(false);
+                img.repaint();
             }
-        };
-        badEnd.addActionListener(actionBadEnd);
+        });
         
         
-        ActionListener actionClassicEnd = new ActionListener() {
+        classicEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                endPath = "immagini/classicEnd.png";
+                buttonPanel.setVisible(false);
+                img.repaint();
             }
-        };
-        classicEnd.addActionListener(actionClassicEnd);
-        
-        
-        ActionListener actionGoodEnd = new ActionListener() {
+        });
+
+        goodEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                endPath = "immagini/goodEnd.jpg";
+                buttonPanel.setVisible(false);
+                img.repaint();
+            }
+        });
+        
+        img = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (endPath != null && !endPath.isEmpty()) {
+                    Image sfondo = new ImageIcon(endPath).getImage();
+                    g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
+                }
             }
         };
-        goodEnd.addActionListener(actionGoodEnd);
         
-        
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+        mainPanel.add(img, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
         this.add(mainPanel);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
@@ -76,17 +135,6 @@ public class FormChoiseEnding extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -113,7 +161,6 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormChoiseEnding(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
