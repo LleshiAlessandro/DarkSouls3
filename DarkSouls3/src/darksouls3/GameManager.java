@@ -5,6 +5,7 @@
 package darksouls3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -22,10 +23,12 @@ public class GameManager {
     protected EventManager eventM = new EventManager();
     protected FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();
+    private EnumVillain[] bosses = EnumVillain.values();;
     private Random rnd = new Random();
     protected ArrayList <NPC> npcsMet = new ArrayList();
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
     protected int result = -1;
+    private int bossRand;
     //costruttore
     public GameManager(Character c,Player p) {
         this.c = c;
@@ -38,15 +41,27 @@ public class GameManager {
     //NEW BOSS
     public void newBoss(){
         //creo 2 liste 1 dei non apparsi e 1 degli apparsi, e gestisco le duplicità così
-        EnumVillain[] bosses = EnumVillain.values();
-        ArrayList<EnumVillain> bossesNotAppeared = new ArrayList();//pieno all'inizio
+        ArrayList<EnumVillain> bossesNotAppeared = new ArrayList(Arrays.asList(bosses));//pieno all'inizio
         ArrayList<EnumVillain> bossesAppeared = new ArrayList();//vuoto all'inizio
-        for(EnumVillain e: bosses){
-            bossesNotAppeared.add(e);
+        
+        bossRand = rnd.nextInt(bossesNotAppeared.size());//prendo una posizione a caso di boss non apparso
+        //non controlla quello randomico, ma va in fila
+        for(EnumVillain e : bossesNotAppeared){
+            
+            if(bossesAppeared.contains(e)){
+                e.setAppeared(true);
+                bossRand = rnd.nextInt(bossesNotAppeared.size());
+            }
+            if(e.isAppeared() == true){
+                bossesAppeared.add(e);
+                bossesNotAppeared.remove(e);
+            }
+            else{
+                e.setAppeared(true);
+            }
+            
         }
-        
-        
-        this.v = new Villain(bosses[rnd.nextInt(bosses.length)]);
+        this.v = new Villain(bossesNotAppeared.get(bossRand));
         inFight = true;
     }
     //ITEM FOUND
