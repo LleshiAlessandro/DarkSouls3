@@ -23,6 +23,7 @@ public class FormFightScreen extends javax.swing.JFrame {
     private int value;
     private boolean soulOfCinderDefeated = false;
     private boolean soul_of_cinder = false;
+    private JProgressBar lifeBar;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -32,7 +33,6 @@ public class FormFightScreen extends javax.swing.JFrame {
      */
     public FormFightScreen(FormGameScreen fG, GameManager g, String imgPath) {
         initComponents();
-        
         
         JPanel mainPanel = new JPanel(new GridLayout(2,1)); // divide lo schermo in due righe
         this.add(mainPanel);
@@ -51,7 +51,14 @@ public class FormFightScreen extends javax.swing.JFrame {
         bossStatsPanel.add(bossLife);
         bossStatsPanel.add(bossAtt);
         bossStatsPanel.setBackground(Color.black);
+        JProgressBar bossLifeBar = new JProgressBar(0, g.v.getLife());
+        bossLifeBar.setBorder(null);
         
+        bossLifeBar.setBackground(Color.black);
+        bossLifeBar.setForeground(Color.red);
+        bossLifeBar.setStringPainted(true);
+        bossLifeBar.setValue(g.v.life);
+        bossImg_and_StatsPanel.add(bossLifeBar, BorderLayout.NORTH);
         
         
         //tutte le immagini dei boss
@@ -166,9 +173,10 @@ public class FormFightScreen extends javax.swing.JFrame {
         lifeCharacter.setForeground(Color.white);
         
         
-        JProgressBar lifeBar = new JProgressBar(0, g.c.life); // crea una barra
-        lifeBar.setValue(g.c.life); // valore iniziale
-        lifeBar.setStringPainted(true); // mostra il numero % sulla barra
+        lifeBar = new JProgressBar(0, g.c.life); // crea una barra
+        lifeBar.setValue(g.c.life); //valore iniziale
+        lifeBar.setStringPainted(true); //mostra il numero % sulla barra
+        lifeBar.setBorder(null);
         lifeBar.setBackground(Color.red);
         lifeBar.setForeground(Color.green);
         characterStatsPanel.add(lifeBar);
@@ -242,6 +250,9 @@ public class FormFightScreen extends javax.swing.JFrame {
                         numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                         numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                         numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                        lifeBar.setValue(g.c.getLife());
+                        lifeBar.repaint();
+                        
                     }
                     lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
                     manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
@@ -249,6 +260,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);
                     }
+                    
                 }
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 
@@ -304,24 +316,27 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "attack";
                 g.fight(keyWord);
-                bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                
+                bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
+                lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
+                lifeBar.setValue(g.c.getLife());
+                lifeBar.repaint();
+
                 if(g.c.getLife()>0 && g.v.getLife()>0){
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);
+                        lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
+                        lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                         lifeBar.setValue(g.c.getLife());
+                        lifeBar.repaint();
+                        
                     }
                     else{
                         turn.setForeground(Color.green);
+                        bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
+                        
                     }
                 }
-                //è sbagliato perché ogni volta che clicco mi toglie vita alla bar anche se il turno è mio
-                //int value = lifeBar.getValue();
-                //lifeBar.setValue(value - g.v.getBaseAtt());
-                
-                
-                
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
@@ -390,6 +405,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
+                lifeBar.setValue(g.c.getLife());
+                lifeBar.repaint();
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);
@@ -455,6 +472,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
+                lifeBar.setValue(g.c.getLife());
+                lifeBar.repaint();
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
                         turn.setForeground(Color.red);

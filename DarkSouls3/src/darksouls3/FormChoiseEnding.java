@@ -32,7 +32,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         t = new Timer(1000, e->{
             leaseTime--;
             if(leaseTime <= 0){
-                this.dispose();
+                dispose();
             }
         });
         JPanel mainPanel = new JPanel(new BorderLayout());
