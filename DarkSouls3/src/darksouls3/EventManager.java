@@ -34,7 +34,7 @@ public class EventManager {
             return lastEvent = Event.NEW_NPC;
         }
         else if(randomEvent >= 86 && randomEvent <= 100){
-             return lastEvent = Event.ITEM_FOUND;
+            return lastEvent = Event.ITEM_FOUND;
         }
         return lastEvent = Event.NEW_LOCATION;
     }
@@ -42,7 +42,6 @@ public class EventManager {
     public Event getLastEvent() {
         return lastEvent;
     }
-    
     
     
     @Override

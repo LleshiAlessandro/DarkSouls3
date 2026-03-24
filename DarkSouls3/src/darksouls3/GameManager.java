@@ -29,39 +29,31 @@ public class GameManager {
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
     protected int result = -1;
     private int bossRand;
+    //creo 2 liste 1 dei non apparsi e 1 degli apparsi, e gestisco le duplicità così
+    private ArrayList<EnumVillain> bossesNotAppeared = new ArrayList<>(Arrays.asList(EnumVillain.values()));
+    private ArrayList<EnumVillain> bossesAppeared = new ArrayList<>();
     //costruttore
     public GameManager(Character c,Player p) {
         this.c = c;
         this.p = p;
     }
 
-    
-    
-    
     //NEW BOSS
     public void newBoss(){
-        //creo 2 liste 1 dei non apparsi e 1 degli apparsi, e gestisco le duplicità così
-        ArrayList<EnumVillain> bossesNotAppeared = new ArrayList(Arrays.asList(bosses));//pieno all'inizio
-        ArrayList<EnumVillain> bossesAppeared = new ArrayList();//vuoto all'inizio
-        
-        bossRand = rnd.nextInt(bossesNotAppeared.size());//prendo una posizione a caso di boss non apparso
-        //non controlla quello randomico, ma va in fila
-        for(EnumVillain e : bossesNotAppeared){
-            
-            if(bossesAppeared.contains(e)){
-                e.setAppeared(true);
-                bossRand = rnd.nextInt(bossesNotAppeared.size());
-            }
-            if(e.isAppeared() == true){
-                bossesAppeared.add(e);
-                bossesNotAppeared.remove(e);
-            }
-            else{
-                e.setAppeared(true);
-            }
-            
+        if(bossesNotAppeared.isEmpty()) {
+            //System.out.println("Tutti i boss sono già stati affrontati!");
+            return;
         }
-        this.v = new Villain(bossesNotAppeared.get(bossRand));
+        // scegli un boss casuale dalla lista dei non apparsi
+        bossRand = rnd.nextInt(bossesNotAppeared.size());
+        EnumVillain x = bossesNotAppeared.get(bossRand);//boss uscito random da quelli non sconfitti
+        
+        if(x.isAppeared() != true){
+            x.setAppeared(true);
+            bossesAppeared.add(x);
+            bossesNotAppeared.remove(x);
+        }
+        this.v = new Villain(x);
         inFight = true;
     }
     //ITEM FOUND

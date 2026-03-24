@@ -24,6 +24,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected JButton exit;
     protected JLabel att;
     protected JTextArea eventArea;
+    private JScrollPane scrollEventArea;
     protected JLabel numEstus ;
     protected JLabel numAshenEstus ;
     protected JLabel numGreenBlossom ;
@@ -198,12 +199,12 @@ public class FormGameScreen extends javax.swing.JFrame {
         eventArea = new JTextArea();
         eventArea.setForeground(Color.white);
         eventArea.setBackground(Color.black);
-        eventArea.add(new JScrollPane());
         eventArea.setEditable(false);
-        
+        scrollEventArea = new JScrollPane(eventArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollEventArea.setOpaque(false);
         
         eastPanel.add(titleEvent, BorderLayout.NORTH);
-        eastPanel.add(eventArea, BorderLayout.CENTER);
+        eastPanel.add(scrollEventArea, BorderLayout.CENTER);
         eastPanel.setBorder(new EmptyBorder(10,10,10,10));
         eastPanel.setBackground(Color.black);
         JPanel southPanel = new JPanel(new BorderLayout());
@@ -220,7 +221,7 @@ public class FormGameScreen extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.eventManaging();
-                eventArea.append(g.eventM.toString());
+                eventArea.append(g.eventM.toString().toLowerCase().replace("_", " "));
                 if(g.inFight == true){
                     travel.setEnabled(false);
                     exit.setEnabled(false);

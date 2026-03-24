@@ -22,12 +22,19 @@ public class FormChoiseEnding extends javax.swing.JFrame {
     private boolean hasFireKeeper = false;
     private String endPath = "";
     private JPanel img;
+    private Timer t;
+    private int leaseTime = 10;
     /**
      * Creates new form FormChoiseEnding
      */
     public FormChoiseEnding(GameManager g) {
         initComponents();
-        
+        t = new Timer(1000, e->{
+            leaseTime--;
+            if(leaseTime <= 0){
+                this.dispose();
+            }
+        });
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         JPanel buttonPanel = new JPanel(new GridLayout(1,3));
@@ -84,6 +91,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 endPath = "immagini/badEnd.png";
                 buttonPanel.setVisible(false);
                 img.repaint();
+                t.start();
             }
         });
         
@@ -94,6 +102,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 endPath = "immagini/classicEnd.png";
                 buttonPanel.setVisible(false);
                 img.repaint();
+                t.start();
             }
         });
 
@@ -103,6 +112,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 endPath = "immagini/goodEnd.jpg";
                 buttonPanel.setVisible(false);
                 img.repaint();
+                t.start();
             }
         });
         
