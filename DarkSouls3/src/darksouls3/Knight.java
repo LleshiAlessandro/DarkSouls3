@@ -17,32 +17,42 @@ public class Knight extends Character{
     //il prescelto
     public void specialAbility(Villain v){
         //+50 vita
-        if(getLife() >= 100){
-            life = 150;
+        if(this.getMana() >= 50){
+            if(getLife() >= 100){
+                life = 150;
+            }
+            else{
+                this.life = life + 50;
+            }
+
+            //+50 mana
+            if(getMana() >= 50){
+                mana = 100;
+            }
+            else{
+                this.mana = mana + 50;
+            }
+
+            //+50 stamina
+            if(getStamina() >= 50){
+                stamina = 100;
+            }
+            else{
+                this.stamina = stamina + 50;
+            }
+            inv.addNumberEstus();
+            inv.addNumberAshenEstus();
+            inv.addGreenBlossom();
         }
         else{
-            this.life = life + 50;
+           if(this.inv.getNumberAshenEstus() > 0){
+               this.useAshenEstus();
+           }
+           else{
+
+           }
         }
-        //+50 mana
-        if(getMana() >= 50){
-            mana = 100;
-        }
-        else{
-            this.mana = mana + 50;
-        }
-        //+50 stamina
-        if(getStamina() >= 50){
-            stamina = 100;
-        }
-        else{
-            this.stamina = stamina + 50;
-        }
-        
-        //prendi 1 cura, 1 cura del mana e 1 della stamina
-        inv.addNumberEstus();
-        inv.addNumberAshenEstus();
-        inv.addGreenBlossom();
-        this.setMana(this.getMana() - this.getMana()/2);
+        this.setMana(this.getMana() - 50);
     }
     @Override
     public String toString(){

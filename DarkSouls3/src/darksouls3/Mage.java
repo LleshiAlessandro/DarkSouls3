@@ -21,25 +21,35 @@ public class Mage extends Character{
     public void specialAbility(Villain v){
         Random rdn = new Random();
         int i = rdn.nextInt(0, 2);
-
-        if(i == 0){
-            mana = 100;
-            if(getStamina() >=70){
-                stamina = 100;
+        if(this.getMana() >= 25){
+            if(i == 0){
+                mana = 100;
+                if(getStamina() >=70){
+                    stamina = 100;
+                }
+                else{
+                    stamina = stamina +30;
+                }
             }
             else{
-                stamina = stamina +30;
+                if(v.getLife() >= 70){
+                    v.setLife(100);
+                }
+                else{
+                    v.setLife(v.life = v.getLife() + 30);
+                }
             }
         }
         else{
-            if(v.getLife() >= 70){
-                v.setLife(100);
-            }
-            else{
-                v.setLife(v.life = v.getLife() + 30);
-            }
+           if(this.inv.getNumberAshenEstus() > 0){
+               this.useAshenEstus();
+           }
+           else{
+
+           }
         }
-        this.setMana(this.getMana() - this.getMana()/4);
+        
+        this.setMana(this.getMana() - 25);
     }
     @Override
     public String toString(){

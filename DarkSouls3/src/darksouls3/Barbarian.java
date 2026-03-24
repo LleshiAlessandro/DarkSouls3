@@ -19,10 +19,18 @@ public class Barbarian extends Character{
     //modalità berserk
     public void specialAbility(Villain v) {
         
-        if(this.getLife() <= 10){
+        if(this.getLife() <= 10 && this.getMana() >= 20){
             v.setLife(0);
         }
-        this.setMana(this.getMana() - this.getMana()/5);
+        else{
+           if(this.inv.getNumberAshenEstus() > 0){
+               this.useAshenEstus();
+           }
+           else{
+
+           }
+        }
+        this.setMana(this.getMana() - 20);
     }
     @Override
     public String toString(){

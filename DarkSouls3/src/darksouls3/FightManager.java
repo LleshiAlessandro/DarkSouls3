@@ -58,10 +58,10 @@ public class FightManager {
                 escapeResult = escape.nextInt(0, 101);
                 if(escapeResult <= 33){
                     c.setLife(c.getLife() - v.getBaseAtt());
-                    c.setStamina(-10);
+                    c.setStamina(c.getStamina() - 10);
                 }
                 else{
-                    c.setStamina(-10);
+                    c.setStamina(c.getStamina() - 10);
                     c.setLife(c.getLife() + 15);
                 }
             }

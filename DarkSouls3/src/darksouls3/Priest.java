@@ -17,9 +17,19 @@ public class Priest extends Character{
     @Override
     //benedizione degli angeli
     public void specialAbility(Villain v){
-        life = 100;
-        v.setLife(v.life = v.getLife() -30);
-        this.setMana(this.getMana() - this.getMana()/4);
+        if(this.getMana() >= 25){
+            life = 100;
+            v.setLife(v.life = v.getLife() -30);
+        }
+        else{
+           if(this.inv.getNumberAshenEstus() > 0){
+               this.useAshenEstus();
+           }
+           else{
+
+           }
+        }
+        this.setMana(this.getMana() - 25);
     }
     @Override
     public String toString(){
