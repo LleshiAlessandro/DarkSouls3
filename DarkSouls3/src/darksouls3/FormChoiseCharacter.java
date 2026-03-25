@@ -19,7 +19,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseCharacter.class.getName());
     private String nameCharacter;
     protected Character c;
-    String imgPath;
+    protected String imgPath;
     String hystoriPg1 =  "In the dying lands of Lothric, where ash falls like silent snow,\n" +
     "a legend is whispered among the fading fires.\n" +
     "\n" +

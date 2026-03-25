@@ -26,6 +26,9 @@ public class FormFightScreen extends javax.swing.JFrame {
     private JProgressBar lifeBar;
     private JProgressBar manaBar;
     private JProgressBar staminaBar;
+    private String imgPathAzione = "";
+    private JPanel imgsCharacterActions;
+    private Image sfondoAzione;
 //immagini/barbarian.png
     /**
      * Creates new form FIghtScreen
@@ -149,7 +152,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         mainPanel.add(bossImg_and_StatsPanel);
 
         JPanel characterPanel = new JPanel(new BorderLayout());
-        characterPanel.setBackground(Color.GREEN);
+        characterPanel.setBackground(Color.black);
         mainPanel.add(characterPanel);
 
         JPanel characterImg_and_StatsPanel = new JPanel(new BorderLayout());
@@ -165,7 +168,28 @@ public class FormFightScreen extends javax.swing.JFrame {
         };
         characterImgPanel.setPreferredSize(new Dimension(300,650));
         characterImg_and_StatsPanel.add(characterImgPanel, BorderLayout.WEST);
-
+        
+        
+        //character img Actions
+        JPanel centralPanel = new JPanel(new GridLayout(1,2, 0,0));
+        JPanel leftCentralPanel = new JPanel();
+        leftCentralPanel.setBackground(Color.black);
+        centralPanel.add(leftCentralPanel);
+        imgsCharacterActions = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (sfondoAzione != null) {
+                    g.drawImage(sfondoAzione, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+        imgsCharacterActions.setBackground(Color.black);
+        imgsCharacterActions.setPreferredSize(new Dimension(200,500));
+        imgsCharacterActions.setMinimumSize(new Dimension(200,500));
+        imgsCharacterActions.setMaximumSize(new Dimension(200,500));
+        centralPanel.add(imgsCharacterActions);
+        characterImg_and_StatsPanel.add(centralPanel, BorderLayout.CENTER);
         
         //character stats
         JPanel characterStatsPanel = new JPanel(new GridLayout(7,1));
@@ -189,7 +213,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         manaBar.setStringPainted(true); //mostra il numero % sulla barra
         manaBar.setBorder(null);
         manaBar.setBackground(Color.black);
-        manaBar.setForeground(Color.blue);
+        manaBar.setForeground(Color.cyan);
         
         
         
@@ -199,6 +223,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         staminaBar.setBorder(null);
         staminaBar.setBackground(Color.black);
         staminaBar.setForeground(Color.green);
+
         
         
         
@@ -266,6 +291,22 @@ public class FormFightScreen extends javax.swing.JFrame {
                 }
                 keyWord = "heal";
                 g.fight(keyWord);
+                if(imgPath.equals("immagini/barbarian.png") == true){
+                    imgPathAzione = "immagini/barbarian_healing.png";
+                }
+                else if(imgPath.equals("immagini/knight.png") == true){
+                    imgPathAzione = "immagini/knight_healing.png";
+                }
+                else if(imgPath.equals("immagini/mage.png") == true){
+                    imgPathAzione = "immagini/mage_healing.png";
+                }
+                else if(imgPath.equals("immagini/priest.png") == true){
+                    imgPathAzione = "immagini/priest_healing.png";
+                }
+                changeActionImg();
+                
+                
+                
                 lifeBar.setValue(g.c.getLife());
                 manaBar.setValue(g.c.getMana());
                 staminaBar.setValue(g.c.getStamina());
@@ -355,6 +396,19 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "attack";
                 g.fight(keyWord);
+                if(imgPath.equals("immagini/barbarian.png") == true){
+                    imgPathAzione = "immagini/barbarian_att.png";
+                }
+                else if(imgPath.equals("immagini/knight.png") == true){
+                    imgPathAzione = "immagini/knight_att.png";
+                }
+                else if(imgPath.equals("immagini/mage.png") == true){
+                    imgPathAzione = "immagini/mage_att.png";
+                }
+                else if(imgPath.equals("immagini/priest.png") == true){
+                    imgPathAzione = "immagini/priest_att.png";
+                }
+                changeActionImg();
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
                 lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
@@ -452,6 +506,19 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
+                if(imgPath.equals("immagini/barbarian.png") == true){
+                    imgPathAzione = "immagini/barbarian_roll.png";
+                }
+                else if(imgPath.equals("immagini/knight.png") == true){
+                    imgPathAzione = "immagini/knight_roll.png";
+                }
+                else if(imgPath.equals("immagini/mage.png") == true){
+                    imgPathAzione = "immagini/mage_roll.png";
+                }
+                else if(imgPath.equals("immagini/priest.png") == true){
+                    imgPathAzione = "immagini/priest_roll.png";
+                }
+                changeActionImg();
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
                         specialAbility.setEnabled(false);
@@ -524,6 +591,19 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
+                if(imgPath.equals("immagini/barbarian.png") == true){
+                    imgPathAzione = "immagini/barbarian_sp.png";
+                }
+                else if(imgPath.equals("immagini/knight.png") == true){
+                    imgPathAzione = "immagini/knight_sp.png";
+                }
+                else if(imgPath.equals("immagini/mage.png") == true){
+                    imgPathAzione = "immagini/mage_sp.png";
+                }
+                else if(imgPath.equals("immagini/priest.png") == true){
+                    imgPathAzione = "immagini/priest_sp.png";
+                }
+                changeActionImg();
                 lifeBar.setValue(g.c.getLife());
                 lifeBar.repaint();
                 manaBar.setValue(g.c.getMana());
@@ -663,12 +743,20 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
+        
+        
         /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
     
+    }
+    
+    //mi cambia l'immagine per ongi azione
+    public void changeActionImg(){
+        sfondoAzione = new ImageIcon(imgPathAzione).getImage();
+        imgsCharacterActions.repaint(); // ridisegna il pannello
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -681,7 +769,6 @@ public class FormFightScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -702,6 +789,8 @@ public class FormFightScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

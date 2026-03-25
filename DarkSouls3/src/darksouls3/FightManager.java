@@ -49,6 +49,8 @@ public class FightManager {
         if(turn == true){
             if(keyWord.equals(keyWords[0])){
                 c.useEstus();
+                c.useAshenEstus();
+                c.useGreenblossom();
             }
             else if(keyWord.equals(keyWords[1])){
                 v.setLife(v.getLife() - c.getBaseAtt());
@@ -58,6 +60,9 @@ public class FightManager {
                 escapeResult = escape.nextInt(0, 101);
                 if(escapeResult <= 33){
                     c.setLife(c.getLife() - v.getBaseAtt());
+                    c.setStamina(c.getStamina() - 10);
+                }
+                else if(escapeResult == 50){
                     c.setStamina(c.getStamina() - 10);
                 }
                 else{
