@@ -38,7 +38,7 @@ public class FormFightScreen extends javax.swing.JFrame {
      */
     public FormFightScreen(FormGameScreen fG, GameManager g, String imgPath) {
         initComponents();
-        
+        g.bossfightSound();
         JPanel mainPanel = new JPanel(new GridLayout(2,1)); // divide lo schermo in due righe
         this.add(mainPanel);
         
@@ -359,6 +359,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                 fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                 fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                g.stopBossSound();
                 FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -375,6 +376,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -389,6 +391,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                     
                 }
@@ -456,6 +459,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -472,6 +476,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -492,11 +497,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                         if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
                             FormFightScreen.this.dispose();
                             FormChoiseEnding cE = new FormChoiseEnding(g);
+                            g.stopBossSound();
                             fG.dispose();
                             cE.setVisible(true);
                             return;
                         }
                         // altri boss normali
+                        g.stopBossSound();
                         FormFightScreen.this.dispose();
                     }
                 }
@@ -552,6 +559,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -569,6 +577,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -581,6 +590,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
             }
@@ -664,6 +674,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -681,6 +692,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -699,11 +711,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                     if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
                             FormFightScreen.this.dispose();
                             FormChoiseEnding cE = new FormChoiseEnding(g);
+                            g.stopBossSound();
                             fG.dispose();
                             cE.setVisible(true);
                             return;
                         }
-                        FormFightScreen.this.dispose();
+                    g.stopBossSound();
+                    FormFightScreen.this.dispose();
                 }
             }
         };
@@ -741,6 +755,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 1) {
@@ -754,6 +769,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.eventArea.setText("");
                     fG.eventArea.append("YOU DIED");
                     fG.eventArea.setForeground(Color.red);
+                    g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
                 else if (g.getResult() == 2) {
@@ -766,13 +782,15 @@ public class FormFightScreen extends javax.swing.JFrame {
                     //System.out.println("Boss name: [" + g.v.getName() + "]");
                     //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
                     if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
-                            FormFightScreen.this.dispose();
-                            FormChoiseEnding cE = new FormChoiseEnding(g);
-                            fG.dispose();
-                            cE.setVisible(true);
-                            return;
-                        }
+                        g.stopBossSound();    
                         FormFightScreen.this.dispose();
+                        FormChoiseEnding cE = new FormChoiseEnding(g);
+                        fG.dispose();
+                        cE.setVisible(true);
+                        return;
+                    }
+                    g.stopBossSound();
+                    FormFightScreen.this.dispose();
                 }
             }
         };

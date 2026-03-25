@@ -23,7 +23,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
     private String endPath = "";
     private JPanel img;
     private Timer t;
-    private int leaseTime = 10;
+    private int leaseTime = 30;
     /**
      * Creates new form FormChoiseEnding
      */
@@ -32,6 +32,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         t = new Timer(1000, e->{
             leaseTime--;
             if(leaseTime <= 0){
+                g.stopEndSound();
                 dispose();
             }
         });
@@ -92,6 +93,8 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 buttonPanel.setVisible(false);
                 img.repaint();
                 t.start();
+                g.endSound();
+                
             }
         });
         
@@ -103,6 +106,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 buttonPanel.setVisible(false);
                 img.repaint();
                 t.start();
+                g.endSound();
             }
         });
 
@@ -113,6 +117,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 buttonPanel.setVisible(false);
                 img.repaint();
                 t.start();
+                g.endSound();
             }
         });
         
@@ -134,7 +139,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

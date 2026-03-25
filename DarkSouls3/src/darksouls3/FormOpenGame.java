@@ -7,6 +7,8 @@ package darksouls3;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import javax.sound.sampled.*;
 import javax.swing.*;
 
 /**
@@ -29,12 +31,13 @@ public class FormOpenGame extends javax.swing.JFrame {
                 + "Will you defeat the bosses, overcome unexpected events, and save the bonfire flame,\n"
                 + "the last hope of Lothric, Ashen One?";
     String namePlayer;
+    private Clip startClip;
     /**
      * Creates new form OpenGame
      */
     public FormOpenGame() {
         initComponents();
-        
+        this.startSound();
         namePlayer = JOptionPane.showInputDialog(
             null,                       // parent component (null = finestra centrale)
             "Inserisci il tuo nome:",
@@ -119,6 +122,7 @@ public class FormOpenGame extends javax.swing.JFrame {
         ActionListener newGame = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                stopSound();
                 dispose();
                 FormChoiseCharacter cC = new FormChoiseCharacter(p);
                 cC.setVisible(true);
@@ -175,7 +179,30 @@ public class FormOpenGame extends javax.swing.JFrame {
         
     }
 
+    public void startSound(){
+        try {
+            File soundFile = new File("song/inizio_giusto.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
 
+            startClip = AudioSystem.getClip();
+            startClip.open(audioStream);
+            
+            FloatControl volume = (FloatControl) startClip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-18.0f); 
+
+            startClip.loop(Clip.LOOP_CONTINUOUSLY);
+            startClip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void stopSound() {
+    if (startClip != null && startClip.isRunning()) {
+        startClip.stop();   // ferma la riproduzione
+        startClip.close();  // libera le risorse
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

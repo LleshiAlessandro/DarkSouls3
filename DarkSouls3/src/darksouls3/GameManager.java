@@ -4,9 +4,11 @@
  */
 package darksouls3;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import javax.sound.sampled.*;
 
 
 
@@ -32,6 +34,8 @@ public class GameManager {
     //creo 2 liste 1 dei non apparsi e 1 degli apparsi, e gestisco le duplicità così
     private ArrayList<EnumVillain> bossesNotAppeared = new ArrayList<>(Arrays.asList(EnumVillain.values()));
     private ArrayList<EnumVillain> bossesAppeared = new ArrayList<>();
+    private Clip bossClip;
+    private Clip endClip;
     //costruttore
     public GameManager(Character c,Player p) {
         this.c = c;
@@ -140,6 +144,57 @@ public class GameManager {
     public boolean isInFight() {
         return inFight;
     }
+    
+    public void bossfightSound(){
+        try {
+            File soundFile = new File("song/boss_fight_soundTrack.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+
+            bossClip = AudioSystem.getClip();
+            bossClip.open(audioStream);
+            
+            FloatControl volume = (FloatControl) bossClip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-18.0f); 
+
+            bossClip.loop(Clip.LOOP_CONTINUOUSLY);
+            bossClip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void stopBossSound() {
+        if (bossClip != null && bossClip.isRunning()) {
+            bossClip.stop();
+            bossClip.close();
+        }
+    }
+    public void endSound(){
+        try {
+            File soundFile = new File("song/song_finale.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+
+            endClip = AudioSystem.getClip();
+            endClip.open(audioStream);
+            
+            FloatControl volume = (FloatControl) endClip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-18.0f); 
+
+            endClip.loop(Clip.LOOP_CONTINUOUSLY);
+            endClip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void stopEndSound() {
+            if (endClip != null && endClip.isRunning()) {
+                endClip.stop();
+                endClip.close();
+            }
+        }
     
     
     @Override
