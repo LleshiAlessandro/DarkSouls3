@@ -19,26 +19,18 @@ public class Knight extends Character{
         //+50 vita
         if(this.getMana() >= 50){
             if(getLife() >= 100){
-                life = 150;
+                this.setLife(150);
             }
             else{
-                this.life = life + 50;
-            }
-
-            //+50 mana
-            if(getMana() >= 50){
-                mana = 100;
-            }
-            else{
-                this.mana = mana + 50;
+                this.setLife(this.getLife() + 50);
             }
 
             //+50 stamina
             if(getStamina() >= 50){
-                stamina = 100;
+                this.setStamina(100);
             }
             else{
-                this.stamina = stamina + 50;
+                this.setStamina(this.getStamina() + 50);
             }
             inv.addNumberEstus();
             inv.addNumberAshenEstus();

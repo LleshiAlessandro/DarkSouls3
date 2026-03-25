@@ -175,7 +175,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         lifeCharacter.setForeground(Color.white);
         
         
-        lifeBar = new JProgressBar(0, g.c.life); // crea una barra
+        lifeBar = new JProgressBar(0, 150); // crea una barra
         lifeBar.setValue(g.c.life); //valore iniziale
         lifeBar.setStringPainted(true); //mostra il numero % sulla barra
         lifeBar.setBorder(null);
@@ -184,7 +184,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-        manaBar = new JProgressBar(0, g.c.mana); // crea una barra
+        manaBar = new JProgressBar(0, 100); // crea una barra
         manaBar.setValue(g.c.mana); //valore iniziale
         manaBar.setStringPainted(true); //mostra il numero % sulla barra
         manaBar.setBorder(null);
@@ -193,7 +193,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         
         
         
-        staminaBar = new JProgressBar(0, g.c.stamina); // crea una barra
+        staminaBar = new JProgressBar(0, 100); // crea una barra
         staminaBar.setValue(g.c.stamina); //valore iniziale
         staminaBar.setStringPainted(true); //mostra il numero % sulla barra
         staminaBar.setBorder(null);
@@ -264,13 +264,19 @@ public class FormFightScreen extends javax.swing.JFrame {
                 if(g.c.inv.numberEstus <= 0){
                     heal.setEnabled(false);
                 }
-                else{
-                    turn.setForeground(Color.green);
-                }
                 keyWord = "heal";
                 g.fight(keyWord);
+                lifeBar.setValue(g.c.getLife());
+                manaBar.setValue(g.c.getMana());
+                staminaBar.setValue(g.c.getStamina());
+
+                lifeBar.repaint();
+                manaBar.repaint();
+                staminaBar.repaint();
                 if(g.c.getLife()>0 && g.v.getLife()>0){
                     if(g.fightM.getTurni() %2 != 0){
+                        specialAbility.setEnabled(true);
+                        turn.setForeground(Color.green);
                         g.c.useEstus();
                         g.c.useAshenEstus();
                         g.c.useGreenblossom();
@@ -290,6 +296,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
                     staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
                     if(g.fightM.getTurni() %2 == 0){
+                        specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                     }
                     
@@ -359,6 +366,7 @@ public class FormFightScreen extends javax.swing.JFrame {
 
                 if(g.c.getLife()>0 && g.v.getLife()>0){
                     if(g.fightM.getTurni() %2 == 0){
+                        specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                         lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
                         lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
@@ -367,6 +375,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         
                     }
                     else{
+                        specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                         bossLifeBar.setValue(bossLifeBar.getValue() - g.c.getBaseAtt());
                         bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
@@ -445,9 +454,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
+                        specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                     }
                     else{
+                        specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                     }
                 }
@@ -517,22 +528,37 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeBar.repaint();
                 manaBar.setValue(g.c.getMana());
                 manaBar.repaint();
+                staminaBar.setValue(g.c.getStamina());
+                staminaBar.repaint();
                 if(g.c.getLife()>0 && g.v.getLife()> 0){
                     if(g.fightM.getTurni() %2 == 0){
+                        specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                         lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
                         lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                         manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
+                        staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                         lifeBar.setValue(g.c.getLife());
                         lifeBar.repaint();
                         manaBar.setValue(g.c.getMana());
                         manaBar.repaint();
+                        staminaBar.setValue(g.c.getStamina());
+                        staminaBar.repaint();
                     }
                     else{
+                        specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                         bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
+                        manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
+                        staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                         bossLifeBar.setValue(g.v.getLife());
                         bossLifeBar.repaint();
+                        lifeBar.setValue(g.c.getLife());
+                        lifeBar.repaint();
+                        manaBar.setValue(g.c.getMana());
+                        manaBar.repaint();
+                        staminaBar.setValue(g.c.getStamina());
+                        staminaBar.repaint();
                     }
                 }
                 

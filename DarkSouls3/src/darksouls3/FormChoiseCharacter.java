@@ -265,7 +265,7 @@ public class FormChoiseCharacter extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //System.out.println("YOU HAVE CLICKED THE KNIGHT");
-                c = new Knight(35, 75, nameCharacter, 115, 22);
+                c = new Knight(50, 75, nameCharacter, 115, 22);
                 imgPath = "immagini/knight.png";
                 start.setEnabled(true);
             }

@@ -73,7 +73,7 @@ public class FightManager {
             }
                     
             if(fightResult(c, v) != -1){
-                return; // blocca il turno del boss
+                return; //blocca il turno del boss
             }
         }
         else{
