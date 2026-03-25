@@ -259,12 +259,13 @@ public class FormFightScreen extends javax.swing.JFrame {
         azioniCharacterPanel.setBackground(Color.DARK_GRAY);
         characterPanel.add(azioniCharacterPanel, BorderLayout.SOUTH);
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(1,3, 10,0));
+        JPanel buttonsPanel = new JPanel(new GridLayout(1,6, 10,0));
 
         JButton heal = new JButton("Heal");
         JButton attac = new JButton("Attack");
         JButton roll = new JButton("Roll");
         JButton specialAbility = new JButton("Special Ab.");
+        JButton useShield = new JButton("Use Shield");
         JButton useConsumable = new JButton("Use Consumable");
 
         Dimension buttonSize = new Dimension(120,40);
@@ -272,6 +273,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         attac.setPreferredSize(buttonSize);
         roll.setPreferredSize(buttonSize);
         specialAbility.setPreferredSize(buttonSize);
+        useShield.setPreferredSize(buttonSize);
         useConsumable.setPreferredSize(buttonSize);
         
         
@@ -279,6 +281,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         buttonsPanel.add(attac);
         buttonsPanel.add(roll);
         buttonsPanel.add(specialAbility);
+        buttonsPanel.add(useShield);
         buttonsPanel.add(useConsumable);
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
@@ -704,6 +707,76 @@ public class FormFightScreen extends javax.swing.JFrame {
                 }
             }
         };
+        
+        ActionListener actionShield = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(imgPath.equals("immagini/barbarian.png") == true){
+                    imgPathAzione = "immagini/barbarian_shield.png";
+                }
+                else if(imgPath.equals("immagini/knight.png") == true){
+                    imgPathAzione = "immagini/knight_shield.png";
+                }
+                else if(imgPath.equals("immagini/mage.png") == true){
+                    imgPathAzione = "immagini/mage_shield.png";
+                }
+                else if(imgPath.equals("immagini/priest.png") == true){
+                    imgPathAzione = "immagini/priest_shield.png";
+                }
+                changeActionImg();
+                
+                keyWord = "use shield";
+                g.fight(keyWord);
+                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
+                bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
+                lifeBar.setValue(g.c.getLife());
+                lifeBar.repaint();
+                bossLifeBar.setValue(g.v.getLife());
+                bossLifeBar.repaint();
+                
+                if(g.getResult() == 0){
+                JOptionPane.showMessageDialog(FormFightScreen.this,
+                    "Both you and your opponent have fallen… The fire fades.",
+                    "DARK SOULS 3",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(false);
+                    fG.exit.setEnabled(true);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "You have met your end… Ashes to ashes, ember to darkness.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(false);
+                    fG.exit.setEnabled(true);
+                    
+                    fG.eventArea.setText("");
+                    fG.eventArea.append("YOU DIED");
+                    fG.eventArea.setForeground(Color.red);
+                    FormFightScreen.this.dispose();
+                }
+                else if (g.getResult() == 2) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                        "DARK SOULS 3",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(true);
+                    fG.exit.setEnabled(true);
+                    //System.out.println("Boss name: [" + g.v.getName() + "]");
+                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
+                    if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
+                            FormFightScreen.this.dispose();
+                            FormChoiseEnding cE = new FormChoiseEnding(g);
+                            fG.dispose();
+                            cE.setVisible(true);
+                            return;
+                        }
+                        FormFightScreen.this.dispose();
+                }
+            }
+        };
+        
         ActionListener actionConsumable = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -736,6 +809,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         attac.addActionListener(actionAttac);
         roll.addActionListener(actionRoll);
         specialAbility.addActionListener(actionAbility);
+        useShield.addActionListener(actionShield);
         useConsumable.addActionListener(actionConsumable);
         
         
