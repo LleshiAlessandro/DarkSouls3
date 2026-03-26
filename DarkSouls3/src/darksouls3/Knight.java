@@ -48,7 +48,7 @@ public class Knight extends Character{
     }
     @Override
     public String toString(){
-        return "\"The Chosen One\"\n" +
+        return "\"<h1The Chosen One\"\n /h1>" +
                 "\"A surge of destiny courses through the body of the chosen.\n" +
                 "Life rekindles, wounds sealing as if the fire itself breathes anew.\n" +
                 "Mana flows like sacred embers, rekindling the strength of the soul.\n" +
@@ -62,6 +62,7 @@ public class Knight extends Character{
                 "  Restore 50 Stamina (up to 100)\n" +
                 "  Gain 1 Estus Flask\n" +
                 "  Gain 1 Ashen Estus Flask\n" +
-                "  Gain 1 Green Blossom";
+                "  Gain 1 Green Blossom\n" +
+                "  It cost 50 mana";
     }
 }

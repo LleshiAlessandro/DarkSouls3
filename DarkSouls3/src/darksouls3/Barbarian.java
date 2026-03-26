@@ -34,12 +34,13 @@ public class Barbarian extends Character{
     }
     @Override
     public String toString(){
-        return "\"Berserk Mode\"\n" +
+        return "\"<h1Berserk Mode\"\n /h1>" +
     "\"When the Barbarian stands at death's door, fury consumes all reason.\n" +
     "With but a breath of life remaining, the foe is struck down utterly,\n" +
     "as if destiny itself wills their annihilation. The body fights for survival,\n" +
     "and the enemy falls before the wrath of the chosen warrior.\"\n\n" +
     "Effect:\n" +
-    "  If life <= 10, enemy instantly reduced to 0 Life";
+    "  If life <= 10, enemy instantly reduced to 0 Life\n"+
+    "  It cost 20 mana";
     }
 }

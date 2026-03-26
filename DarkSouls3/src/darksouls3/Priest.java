@@ -18,7 +18,7 @@ public class Priest extends Character{
     //benedizione degli angeli
     public void specialAbility(Villain v){
         if(this.getMana() >= 25){
-            life = 100;
+            this.setLife(150);
             v.setLife(v.life = v.getLife() -30);
         }
         else{
@@ -33,13 +33,14 @@ public class Priest extends Character{
     }
     @Override
     public String toString(){
-        return "\"Blessing of the Angels\"\n" +
+        return "\"<h1Blessing of the Angels\"\n /h1>" +
     "\"A divine radiance descends upon the Priest.\n" +
     "Life is restored to its zenith, and the hand of heaven strikes the foe.\n" +
     "Angelic power diminishes the enemy’s vitality by a sliver,\n" +
     "turning prayer into righteous action.\"\n\n" +
     "Effect:\n" +
-    "  Restore Life to 100\n" +
-    "  Deal 30 damage to enemy";
+    "  Restore Life to 150\n" +
+    "  Deal 30 damage to enemy\n"+
+    "  it cost 25 mana";
     }
 }

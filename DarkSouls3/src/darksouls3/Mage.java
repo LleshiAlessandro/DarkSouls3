@@ -53,7 +53,9 @@ public class Mage extends Character{
     }
     @Override
     public String toString(){
-        return "\"Gamble of Fate\"\n" +
+        //da sistemare visivamente
+    return  "<html>" +
+    "<h3 Gamble of Fate /h3> </html> \n" +
     "\"The Mage toys with the threads of chance and destiny.\n" +
     "One moment, mana and stamina are replenished, invigorating the body and soul.\n" +
     "The next, the enemy’s vitality may surge or wane, subject to the whims of fortune.\n" +
@@ -61,6 +63,8 @@ public class Mage extends Character{
     "Effect:\n" +
     "  Randomly:\n" +
     "    - Restore mana to 100 and stamina (+30 or 100 if >=70)\n" +
-    "    - Enemy gains 30 Life (or 100 if enemy life >=70)";
+    "    - Enemy gains 30 Life (or 100 if enemy life >=70)\n" +
+    "    - It cost 25 mana ";
+    
     }
 }
