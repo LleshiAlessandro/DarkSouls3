@@ -120,7 +120,7 @@ public class FormGameScreen extends javax.swing.JFrame {
         ActionListener actionAbility = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(FormGameScreen.this, g.c.toString(), "Inventory", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(FormGameScreen.this, g.c.toString(), "Special Ability", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         specialAb.addActionListener(actionAbility);
