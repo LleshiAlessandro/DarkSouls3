@@ -89,7 +89,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         badEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                endPath = "immagini/badEnd.png";
+                endPath = "immagini/badEnd.jpg";
                 buttonPanel.setVisible(false);
                 img.repaint();
                 t.start();
@@ -102,7 +102,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         classicEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                endPath = "immagini/classicEnd.png";
+                endPath = "immagini/classicEnd.jpg";
                 buttonPanel.setVisible(false);
                 img.repaint();
                 t.start();
