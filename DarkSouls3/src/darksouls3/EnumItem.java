@@ -14,7 +14,6 @@ public enum EnumItem {
     GREATSWORD(30, 0),
     DAGGER(22, 0),
     GIANT_HAMMER(28, 0),
-
     // CONSUMABLE
     SIEGBRAU(0, 1),
     DIVINE_BLESSING(0, 1),
@@ -28,7 +27,15 @@ public enum EnumItem {
         this.quantity = quantity;
     }
 
-    public int getBaseDamage() { return baseDamage; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public int getBaseDamage() {
+        return baseDamage;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

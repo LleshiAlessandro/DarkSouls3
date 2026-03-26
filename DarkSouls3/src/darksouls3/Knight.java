@@ -8,61 +8,61 @@ package darksouls3;
  *
  * @author lleshi.alessandro
  */
-public class Knight extends Character{
+public class Knight extends Character {
+
     public Knight(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }
-    
+
     @Override
     //il prescelto
-    public void specialAbility(Villain v){
+    public void specialAbility(Villain v) {
         //+50 vita
-        if(this.getMana() >= 50){
-            if(getLife() >= 100){
+        if (this.getMana() >= 50) {
+            if (getLife() >= 100) {
                 this.setLife(150);
-            }
-            else{
+            } else {
                 this.setLife(this.getLife() + 50);
             }
 
             //+50 stamina
-            if(getStamina() >= 50){
+            if (getStamina() >= 50) {
                 this.setStamina(100);
-            }
-            else{
+            } else {
                 this.setStamina(this.getStamina() + 50);
             }
             inv.addNumberEstus();
             inv.addNumberAshenEstus();
             inv.addGreenBlossom();
-        }
-        else{
-           if(this.inv.getNumberAshenEstus() > 0){
-               this.useAshenEstus();
-           }
-           else{
+        } else {
+            if (this.inv.getNumberAshenEstus() > 0) {
+                this.useAshenEstus();
+            } else {
 
-           }
+            }
         }
         this.setMana(this.getMana() - 50);
     }
+
     @Override
-    public String toString(){
-        return "\"<h1The Chosen One\"\n /h1>" +
-                "\"A surge of destiny courses through the body of the chosen.\n" +
-                "Life rekindles, wounds sealing as if the fire itself breathes anew.\n" +
-                "Mana flows like sacred embers, rekindling the strength of the soul.\n" +
-                "Stamina returns with relentless vigor, the body prepared for the trials that yet linger.\n" +
-                "In this brief communion with fate, one finds an additional Estus, an Ashen Estus,\n" +
-                "and a Green Blossom, as if providence itself deems you worthy to endure further still.\n" +
-                "Yet beware—the boon is fleeting, and the road ahead is fraught with despair.\"\n\n" +
-                "Effect:\n" +
-                "  Restore 50 Life\n" +
-                "  Restore 50 Mana (up to 100)\n" +
-                "  Restore 50 Stamina (up to 100)\n" +
-                "  Gain 1 Estus Flask\n" +
-                "  Gain 1 Ashen Estus Flask\n" +
-                "  Gain 1 Green Blossom\n" +
-                "  It cost 50 mana";
+    public String toString() {
+        return "<html>"
+                + "<h1> The Chosen One </h1> <br>"
+                + "<p A surge of destiny courses through the body of the chosen.<br>"
+                + "Life rekindles, wounds sealing as if the fire itself breathes anew.<br>"
+                + "Mana flows like sacred embers, rekindling the strength of the soul.<br>"
+                + "Stamina returns with relentless vigor, the body prepared for the trials that yet linger.<br>"
+                + "In this brief communion with fate, one finds an additional Estus, an Ashen Estus,<br>"
+                + "and a Green Blossom, as if providence itself deems you worthy to endure further still.<br>"
+                + "Yet beware—the boon is fleeting, and the road ahead is fraught with despair.</p><br>"
+                + "Effect:<br>"
+                + "  Restore 50 Life<br>"
+                + "  Restore 50 Mana (up to 100)<br>"
+                + "  Restore 50 Stamina (up to 100)<br>"
+                + "  Gain 1 Estus Flask<br>"
+                + "  Gain 1 Ashen Estus Flask<br>"
+                + "  Gain 1 Green Blossom<br>"
+                + "  It cost 50 mana"
+                + "</html>";
     }
 }

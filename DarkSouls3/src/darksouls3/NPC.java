@@ -4,12 +4,12 @@
  */
 package darksouls3;
 
-
 /**
  *
  * @author aless
  */
 public class NPC {
+
     private NPC_Name name;
 
     public NPC(NPC_Name name) {
@@ -26,4 +26,3 @@ public class NPC {
         return name.toString().replace("_", " ");
     }
 }
-

@@ -11,102 +11,93 @@ import java.util.Random;
  * @author aless
  */
 public class FightManager {
+
     protected int turni;
     private String[] keyWords = {"heal", "attack", "roll", "special ability", "use shield"};
     private Random escape;
     private int escapeResult;
     protected int bossesDefeated = 0;
-    
 
     public FightManager() {
         this.turni = 1;
     }
-    
-    public void incrementTurn(){
+
+    public void incrementTurn() {
         turni = turni + 1;
     }
-    
+
     //controlla di chi è il turno, nel gestore dovrò gestire cosa succede nel turno del giocatore e del boss
-    public boolean chooseTurn(Character c, Villain v){
-        if(c.getLife() > 0 && v.getLife() > 0){
-            
+    public boolean chooseTurn(Character c, Villain v) {
+        if (c.getLife() > 0 && v.getLife() > 0) {
+
             //turni del character
-            if(turni %2 != 0){
+            if (turni % 2 != 0) {
                 this.incrementTurn();
                 return true;
-            }
-            //turni del nemico
-            else{
+            } //turni del nemico
+            else {
                 this.incrementTurn();
                 return false;
             }
         }
         return false;
     }
-    
-    public void fightManaged(Character c, Villain v, String keyWord){
+
+    public void fightManaged(Character c, Villain v, String keyWord) {
         boolean turn = this.chooseTurn(c, v);
-        if(turn == true){
-            if(keyWord.equals(keyWords[0])){
+        if (turn == true) {
+            if (keyWord.equals(keyWords[0])) {
                 c.useEstus();
                 c.useAshenEstus();
                 c.useGreenblossom();
-            }
-            else if(keyWord.equals(keyWords[1])){
+            } else if (keyWord.equals(keyWords[1])) {
                 v.setLife(v.getLife() - c.getBaseAtt());
-            }
-            else if(keyWord.equals(keyWords[2])){
+            } else if (keyWord.equals(keyWords[2])) {
                 escape = new Random();
                 escapeResult = escape.nextInt(0, 101);
-                if(escapeResult <= 33){
+                if (escapeResult <= 33) {
                     c.setLife(c.getLife() - v.getBaseAtt());
                     c.setStamina(c.getStamina() - 10);
-                }
-                else if(escapeResult == 50){
+                } else if (escapeResult == 50) {
                     c.setStamina(c.getStamina() - 10);
-                }
-                else{
+                } else {
                     c.setStamina(c.getStamina() - 10);
                     c.setLife(c.getLife() + 15);
                 }
-            }
-            else if(keyWord.equals(keyWords[3])){
+            } else if (keyWord.equals(keyWords[3])) {
                 c.specialAbility(v);
-            }
-            else if(keyWord.equals(keyWords[4])){
+            } else if (keyWord.equals(keyWords[4])) {
                 c.setLife(c.getLife() - (v.getBaseAtt() - 12));
                 v.setLife(v.getLife() - 15);
-            }
-            else{
+            } else {
                 System.out.println(" Errore ");
             }
-                    
-            if(fightResult(c, v) != -1){
+
+            if (fightResult(c, v) != -1) {
                 return; //blocca il turno del boss
             }
-        }
-        else{
-            if(v.getLife() > 0){
+        } else {
+            if (v.getLife() > 0) {
                 c.setLife(c.getLife() - v.getBaseAtt());
             }
         }
     }
-    public int fightResult(Character c, Villain v){
-    if (c.getLife() <= 0 && v.getLife() <= 0) {
-                return 0;//fight pareggiato
-            }
-            else if (c.getLife() <= 0) {
-                return 1;//fight vinto dal boss
-                
-            }
-            else if (v.getLife() <= 0) {
-                bossesDefeated++;
-                return 2;//fight vinto
-            }
+
+    public int fightResult(Character c, Villain v) {
+        if (c.getLife() <= 0 && v.getLife() <= 0) {
+            return 0;//fight pareggiato
+        } else if (c.getLife() <= 0) {
+            return 1;//fight vinto dal boss
+
+        } else if (v.getLife() <= 0) {
+            bossesDefeated++;
+            return 2;//fight vinto
+        }
         return -1;
     }
+
     public int getTurni() {
         return turni;
     }
-    
+
 }

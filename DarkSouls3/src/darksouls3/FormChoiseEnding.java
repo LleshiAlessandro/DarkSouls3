@@ -14,7 +14,7 @@ import javax.swing.*;
  * @author lleshi.alessandro
  */
 public class FormChoiseEnding extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormChoiseEnding.class.getName());
     private boolean hasAnri = false;
     private boolean hasYuria = false;
@@ -24,67 +24,62 @@ public class FormChoiseEnding extends javax.swing.JFrame {
     private JPanel img;
     private Timer t;
     private int leaseTime = 30;
+
     /**
      * Creates new form FormChoiseEnding
      */
     public FormChoiseEnding(GameManager g) {
         initComponents();
-        t = new Timer(1000, e->{
+        t = new Timer(1000, e -> {
             leaseTime--;
-            if(leaseTime <= 0){
+            if (leaseTime <= 0) {
                 g.stopEndSound();
                 dispose();
             }
         });
         JPanel mainPanel = new JPanel(new BorderLayout());
-        
-        JPanel buttonPanel = new JPanel(new GridLayout(1,3));
+
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
         JButton badEnd = new JButton("<html>The flame has waned…<br>Shadows crawl where light once held sway.<br>From the ashes of fire, a new Lord of Darkness rises.<br>All shall kneel beneath the endless night… and the age of man fades into legend.</html>");
         JButton classicEnd = new JButton("<html>The fire flickers, frail yet unbroken…<br>Through pain and sacrifice, the flame endures.<br>A fragile light against the encroaching dark, it burns once more.<br>And so the cycle continues, until the fire fades again.</html>");
         JButton goodEnd = new JButton("<html>The flame trembles and then ebbs…<br>The fire fades, but not in despair.<br>In its absence, a quiet dawn breaks upon Lothric, and hope, long dormant, stirs once more.<br>The age of fire may end, yet life endures.</html>");
         Dimension buttonDimension = new Dimension(20, 100);
-        
+
         badEnd.setPreferredSize(buttonDimension);
         classicEnd.setPreferredSize(buttonDimension);
         goodEnd.setPreferredSize(buttonDimension);
-        
+
         goodEnd.setEnabled(false);
         badEnd.setEnabled(false);
-        
-        
+
         buttonPanel.add(badEnd);
         buttonPanel.add(classicEnd);
         buttonPanel.add(goodEnd);
-        
-        
-        for(NPC n : g.npcsMet){
-            if(n.getName().equals(NPC_Name.ANRI_OF_ASTORA)){
+
+        for (NPC n : g.npcsMet) {
+            if (n.getName().equals(NPC_Name.ANRI_OF_ASTORA)) {
                 hasAnri = true;
-            }
-            else if(n.getName().equals(NPC_Name.YURIA_OF_LONDOR)){
+            } else if (n.getName().equals(NPC_Name.YURIA_OF_LONDOR)) {
                 hasYuria = true;
-            }
-            else if(n.getName().equals(NPC_Name.YOEL_OF_LONDOR)){
+            } else if (n.getName().equals(NPC_Name.YOEL_OF_LONDOR)) {
                 hasYoel = true;
-            }
-            else if(n.getName().equals(NPC_Name.FIRE_KEEPER)){
+            } else if (n.getName().equals(NPC_Name.FIRE_KEEPER)) {
                 hasFireKeeper = true;
             }
         }
 
         // abilita bottoni corretti
-        if(hasAnri  == true || hasYuria  == true || hasYoel == true){
+        if (hasAnri == true || hasYuria == true || hasYoel == true) {
             badEnd.setEnabled(true);
         }
 
-        if(hasFireKeeper == true){
+        if (hasFireKeeper == true) {
             goodEnd.setEnabled(true);
         }
 
         // classic sempre disponibile
         classicEnd.setEnabled(true);
 
-        
         //da implementare i 3 bottoni, devo aggiungere il controllo degli npc e quinid se è possibile fare il finale, poi dovrò scegliere 3 immagini
         badEnd.addActionListener(new ActionListener() {
             @Override
@@ -94,11 +89,10 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 img.repaint();
                 t.start();
                 g.endSound();
-                
+
             }
         });
-        
-        
+
         classicEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,7 +114,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 g.endSound();
             }
         });
-        
+
         img = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -131,7 +125,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
                 }
             }
         };
-        
+
         mainPanel.add(img, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -139,7 +133,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

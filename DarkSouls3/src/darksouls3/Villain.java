@@ -8,8 +8,8 @@ package darksouls3;
  *
  * @author lleshi.alessandro
  */
-public class Villain extends PgStatsCommon{
-    
+public class Villain extends PgStatsCommon {
+
     public Villain(EnumVillain bossEnum) {
         super(bossEnum.getDisplayName(), bossEnum.getLife(), bossEnum.getBaseAtt());
     }
@@ -17,5 +17,5 @@ public class Villain extends PgStatsCommon{
     public String getName() {
         return name;
     }
-    
+
 }

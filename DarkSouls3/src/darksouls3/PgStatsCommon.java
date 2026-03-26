@@ -9,6 +9,7 @@ package darksouls3;
  * @author lleshi.alessandro
  */
 public class PgStatsCommon {
+
     protected String name;
     protected int life;
     protected int baseAtt;
@@ -34,9 +35,5 @@ public class PgStatsCommon {
     public void setBaseAtt(int baseAtt) {
         this.baseAtt = baseAtt;
     }
-    
-    
-    
-    
-    
+
 }

@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
  * @author aless
  */
 public class FormFightScreen extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormFightScreen.class.getName());
     private String keyWord = "";
     private String[] bossPaths = {"boss/Iudex_Gundyr.jpg", "boss/vordt.jpeg", "boss/Dancer_of_the_Boreal_Valley.jpg", "boss/Abyss_Watchers.jpg", "boss/Sulyvahn.jpg", "boss/yhorm.jpg", "boss/aldrich.jpg", "boss/lorian_lothric.jpg", "boss/soul-of-cinder.jpg", "boss/friede.jpg", "boss/namless_king.jpg", "boss/demon_prince.png", "boss/midir.jpg", "boss/gael.jpg"};
@@ -30,22 +30,25 @@ public class FormFightScreen extends javax.swing.JFrame {
     private JPanel imgsCharacterActions;
     private Image sfondoAzione;
 //immagini/barbarian.png
+
     /**
      * Creates new form FIghtScreen
-     * @param fG mi serve perché almeno il form non viene chiuso e il form corrente sa da chi è stato aperto
+     *
+     * @param fG mi serve perché almeno il form non viene chiuso e il form
+     * corrente sa da chi è stato aperto
      * @param g il form che ha aperto il form corrente usa il suo stesso gestore
-     * @param imgPath ho bisogno di sapere l'immagine del character scelto precedentemente
+     * @param imgPath ho bisogno di sapere l'immagine del character scelto
+     * precedentemente
      */
     public FormFightScreen(FormGameScreen fG, GameManager g, String imgPath) {
         initComponents();
         g.bossfightSound();
-        JPanel mainPanel = new JPanel(new GridLayout(2,1)); // divide lo schermo in due righe
+        JPanel mainPanel = new JPanel(new GridLayout(2, 1)); // divide lo schermo in due righe
         this.add(mainPanel);
-        
-        
+
         JPanel bossImg_and_StatsPanel = new JPanel(new BorderLayout());
-        
-        JPanel bossStatsPanel = new JPanel(new GridLayout(5,1));
+
+        JPanel bossStatsPanel = new JPanel(new GridLayout(5, 1));
         JLabel bossName = new JLabel("  Name: " + g.v.name);
         bossName.setForeground(Color.white);
         JLabel bossLife = new JLabel("  Life: " + g.v.getLife());
@@ -56,7 +59,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         bossStatsPanel.add(bossLife);
         bossStatsPanel.add(bossAtt);
         bossStatsPanel.setBackground(Color.black);
-        
+
         JProgressBar bossLifeBar = new JProgressBar(0, g.v.getLife());
         bossLifeBar.setBorder(null);
         bossLifeBar.setBackground(Color.black);
@@ -64,90 +67,74 @@ public class FormFightScreen extends javax.swing.JFrame {
         bossLifeBar.setStringPainted(true);
         bossLifeBar.setValue(g.v.life);
         bossImg_and_StatsPanel.add(bossLifeBar, BorderLayout.NORTH);
-        
-        
+
         //tutte le immagini dei boss
-        if(g.v.getName().equals(EnumVillain.IUDEX_GUNDYR.getDisplayName())){
+        if (g.v.getName().equals(EnumVillain.IUDEX_GUNDYR.getDisplayName())) {
             bossPath = bossPaths[0];
-        }
-        else if(g.v.getName().equals(EnumVillain.VORDT_OF_THE_BOREAL_VALLEY.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.VORDT_OF_THE_BOREAL_VALLEY.getDisplayName())) {
             bossPath = bossPaths[1];
-        }
-        else if(g.v.getName().equals(EnumVillain.DANCER_OF_THE_BOREAL_VALLEY.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.DANCER_OF_THE_BOREAL_VALLEY.getDisplayName())) {
             bossPath = bossPaths[2];
-        }
-        else if(g.v.getName().equals(EnumVillain.ABYSS_WATCHERS.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.ABYSS_WATCHERS.getDisplayName())) {
             bossPath = bossPaths[3];
-        }
-        else if(g.v.getName().equals(EnumVillain.PONTIFF_SULYVAHN.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.PONTIFF_SULYVAHN.getDisplayName())) {
             bossPath = bossPaths[4];
-        }
-        else if(g.v.getName().equals(EnumVillain.YHORM_THE_GIANT.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.YHORM_THE_GIANT.getDisplayName())) {
             bossPath = bossPaths[5];
-        }
-        else if(g.v.getName().equals(EnumVillain.ALDRICH_DEVOURER_OF_GODS.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.ALDRICH_DEVOURER_OF_GODS.getDisplayName())) {
             bossPath = bossPaths[6];
-        }
-        else if(g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.LORRIC_AND_LORIAN.getDisplayName())) {
             bossPath = bossPaths[7];
-        }
-        //non funziona
-        else if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
+        } //non funziona
+        else if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
             bossPath = bossPaths[8];
             soul_of_cinder = true;
-        }
-        else if(g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.SISTER_FRIEDE.getDisplayName())) {
             bossPath = bossPaths[9];
-        }
-        else if(g.v.getName().equals(EnumVillain.NAMELESS_KING.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.NAMELESS_KING.getDisplayName())) {
             bossPath = bossPaths[10];
-        }
-        else if(g.v.getName().equals(EnumVillain.DEMON_PRINCE.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.DEMON_PRINCE.getDisplayName())) {
             bossPath = bossPaths[11];
-        }
-        else if(g.v.getName().equals(EnumVillain.DARK_EATER_MIDIR.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.DARK_EATER_MIDIR.getDisplayName())) {
             bossPath = bossPaths[12];
-        }
-        else if(g.v.getName().equals(EnumVillain.SLAVE_KNIGHT_GAEL.getDisplayName())){
+        } else if (g.v.getName().equals(EnumVillain.SLAVE_KNIGHT_GAEL.getDisplayName())) {
             bossPath = bossPaths[13];
-        }
-        else{
+        } else {
             bossPath = bossPaths[1];//di default
         }
         JPanel bossImgPanel = new JPanel() {
-            
+
             Image sfondo = new ImageIcon(bossPath).getImage();
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        bossImgPanel.setPreferredSize(new Dimension(300,650));
-        
-        
-        
+        bossImgPanel.setPreferredSize(new Dimension(300, 650));
+
         JPanel infoPanel = new JPanel();
         infoPanel.setBackground(Color.black);
-        infoPanel.setPreferredSize(new Dimension(150,150));
+        infoPanel.setPreferredSize(new Dimension(150, 150));
         bossImg_and_StatsPanel.add(bossImgPanel, BorderLayout.CENTER);
-        bossImgPanel.setBorder(new EmptyBorder(20,20,20,20));
+        bossImgPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         bossImg_and_StatsPanel.add(bossStatsPanel, BorderLayout.EAST);
         JLabel turn = new JLabel("turn: " + String.valueOf(g.fightM.getTurni()));
         JLabel numEstus = new JLabel("number of estus: " + String.valueOf(g.c.inv.numberEstus));
         JLabel numAshenEstus = new JLabel("number of ashen estus: " + String.valueOf(g.c.inv.numberAshenEstus));
         JLabel numGreenBlossom = new JLabel("number of GreenBlossom: " + String.valueOf(g.c.inv.greenBlossom));
-        
+
         turn.setForeground(Color.green);
         numEstus.setForeground(Color.white);
         numAshenEstus.setForeground(Color.white);
         numGreenBlossom.setForeground(Color.white);
-        
+
         infoPanel.add(turn);
         infoPanel.add(numEstus);
         infoPanel.add(numAshenEstus);
         infoPanel.add(numGreenBlossom);
-        infoPanel.setPreferredSize(new Dimension(200,200));
+        infoPanel.setPreferredSize(new Dimension(200, 200));
         bossImg_and_StatsPanel.add(infoPanel, BorderLayout.WEST);//mi serve per ridimensionare l'immagine non serve ad altro
         mainPanel.add(bossImg_and_StatsPanel);
 
@@ -160,18 +147,18 @@ public class FormFightScreen extends javax.swing.JFrame {
 
         JPanel characterImgPanel = new JPanel() {
             Image sfondo = new ImageIcon(imgPath).getImage();
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        characterImgPanel.setPreferredSize(new Dimension(300,650));
+        characterImgPanel.setPreferredSize(new Dimension(300, 650));
         characterImg_and_StatsPanel.add(characterImgPanel, BorderLayout.WEST);
-        
-        
+
         //character img Actions
-        JPanel centralPanel = new JPanel(new GridLayout(1,2, 0,0));
+        JPanel centralPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JPanel leftCentralPanel = new JPanel();
         leftCentralPanel.setBackground(Color.black);
         centralPanel.add(leftCentralPanel);
@@ -185,38 +172,33 @@ public class FormFightScreen extends javax.swing.JFrame {
             }
         };
         imgsCharacterActions.setBackground(Color.black);
-        imgsCharacterActions.setPreferredSize(new Dimension(200,500));
-        imgsCharacterActions.setMinimumSize(new Dimension(200,500));
-        imgsCharacterActions.setMaximumSize(new Dimension(200,500));
+        imgsCharacterActions.setPreferredSize(new Dimension(200, 500));
+        imgsCharacterActions.setMinimumSize(new Dimension(200, 500));
+        imgsCharacterActions.setMaximumSize(new Dimension(200, 500));
         centralPanel.add(imgsCharacterActions);
         characterImg_and_StatsPanel.add(centralPanel, BorderLayout.CENTER);
-        
+
         //character stats
-        JPanel characterStatsPanel = new JPanel(new GridLayout(7,1));
+        JPanel characterStatsPanel = new JPanel(new GridLayout(7, 1));
         JLabel nameCharacter = new JLabel("  Name: " + g.c.name);
         nameCharacter.setForeground(Color.white);
         JLabel lifeCharacter = new JLabel("  Life: " + g.c.getLife());
         lifeCharacter.setForeground(Color.white);
-        
-        
+
         lifeBar = new JProgressBar(0, 150); // crea una barra
         lifeBar.setValue(g.c.life); //valore iniziale
         lifeBar.setStringPainted(true); //mostra il numero % sulla barra
         lifeBar.setBorder(null);
         lifeBar.setBackground(Color.black);
         lifeBar.setForeground(Color.red);
-        
-        
-        
+
         manaBar = new JProgressBar(0, 100); // crea una barra
         manaBar.setValue(g.c.mana); //valore iniziale
         manaBar.setStringPainted(true); //mostra il numero % sulla barra
         manaBar.setBorder(null);
         manaBar.setBackground(Color.black);
         manaBar.setForeground(Color.cyan);
-        
-        
-        
+
         staminaBar = new JProgressBar(0, 100); // crea una barra
         staminaBar.setValue(g.c.stamina); //valore iniziale
         staminaBar.setStringPainted(true); //mostra il numero % sulla barra
@@ -224,17 +206,13 @@ public class FormFightScreen extends javax.swing.JFrame {
         staminaBar.setBackground(Color.black);
         staminaBar.setForeground(Color.green);
 
-        
-        
-        
-        
         JLabel manaCharacter = new JLabel("  Mana: " + g.c.mana);
         manaCharacter.setForeground(Color.white);
         JLabel staminaCharacter = new JLabel("  Stamina: " + g.c.stamina);
         staminaCharacter.setForeground(Color.white);
         JLabel attCharacter = new JLabel("  Base Att: " + g.c.baseAtt);
         attCharacter.setForeground(Color.white);
-        
+
         characterStatsPanel.add(nameCharacter);
         characterStatsPanel.add(attCharacter);
         characterStatsPanel.add(lifeBar);
@@ -243,15 +221,12 @@ public class FormFightScreen extends javax.swing.JFrame {
         characterStatsPanel.add(manaCharacter);
         characterStatsPanel.add(staminaBar);
         characterStatsPanel.add(staminaCharacter);
-        
-        
-        
-        
+
         characterImg_and_StatsPanel.setBackground(Color.black);
         characterStatsPanel.setBackground(Color.black);
         characterImgPanel.setBackground(Color.black);
         characterImg_and_StatsPanel.add(characterStatsPanel, BorderLayout.EAST);
-        characterImg_and_StatsPanel.setBorder(new EmptyBorder(20,20,20,20));
+        characterImg_and_StatsPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JPanel azioniCharacterPanel = new JPanel(new BorderLayout());
         azioniCharacterPanel.setPreferredSize(new Dimension(600, 50));
@@ -259,7 +234,7 @@ public class FormFightScreen extends javax.swing.JFrame {
         azioniCharacterPanel.setBackground(Color.DARK_GRAY);
         characterPanel.add(azioniCharacterPanel, BorderLayout.SOUTH);
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(1,6, 10,0));
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 6, 10, 0));
 
         JButton heal = new JButton("Heal");
         JButton attac = new JButton("Attack");
@@ -268,15 +243,14 @@ public class FormFightScreen extends javax.swing.JFrame {
         JButton useShield = new JButton("Use Shield");
         JButton useConsumable = new JButton("Use Consumable");
 
-        Dimension buttonSize = new Dimension(120,40);
+        Dimension buttonSize = new Dimension(120, 40);
         heal.setPreferredSize(buttonSize);
         attac.setPreferredSize(buttonSize);
         roll.setPreferredSize(buttonSize);
         specialAbility.setPreferredSize(buttonSize);
         useShield.setPreferredSize(buttonSize);
         useConsumable.setPreferredSize(buttonSize);
-        
-        
+
         buttonsPanel.add(heal);
         buttonsPanel.add(attac);
         buttonsPanel.add(roll);
@@ -285,31 +259,26 @@ public class FormFightScreen extends javax.swing.JFrame {
         buttonsPanel.add(useConsumable);
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
-        
+
         ActionListener actionHeal = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(g.c.inv.numberEstus <= 0){
+                if (g.c.inv.numberEstus <= 0) {
                     heal.setEnabled(false);
                 }
                 keyWord = "heal";
                 g.fight(keyWord);
-                if(imgPath.equals("immagini/barbarian.png") == true){
+                if (imgPath.equals("immagini/barbarian.png") == true) {
                     imgPathAzione = "immagini/barbarian_healing.png";
-                }
-                else if(imgPath.equals("immagini/knight.png") == true){
+                } else if (imgPath.equals("immagini/knight.png") == true) {
                     imgPathAzione = "immagini/knight_healing.png";
-                }
-                else if(imgPath.equals("immagini/mage.png") == true){
+                } else if (imgPath.equals("immagini/mage.png") == true) {
                     imgPathAzione = "immagini/mage_healing.png";
-                }
-                else if(imgPath.equals("immagini/priest.png") == true){
+                } else if (imgPath.equals("immagini/priest.png") == true) {
                     imgPathAzione = "immagini/priest_healing.png";
                 }
                 changeActionImg();
-                
-                
-                
+
                 lifeBar.setValue(g.c.getLife());
                 manaBar.setValue(g.c.getMana());
                 staminaBar.setValue(g.c.getStamina());
@@ -317,8 +286,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeBar.repaint();
                 manaBar.repaint();
                 staminaBar.repaint();
-                if(g.c.getLife()>0 && g.v.getLife()>0){
-                    if(g.fightM.getTurni() %2 != 0){
+                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
+                    if (g.fightM.getTurni() % 2 != 0) {
                         specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                         g.c.useEstus();
@@ -330,43 +299,41 @@ public class FormFightScreen extends javax.swing.JFrame {
                         lifeBar.setValue(g.c.getLife());
                         manaBar.setValue(g.c.getMana());
                         staminaBar.setValue(g.c.getStamina());
-                        
+
                         lifeBar.repaint();
                         manaBar.repaint();
                         staminaBar.repaint();
-                        
+
                     }
                     lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
                     manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
                     staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
-                    if(g.fightM.getTurni() %2 == 0){
+                    if (g.fightM.getTurni() % 2 == 0) {
                         specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                     }
-                    
+
                 }
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
-                
-                
-                if(g.getResult() == 0){
-                JOptionPane.showMessageDialog(FormFightScreen.this,
-                    "Both you and your opponent have fallen… The fire fades.",
-                    "DARK SOULS 3",
-                    JOptionPane.INFORMATION_MESSAGE);
-                fG.travel.setEnabled(false);
-                fG.exit.setEnabled(true);
-                fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                g.stopBossSound();
-                FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 1) {
+
+                if (g.getResult() == 0) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "You have met your end… Ashes to ashes, ember to darkness.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "Both you and your opponent have fallen… The fire fades.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    fG.travel.setEnabled(false);
+                    fG.exit.setEnabled(true);
+                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
+                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+                    g.stopBossSound();
+                    FormFightScreen.this.dispose();
+                } else if (g.getResult() == 1) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                            "You have met your end… Ashes to ashes, ember to darkness.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -378,13 +345,12 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 2) {
-                    
+                } else if (g.getResult() == 2) {
+
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -393,7 +359,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                    
+
                 }
             }
         };
@@ -402,16 +368,13 @@ public class FormFightScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 keyWord = "attack";
                 g.fight(keyWord);
-                if(imgPath.equals("immagini/barbarian.png") == true){
+                if (imgPath.equals("immagini/barbarian.png") == true) {
                     imgPathAzione = "immagini/barbarian_att.png";
-                }
-                else if(imgPath.equals("immagini/knight.png") == true){
+                } else if (imgPath.equals("immagini/knight.png") == true) {
                     imgPathAzione = "immagini/knight_att.png";
-                }
-                else if(imgPath.equals("immagini/mage.png") == true){
+                } else if (imgPath.equals("immagini/mage.png") == true) {
                     imgPathAzione = "immagini/mage_att.png";
-                }
-                else if(imgPath.equals("immagini/priest.png") == true){
+                } else if (imgPath.equals("immagini/priest.png") == true) {
                     imgPathAzione = "immagini/priest_att.png";
                 }
                 changeActionImg();
@@ -424,35 +387,34 @@ public class FormFightScreen extends javax.swing.JFrame {
                 bossLifeBar.setValue(g.v.getLife());
                 bossLifeBar.repaint();
 
-                if(g.c.getLife()>0 && g.v.getLife()>0){
-                    if(g.fightM.getTurni() %2 == 0){
+                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
+                    if (g.fightM.getTurni() % 2 == 0) {
                         specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                         lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
                         lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                         lifeBar.setValue(g.c.getLife());
                         lifeBar.repaint();
-                        
-                    }
-                    else{
+
+                    } else {
                         specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                         bossLifeBar.setValue(bossLifeBar.getValue() - g.c.getBaseAtt());
                         bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
                         bossLifeBar.setValue(g.v.getLife());
                         bossLifeBar.repaint();
-                        
+
                     }
                 }
                 turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                 numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                if(g.getResult() == 0){
-                JOptionPane.showMessageDialog(FormFightScreen.this,
-                    "Both you and your opponent have fallen… The fire fades.",
-                    "DARK SOULS 3",
-                    JOptionPane.INFORMATION_MESSAGE);
+                if (g.getResult() == 0) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                            "Both you and your opponent have fallen… The fire fades.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -461,12 +423,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 1) {
+                } else if (g.getResult() == 1) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "You have met your end… Ashes to ashes, ember to darkness.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "You have met your end… Ashes to ashes, ember to darkness.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -478,12 +439,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 2) {
+                } else if (g.getResult() == 2) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -493,8 +453,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                     //non funziona
                     //System.out.println("Boss name: [" + g.v.getName() + "]");
                     //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if(g.getResult() == 2){
-                        if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
+                    if (g.getResult() == 2) {
+                        if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
                             FormFightScreen.this.dispose();
                             FormChoiseEnding cE = new FormChoiseEnding(g);
                             g.stopBossSound();
@@ -516,25 +476,21 @@ public class FormFightScreen extends javax.swing.JFrame {
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                if(imgPath.equals("immagini/barbarian.png") == true){
+                if (imgPath.equals("immagini/barbarian.png") == true) {
                     imgPathAzione = "immagini/barbarian_roll.png";
-                }
-                else if(imgPath.equals("immagini/knight.png") == true){
+                } else if (imgPath.equals("immagini/knight.png") == true) {
                     imgPathAzione = "immagini/knight_roll.png";
-                }
-                else if(imgPath.equals("immagini/mage.png") == true){
+                } else if (imgPath.equals("immagini/mage.png") == true) {
                     imgPathAzione = "immagini/mage_roll.png";
-                }
-                else if(imgPath.equals("immagini/priest.png") == true){
+                } else if (imgPath.equals("immagini/priest.png") == true) {
                     imgPathAzione = "immagini/priest_roll.png";
                 }
                 changeActionImg();
-                if(g.c.getLife()>0 && g.v.getLife()> 0){
-                    if(g.fightM.getTurni() %2 == 0){
+                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
+                    if (g.fightM.getTurni() % 2 == 0) {
                         specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
-                    }
-                    else{
+                    } else {
                         specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                     }
@@ -548,11 +504,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                 numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                 numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                 numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                if(g.getResult() == 0){
-                JOptionPane.showMessageDialog(FormFightScreen.this,
-                    "Both you and your opponent have fallen… The fire fades.",
-                    "DARK SOULS 3",
-                    JOptionPane.INFORMATION_MESSAGE);
+                if (g.getResult() == 0) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                            "Both you and your opponent have fallen… The fire fades.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -561,12 +517,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 1) {
+                } else if (g.getResult() == 1) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "You have met your end… Ashes to ashes, ember to darkness.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "You have met your end… Ashes to ashes, ember to darkness.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -579,12 +534,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 2) {
+                } else if (g.getResult() == 2) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
                     fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
@@ -604,16 +558,13 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                 staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
                 bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
-                if(imgPath.equals("immagini/barbarian.png") == true){
+                if (imgPath.equals("immagini/barbarian.png") == true) {
                     imgPathAzione = "immagini/barbarian_sp.png";
-                }
-                else if(imgPath.equals("immagini/knight.png") == true){
+                } else if (imgPath.equals("immagini/knight.png") == true) {
                     imgPathAzione = "immagini/knight_sp.png";
-                }
-                else if(imgPath.equals("immagini/mage.png") == true){
+                } else if (imgPath.equals("immagini/mage.png") == true) {
                     imgPathAzione = "immagini/mage_sp.png";
-                }
-                else if(imgPath.equals("immagini/priest.png") == true){
+                } else if (imgPath.equals("immagini/priest.png") == true) {
                     imgPathAzione = "immagini/priest_sp.png";
                 }
                 changeActionImg();
@@ -623,8 +574,8 @@ public class FormFightScreen extends javax.swing.JFrame {
                 manaBar.repaint();
                 staminaBar.setValue(g.c.getStamina());
                 staminaBar.repaint();
-                if(g.c.getLife()>0 && g.v.getLife()> 0){
-                    if(g.fightM.getTurni() %2 == 0){
+                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
+                    if (g.fightM.getTurni() % 2 == 0) {
                         specialAbility.setEnabled(false);
                         turn.setForeground(Color.red);
                         lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
@@ -637,8 +588,7 @@ public class FormFightScreen extends javax.swing.JFrame {
                         manaBar.repaint();
                         staminaBar.setValue(g.c.getStamina());
                         staminaBar.repaint();
-                    }
-                    else{
+                    } else {
                         specialAbility.setEnabled(true);
                         turn.setForeground(Color.green);
                         bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
@@ -654,20 +604,20 @@ public class FormFightScreen extends javax.swing.JFrame {
                         staminaBar.repaint();
                     }
                 }
-                
+
                 turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
                 used = true;
-                if(used == true){
+                if (used == true) {
                     specialAbility.setEnabled(false);
                     numEstus.setText("number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
                     numAshenEstus.setText("number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
                     numGreenBlossom.setText("number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                 }
-                if(g.getResult() == 0){
-                JOptionPane.showMessageDialog(FormFightScreen.this,
-                    "Both you and your opponent have fallen… The fire fades.",
-                    "DARK SOULS 3",
-                    JOptionPane.INFORMATION_MESSAGE);
+                if (g.getResult() == 0) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                            "Both you and your opponent have fallen… The fire fades.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -676,16 +626,15 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 1) {
+                } else if (g.getResult() == 1) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "You have met your end… Ashes to ashes, ember to darkness.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "You have met your end… Ashes to ashes, ember to darkness.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    
+
                     fG.eventArea.setText("");
                     fG.eventArea.append("YOU DIED");
                     fG.eventArea.setForeground(Color.red);
@@ -694,12 +643,11 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 2) {
+                } else if (g.getResult() == 2) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
                     fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
@@ -708,37 +656,34 @@ public class FormFightScreen extends javax.swing.JFrame {
                     fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
                     //System.out.println("Boss name: [" + g.v.getName() + "]");
                     //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
-                            FormFightScreen.this.dispose();
-                            FormChoiseEnding cE = new FormChoiseEnding(g);
-                            g.stopBossSound();
-                            fG.dispose();
-                            cE.setVisible(true);
-                            return;
-                        }
+                    if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
+                        FormFightScreen.this.dispose();
+                        FormChoiseEnding cE = new FormChoiseEnding(g);
+                        g.stopBossSound();
+                        fG.dispose();
+                        cE.setVisible(true);
+                        return;
+                    }
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
                 }
             }
         };
-        
+
         ActionListener actionShield = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(imgPath.equals("immagini/barbarian.png") == true){
+                if (imgPath.equals("immagini/barbarian.png") == true) {
                     imgPathAzione = "immagini/barbarian_shield.png";
-                }
-                else if(imgPath.equals("immagini/knight.png") == true){
+                } else if (imgPath.equals("immagini/knight.png") == true) {
                     imgPathAzione = "immagini/knight_shield.png";
-                }
-                else if(imgPath.equals("immagini/mage.png") == true){
+                } else if (imgPath.equals("immagini/mage.png") == true) {
                     imgPathAzione = "immagini/mage_shield.png";
-                }
-                else if(imgPath.equals("immagini/priest.png") == true){
+                } else if (imgPath.equals("immagini/priest.png") == true) {
                     imgPathAzione = "immagini/priest_shield.png";
                 }
                 changeActionImg();
-                
+
                 keyWord = "use shield";
                 g.fight(keyWord);
                 lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
@@ -747,42 +692,40 @@ public class FormFightScreen extends javax.swing.JFrame {
                 lifeBar.repaint();
                 bossLifeBar.setValue(g.v.getLife());
                 bossLifeBar.repaint();
-                
-                if(g.getResult() == 0){
-                JOptionPane.showMessageDialog(FormFightScreen.this,
-                    "Both you and your opponent have fallen… The fire fades.",
-                    "DARK SOULS 3",
-                    JOptionPane.INFORMATION_MESSAGE);
+
+                if (g.getResult() == 0) {
+                    JOptionPane.showMessageDialog(FormFightScreen.this,
+                            "Both you and your opponent have fallen… The fire fades.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 1) {
+                } else if (g.getResult() == 1) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "You have met your end… Ashes to ashes, ember to darkness.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "You have met your end… Ashes to ashes, ember to darkness.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(false);
                     fG.exit.setEnabled(true);
-                    
+
                     fG.eventArea.setText("");
                     fG.eventArea.append("YOU DIED");
                     fG.eventArea.setForeground(Color.red);
                     g.stopBossSound();
                     FormFightScreen.this.dispose();
-                }
-                else if (g.getResult() == 2) {
+                } else if (g.getResult() == 2) {
                     JOptionPane.showMessageDialog(FormFightScreen.this,
-                        "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                        "DARK SOULS 3",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
+                            "DARK SOULS 3",
+                            JOptionPane.INFORMATION_MESSAGE);
                     fG.travel.setEnabled(true);
                     fG.exit.setEnabled(true);
                     //System.out.println("Boss name: [" + g.v.getName() + "]");
                     //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if(g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3){
-                        g.stopBossSound();    
+                    if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
+                        g.stopBossSound();
                         FormFightScreen.this.dispose();
                         FormChoiseEnding cE = new FormChoiseEnding(g);
                         fG.dispose();
@@ -794,12 +737,12 @@ public class FormFightScreen extends javax.swing.JFrame {
                 }
             }
         };
-        
+
         ActionListener actionConsumable = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(g.c.inv.items.isEmpty() != true){
-                   for (Item item : g.c.inv.items) {
+                if (g.c.inv.items.isEmpty() != true) {
+                    for (Item item : g.c.inv.items) {
                         if (item.getName() == EnumItem.DIVINE_BLESSING) {
                             g.c.setLife(g.c.getLife() + 20);
                             g.c.inv.items.remove(item);
@@ -811,42 +754,35 @@ public class FormFightScreen extends javax.swing.JFrame {
                             g.c.inv.items.remove(item);
                         }
                     }
-                    
+
                     lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
                     manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
                     staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(FormFightScreen.this, "INVENTORY EMPTY", "Inventory", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
-        };    
-        
-        
+        };
+
         heal.addActionListener(actionHeal);
         attac.addActionListener(actionAttac);
         roll.addActionListener(actionRoll);
         specialAbility.addActionListener(actionAbility);
         useShield.addActionListener(actionShield);
         useConsumable.addActionListener(actionConsumable);
-        
-        
-        
-        
+
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
-        
-        
+
         /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    
+         * This method is called from within the constructor to initialize the
+         * form. WARNING: Do NOT modify this code. The content of this method is
+         * always regenerated by the Form Editor.
+         */
     }
-    
+
     //mi cambia l'immagine per ongi azione
-    public void changeActionImg(){
+    public void changeActionImg() {
         sfondoAzione = new ImageIcon(imgPathAzione).getImage();
         imgsCharacterActions.repaint(); // ridisegna il pannello
     }
@@ -881,8 +817,7 @@ public class FormFightScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

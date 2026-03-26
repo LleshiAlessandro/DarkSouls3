@@ -48,7 +48,7 @@ public enum EnumVillain {
     public int getBaseAtt() {
         return baseAtt;
     }
-    
+
     public boolean isAppeared() {
         return appeared;
     }
@@ -69,10 +69,9 @@ public enum EnumVillain {
     public void setAppeared(boolean appeared) {
         this.appeared = appeared;
     }
-    
-    
-    public void controlBossApperas(){
-        if(this.isAppeared() == false){
+
+    public void controlBossApperas() {
+        if (this.isAppeared() == false) {
             this.setAppeared(true);
         }
     }

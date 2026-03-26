@@ -11,6 +11,7 @@ import java.util.Random;
  * @author lleshi.alessandro
  */
 public class Item {
+
     private Random rdn = new Random();
     private EnumItem name;
     private int damage;
@@ -26,17 +27,25 @@ public class Item {
         this.quantity = name.getQuantity();
     }
 
-    public EnumItem getName() { return name; }
-    public int getDamage() { return damage; }
-    public int getQuantity() { return quantity; }
+    public EnumItem getName() {
+        return name;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     @Override
     public String toString() {
-        if(damage > 0) {
+        if (damage > 0) {
             return "Item: " + name + " (Damage: " + damage + ")" + "\n";
         } else {
             return "Item: " + name + " (Quantity: " + quantity + ")" + "\n";
         }
     }
-    
+
 }

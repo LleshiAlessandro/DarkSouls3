@@ -11,21 +11,23 @@ import java.util.ArrayList;
  * @author lleshi.alessandro
  */
 public class Inventory {
+
     protected int numberEstus;
     protected int numberAshenEstus;
     protected int greenBlossom;
-    protected ArrayList <Item> items = new ArrayList();
+    protected ArrayList<Item> items = new ArrayList();
 
     public Inventory() {
         this.numberEstus = 5;
         this.numberAshenEstus = 5;
         this.greenBlossom = 5;
     }
-    
-    public void addItem(Item i){
+
+    public void addItem(Item i) {
         items.add(i);
     }
-    public void removeitem(Item i){
+
+    public void removeitem(Item i) {
         items.remove(i);
     }
 
@@ -56,11 +58,9 @@ public class Inventory {
     public void addGreenBlossom() {
         this.greenBlossom = greenBlossom + 1;
     }
-    
-    
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "items: " + getItems();
     }
 }
