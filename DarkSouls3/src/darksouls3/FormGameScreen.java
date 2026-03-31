@@ -32,6 +32,7 @@ public class FormGameScreen extends javax.swing.JFrame {
     protected ArrayList<String> npcName = new ArrayList();
     private String mapPath;
     private Image sfondoAgg;
+    private Salvataggio save;
 
     /**
      * Creates new form GameScreen
@@ -49,7 +50,8 @@ public class FormGameScreen extends javax.swing.JFrame {
         initComponents();
 
         g = new GameManager(c, p);
-
+        
+        
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -167,11 +169,30 @@ public class FormGameScreen extends javax.swing.JFrame {
             }
         };
         npcs.addActionListener(actionNpc);
-
+        
+        //csv save and load
         JButton saveCsv = new JButton("save CSV");
         JButton loadCsv = new JButton("load CSV");
-        JButton save = new JButton("save");
-        JButton load = new JButton("load");
+        
+        //serialized save and load
+        JButton saveButton = new JButton("save");
+        
+        ActionListener actionSaveSerial = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save = new Salvataggio(g.c, p, FormGameScreen.this);
+            }
+        };
+        saveButton.addActionListener(actionSaveSerial);
+        
+        JButton loadButton = new JButton("load");
+        ActionListener actionLoadSerial = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //mettere il metodo che mi gestisce il salvataggio dal gestore
+                //gli passo un oggetto salvataggio come parametro così che so quale salvataggio deve prendere
+            }
+        };
         imgCharacter.setPreferredSize(new Dimension(175, 550));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);
@@ -182,8 +203,8 @@ public class FormGameScreen extends javax.swing.JFrame {
         eastButtonPanel.add(npcs);
         eastButtonPanel.add(saveCsv);
         eastButtonPanel.add(loadCsv);
-        eastButtonPanel.add(save);
-        eastButtonPanel.add(load);
+        eastButtonPanel.add(saveButton);
+        eastButtonPanel.add(loadButton);
         westPanel.add(eastButtonPanel, BorderLayout.EAST);
 
         JPanel eastPanel = new JPanel(new BorderLayout());
