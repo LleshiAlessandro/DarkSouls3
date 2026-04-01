@@ -22,5 +22,17 @@ public class Salvataggio {
         this.p = p;
         this.gameScreen = form;
     }
+    //i get mi servono per leggere i file nell ObjectInputStream
+    public Character getC() {
+        return c;
+    }
+
+    public Player getP() {
+        return p;
+    }
+
+    public FormGameScreen getGameScreen() {
+        return gameScreen;
+    }
     
 }
