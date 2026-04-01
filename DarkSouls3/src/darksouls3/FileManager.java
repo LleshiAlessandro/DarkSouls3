@@ -4,10 +4,33 @@
  */
 package darksouls3;
 
+import java.io.IOException;
+import java.io.*;
+import java.io.Serializable;
+
 /**
  *
  * @author aless
  */
-public class FileManager {
+public class FileManager implements Serializable{
     //tutto da implementare
+    private String gameSave = "save.ser";//savlataggio serializzato
+    
+    public void saveSer(Salvataggio s){
+        //salvo variabili character
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(gameSave))){
+            oos.writeObject(s);
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
+    public void loadSer(Salvataggio s){
+        try(ObjectInputStream oos = new ObjectInputStream(new FileInputStream(gameSave))){
+            //devo far leggere 
+            
+            Character c =s.getC();
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
 }
