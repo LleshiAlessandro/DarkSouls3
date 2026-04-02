@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author lleshi.alessandro
  */
-public class FormGameScreen extends javax.swing.JFrame {
+public class FormGameScreen extends javax.swing.JFrame{
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
 
@@ -174,25 +174,32 @@ public class FormGameScreen extends javax.swing.JFrame {
         JButton saveCsv = new JButton("save CSV");
         JButton loadCsv = new JButton("load CSV");
         
+        
+        
+        
         //serialized save and load
         JButton saveButton = new JButton("save");
-        
         ActionListener actionSaveSerial = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                save = new Salvataggio(g.c, p, FormGameScreen.this);
+                save = new Salvataggio(g.c, p);
+                g.fileM.saveSer(save);
             }
         };
-        saveButton.addActionListener(actionSaveSerial);
-        
         JButton loadButton = new JButton("load");
         ActionListener actionLoadSerial = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 //mettere il metodo che mi gestisce il salvataggio dal gestore
                 //gli passo un oggetto salvataggio come parametro così che so quale salvataggio deve prendere
+                g.fileM.loadSer(save);
             }
         };
+        saveButton.addActionListener(actionSaveSerial);
+        loadButton.addActionListener(actionLoadSerial);
+        
+        
+        
         imgCharacter.setPreferredSize(new Dimension(175, 550));
         westPanel.add(imgCharacter);
         westPanel.add(characterSpec);

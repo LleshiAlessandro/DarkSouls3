@@ -20,7 +20,7 @@ public class GameManager {
     protected Villain v;
     protected Map m;
     private Player p;
-    private FileManager fileM = new FileManager();
+    protected FileManager fileM = new FileManager();
     protected EventManager eventM = new EventManager();
     protected FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();

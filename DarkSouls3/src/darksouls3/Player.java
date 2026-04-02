@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aless
  */
-public class Player {
+public class Player implements Serializable{
 
     private String name;
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public class FileManager implements Serializable{
     //tutto da implementare
-    private String gameSave = "save.ser";//savlataggio serializzato
+    private String gameSave = "salvataggio/save.ser";//savlataggio serializzato
     
     public void saveSer(Salvataggio s){
         //salvo variabili character
@@ -25,12 +25,17 @@ public class FileManager implements Serializable{
         }
     }
     public void loadSer(Salvataggio s){
-        try(ObjectInputStream oos = new ObjectInputStream(new FileInputStream(gameSave))){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(gameSave))){
             //devo far leggere 
             
-            Character c =s.getC();
+            Salvataggio newS = (Salvataggio) ois.readObject();
+            Player p = newS.getP();
+            Character c = newS.getC();
         }catch(IOException e){
             System.out.println(e);
+        }catch(ClassNotFoundException i){
+            System.out.println(i);
         }
+        
     }
 }

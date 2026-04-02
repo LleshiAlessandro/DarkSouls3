@@ -4,23 +4,23 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author lleshi.alessandro
  */
-public class Salvataggio {
+public class Salvataggio implements Serializable{
 
     //dovrò inserire tutti i dati che dorvò salvare, così che con la serializzazione inserirò 1 solo oggetto Salvataggio nel fileManager e salverò tutto
     //con 1 solo oggetto
     private Character c;
     private Player p;
-    private FormGameScreen gameScreen;
 
-    public Salvataggio(Character c, Player p,FormGameScreen form) {
+    public Salvataggio(Character c, Player p) {
         this.c = c;
         this.p = p;
-        this.gameScreen = form;
     }
     //i get mi servono per leggere i file nell ObjectInputStream
     public Character getC() {
@@ -29,10 +29,6 @@ public class Salvataggio {
 
     public Player getP() {
         return p;
-    }
-
-    public FormGameScreen getGameScreen() {
-        return gameScreen;
     }
     
 }

@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aless
  */
-public class NPC {
+public class NPC implements Serializable{
 
     private NPC_Name name;
 

@@ -4,13 +4,14 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author lleshi.alessandro
  */
-public class Inventory {
+public class Inventory implements Serializable{
 
     protected int numberEstus;
     protected int numberAshenEstus;

@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lleshi.alessandro
  */
-public class Knight extends Character {
+public class Knight extends Character implements Serializable{
 
     public Knight(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);

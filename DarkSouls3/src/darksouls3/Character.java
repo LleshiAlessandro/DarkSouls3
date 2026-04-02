@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lleshi.alessandro
  */
-public abstract class Character extends PgStatsCommon {
+public abstract class Character extends PgStatsCommon implements Serializable{
 
     protected int mana;
     protected int stamina;

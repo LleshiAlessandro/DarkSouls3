@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lleshi.alessandro
  */
-public class PgStatsCommon {
+public class PgStatsCommon implements Serializable{
 
     protected String name;
     protected int life;

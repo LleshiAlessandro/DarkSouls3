@@ -4,11 +4,13 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aless
  */
-public enum Map {
+public enum Map implements Serializable{
     CEMETERY_OF_ASH, // satuarioDelVincolo
     FIRELINK_SHRINE, // fire_link 
     FIRELINK_SHRINE_ALT, // fire

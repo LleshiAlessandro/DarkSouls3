@@ -4,13 +4,14 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  *
  * @author lleshi.alessandro
  */
-public class Item {
+public class Item implements Serializable{
 
     private Random rdn = new Random();
     private EnumItem name;
