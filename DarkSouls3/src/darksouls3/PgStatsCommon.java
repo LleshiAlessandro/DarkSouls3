@@ -15,6 +15,7 @@ public class PgStatsCommon implements Serializable{
     protected String name;
     protected int life;
     protected int baseAtt;
+    private static final long serialVersionUID = 1L;
 
     public PgStatsCommon(String name, int life, int baseAtt) {
         this.name = name;

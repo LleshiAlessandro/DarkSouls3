@@ -4,14 +4,17 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  *
  * @author lleshi.alessandro
  */
-public class Mage extends Character {
+public class Mage extends Character implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     public Mage(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }

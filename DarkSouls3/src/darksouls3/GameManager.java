@@ -19,7 +19,7 @@ public class GameManager {
     protected Character c;
     protected Villain v;
     protected Map m;
-    private Player p;
+    protected Player p;
     protected FileManager fileM = new FileManager();
     protected EventManager eventM = new EventManager();
     protected FightManager fightM = new FightManager();
@@ -27,7 +27,7 @@ public class GameManager {
     private EnumVillain[] bosses = EnumVillain.values();
     ;
     private Random rnd = new Random();
-    protected ArrayList<NPC> npcsMet = new ArrayList();
+
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight
     protected int result = -1;
     private int bossRand;
@@ -72,7 +72,7 @@ public class GameManager {
         //mi fa incontrare un npc randomico
         rnd = new Random();
         NPC_Name randomNpc = NPC_Name.values()[rnd.nextInt(NPC_Name.values().length)];
-        npcsMet.add(new NPC(randomNpc));
+        c.npcsMet.add(new NPC(randomNpc));
     }
 
     //RESTORE HEALS
@@ -136,7 +136,7 @@ public class GameManager {
 
     //gestione ending
     public void ending() {
-        endingM.ending(npcsMet);
+        endingM.ending(c.npcsMet);
     }
     //da implementare il load e il save
 

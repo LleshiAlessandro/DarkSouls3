@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 public class Knight extends Character implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     public Knight(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }

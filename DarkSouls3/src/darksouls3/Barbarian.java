@@ -4,12 +4,16 @@
  */
 package darksouls3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lleshi.alessandro
  */
-public class Barbarian extends Character {
+public class Barbarian extends Character implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     public Barbarian(int mana, int stamina, String name, int life, int baseAtt) {
         super(mana, stamina, name, life, baseAtt);
     }

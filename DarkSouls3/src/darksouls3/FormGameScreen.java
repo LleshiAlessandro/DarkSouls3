@@ -22,7 +22,11 @@ public class FormGameScreen extends javax.swing.JFrame{
     FormFightScreen fF;
     protected JButton travel;
     protected JButton exit;
+    protected JLabel life;
+    protected JLabel mana;
+    protected JLabel stamina;
     protected JLabel att;
+    protected JLabel name;
     protected JTextArea eventArea;
     private JScrollPane scrollEventArea;
     protected JLabel numEstus;
@@ -33,7 +37,9 @@ public class FormGameScreen extends javax.swing.JFrame{
     private String mapPath;
     private Image sfondoAgg;
     private Salvataggio save;
-
+    private Character newC;
+    private JPanel imgCharacter;
+    private String pathLoad = " ";
     /**
      * Creates new form GameScreen
      */
@@ -50,7 +56,6 @@ public class FormGameScreen extends javax.swing.JFrame{
         initComponents();
 
         g = new GameManager(c, p);
-        
         
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
@@ -91,7 +96,7 @@ public class FormGameScreen extends javax.swing.JFrame{
 
         JPanel westPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         westPanel.setBackground(Color.black);
-        JPanel imgCharacter = new JPanel(new BorderLayout()) {
+        imgCharacter = new JPanel(new BorderLayout()) {
             Image sfondo = new ImageIcon(imgPath).getImage();
 
             @Override
@@ -103,22 +108,26 @@ public class FormGameScreen extends javax.swing.JFrame{
         imgCharacter.setBackground(Color.black);
         JPanel characterSpec = new JPanel(new GridLayout(5, 1, 10, 10));
         characterSpec.setBackground(Color.black);
-        JLabel life = new JLabel("life: " + String.valueOf(g.c.getLife()));
+        life = new JLabel("life: " + String.valueOf(g.c.getLife()));
         life.setForeground(Color.white);
-        JLabel mana = new JLabel("mana: " + String.valueOf(g.c.mana));
+        mana = new JLabel("mana: " + String.valueOf(g.c.mana));
         mana.setForeground(Color.white);
-        JLabel stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
+        stamina = new JLabel("stamina: " + String.valueOf(g.c.stamina));
         stamina.setForeground(Color.white);
         att = new JLabel("base attack: " + String.valueOf(g.c.getBaseAtt()));
         att.setForeground(Color.white);
-        JLabel name = new JLabel("name: " + g.c.name);
+        name = new JLabel("name: " + g.c.name);
         name.setForeground(Color.white);
         characterSpec.add(name);
         characterSpec.add(life);
         characterSpec.add(mana);
         characterSpec.add(stamina);
         characterSpec.add(att);
-
+        
+        
+        
+        
+        
         JPanel eastButtonPanel = new JPanel(new GridLayout(7, 1, 10, 10));
         eastButtonPanel.setBackground(Color.black);
         JButton specialAb = new JButton("info special ability");
@@ -151,14 +160,14 @@ public class FormGameScreen extends javax.swing.JFrame{
         ActionListener actionNpc = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (g.npcsMet.isEmpty()) {
+                if (g.c.npcsMet.isEmpty()) {
                     JOptionPane.showMessageDialog(FormGameScreen.this,
                             "You haven't met any NPCs yet.",
                             "Familiar Faces",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     String names = "";
-                    for (NPC n : g.npcsMet) {
+                    for (NPC n : g.c.npcsMet) {
                         names += n.toString() + "\n";
                     }
                     JOptionPane.showMessageDialog(FormGameScreen.this,
@@ -169,13 +178,6 @@ public class FormGameScreen extends javax.swing.JFrame{
             }
         };
         npcs.addActionListener(actionNpc);
-        
-        //csv save and load
-        JButton saveCsv = new JButton("save CSV");
-        JButton loadCsv = new JButton("load CSV");
-        
-        
-        
         
         //serialized save and load
         JButton saveButton = new JButton("save");
@@ -192,7 +194,13 @@ public class FormGameScreen extends javax.swing.JFrame{
             public void actionPerformed(ActionEvent e) {
                 //mettere il metodo che mi gestisce il salvataggio dal gestore
                 //gli passo un oggetto salvataggio come parametro così che so quale salvataggio deve prendere
-                g.fileM.loadSer(save);
+                Salvataggio newS = g.fileM.loadSer(save);
+                Player newP = newS.getP();
+                g.p = newP;
+                newC = newS.getC();
+                g.c = newC;
+                uploadGraphic();
+                uploadImg();
             }
         };
         saveButton.addActionListener(actionSaveSerial);
@@ -208,8 +216,6 @@ public class FormGameScreen extends javax.swing.JFrame{
         eastButtonPanel.add(specialAb);
         eastButtonPanel.add(inv);
         eastButtonPanel.add(npcs);
-        eastButtonPanel.add(saveCsv);
-        eastButtonPanel.add(loadCsv);
         eastButtonPanel.add(saveButton);
         eastButtonPanel.add(loadButton);
         westPanel.add(eastButtonPanel, BorderLayout.EAST);
@@ -334,7 +340,39 @@ public class FormGameScreen extends javax.swing.JFrame{
         this.add(mainPanel);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
-
+    
+    public void uploadImg(){
+        
+        if(g.c.getClass().equals(Knight.class)){
+            pathLoad = "immagini/knight.png";
+        }
+        else if(g.c.getClass().equals(Barbarian.class)){
+            pathLoad = "immagini/barbarian.png";
+        }
+        else if(g.c.getClass().equals(Mage.class)){
+            pathLoad = "immagini/mage.png";
+        }
+        else if(g.c.getClass().equals(Priest.class)){
+            pathLoad = "immagini/priest.png";
+        }
+        sfondoAgg = new ImageIcon(pathLoad).getImage();
+        imgCharacter.repaint();
+    }
+    
+    public void uploadGraphic(){
+        life.setText("life: " + String.valueOf(g.c.getLife()));
+        life.setForeground(Color.white);
+        mana.setText("mana: " + String.valueOf(g.c.mana));
+        mana.setForeground(Color.white);
+        stamina.setText("stamina: " + String.valueOf(g.c.stamina));
+        stamina.setForeground(Color.white);
+        att.setText("base attack: " + String.valueOf(g.c.getBaseAtt()));
+        att.setForeground(Color.white);
+        name.setText("name: " + g.c.name);
+        name.setForeground(Color.white);
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

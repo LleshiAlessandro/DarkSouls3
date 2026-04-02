@@ -24,18 +24,17 @@ public class FileManager implements Serializable{
             System.out.println(e);
         }
     }
-    public void loadSer(Salvataggio s){
+    public Salvataggio loadSer(Salvataggio s){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(gameSave))){
             //devo far leggere 
             
             Salvataggio newS = (Salvataggio) ois.readObject();
-            Player p = newS.getP();
-            Character c = newS.getC();
+            return newS;
         }catch(IOException e){
             System.out.println(e);
         }catch(ClassNotFoundException i){
             System.out.println(i);
         }
-        
+        return null;
     }
 }

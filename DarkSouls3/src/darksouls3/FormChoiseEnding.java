@@ -56,7 +56,7 @@ public class FormChoiseEnding extends javax.swing.JFrame {
         buttonPanel.add(classicEnd);
         buttonPanel.add(goodEnd);
 
-        for (NPC n : g.npcsMet) {
+        for (NPC n : g.c.npcsMet) {
             if (n.getName().equals(NPC_Name.ANRI_OF_ASTORA)) {
                 hasAnri = true;
             } else if (n.getName().equals(NPC_Name.YURIA_OF_LONDOR)) {

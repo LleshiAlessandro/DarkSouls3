@@ -5,6 +5,7 @@
 package darksouls3;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,8 @@ public abstract class Character extends PgStatsCommon implements Serializable{
     protected int mana;
     protected int stamina;
     protected Inventory inv = new Inventory();
+    protected ArrayList<NPC> npcsMet = new ArrayList();
+    private static final long serialVersionUID = 1L;
 
     public Character(int mana, int stamina, String name, int life, int baseAtt) {
         super(name, life, baseAtt);
@@ -84,5 +87,15 @@ public abstract class Character extends PgStatsCommon implements Serializable{
         this.stamina = stamina;
     }
 
+    public ArrayList<NPC> getNpcsMet() {
+        return npcsMet;
+    }
+
+    public Inventory getInv() {
+        return inv;
+    }
+
+    
+    
     public abstract void specialAbility(Villain v);
 }
