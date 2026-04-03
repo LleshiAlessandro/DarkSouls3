@@ -114,9 +114,8 @@ public class FormOpenGame extends javax.swing.JFrame {
         // Panel in WEST con bottone
         JPanel westPanel = new JPanel();
 
-        westPanel.setLayout(new GridLayout(4, 1, 10, 10));
+        westPanel.setLayout(new GridLayout(3, 1, 10, 10));
         JButton button1 = new JButton("New Game");
-        JButton button2 = new JButton("Load Game");
         JButton button3 = new JButton("Instruction");
         JButton button4 = new JButton("Exit");
 
@@ -153,7 +152,6 @@ public class FormOpenGame extends javax.swing.JFrame {
 
         //aggiungo i bottoni
         westPanel.add(button1);
-        westPanel.add(button2);
         westPanel.add(button3);
         westPanel.add(button4);
 
