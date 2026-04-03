@@ -40,6 +40,7 @@ public class FormGameScreen extends javax.swing.JFrame{
     private Character newC;
     private JPanel imgCharacter;
     private String pathLoad = " ";
+    private Image sfondo;
     /**
      * Creates new form GameScreen
      */
@@ -56,6 +57,7 @@ public class FormGameScreen extends javax.swing.JFrame{
         initComponents();
 
         g = new GameManager(c, p);
+        sfondo = new ImageIcon(imgPath).getImage();
         
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
@@ -97,14 +99,15 @@ public class FormGameScreen extends javax.swing.JFrame{
         JPanel westPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         westPanel.setBackground(Color.black);
         imgCharacter = new JPanel(new BorderLayout()) {
-            Image sfondo = new ImageIcon(imgPath).getImage();
-
+            
+            
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(sfondo, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        
         imgCharacter.setBackground(Color.black);
         JPanel characterSpec = new JPanel(new GridLayout(5, 1, 10, 10));
         characterSpec.setBackground(Color.black);
@@ -185,6 +188,7 @@ public class FormGameScreen extends javax.swing.JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 save = new Salvataggio(g.c, p);
+                pathLoad = imgPath;
                 g.fileM.saveSer(save);
             }
         };
@@ -200,7 +204,8 @@ public class FormGameScreen extends javax.swing.JFrame{
                 newC = newS.getC();
                 g.c = newC;
                 uploadGraphic();
-                uploadImg();
+                pathLoad = uploadImg();
+                setCharacterImage(pathLoad);
             }
         };
         saveButton.addActionListener(actionSaveSerial);
@@ -341,22 +346,25 @@ public class FormGameScreen extends javax.swing.JFrame{
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
     
-    public void uploadImg(){
-        
+    public void setCharacterImage(String path) {
+        sfondo = new ImageIcon(path).getImage();
+        imgCharacter.repaint();
+    }
+    
+    public String uploadImg(){
         if(g.c.getClass().equals(Knight.class)){
-            pathLoad = "immagini/knight.png";
+            return "immagini/knight.png";
         }
         else if(g.c.getClass().equals(Barbarian.class)){
-            pathLoad = "immagini/barbarian.png";
+           return "immagini/barbarian.png";
         }
         else if(g.c.getClass().equals(Mage.class)){
-            pathLoad = "immagini/mage.png";
+            return "immagini/mage.png";
         }
         else if(g.c.getClass().equals(Priest.class)){
-            pathLoad = "immagini/priest.png";
+            return "immagini/priest.png";
         }
-        sfondoAgg = new ImageIcon(pathLoad).getImage();
-        imgCharacter.repaint();
+        return null;
     }
     
     public void uploadGraphic(){
@@ -370,6 +378,13 @@ public class FormGameScreen extends javax.swing.JFrame{
         att.setForeground(Color.white);
         name.setText("name: " + g.c.name);
         name.setForeground(Color.white);
+        
+        numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
+        numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
+        numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
+        numEstus.setForeground(Color.white);
+        numAshenEstus.setForeground(Color.white);
+        numGreenBlossom.setForeground(Color.white);
         
         
     }
