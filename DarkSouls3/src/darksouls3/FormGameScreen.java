@@ -260,72 +260,16 @@ public class FormGameScreen extends javax.swing.JFrame{
                 if (g.inFight == true) {
                     travel.setEnabled(false);
                     exit.setEnabled(false);
-                    fF = new FormFightScreen(FormGameScreen.this, g, imgPath);
+                    String currentImgPath = uploadImg();
+                    fF = new FormFightScreen(FormGameScreen.this, g, currentImgPath);
                     fF.setVisible(true);
                     g.inFight = false;
                 } else {
                     travel.setEnabled(true);
                     exit.setEnabled(true);
                 }
-                if (g.eventM.getLastEvent().equals(Event.NEW_LOCATION)) {
-                    if (g.m.equals(Map.CEMETERY_OF_ASH)) {
-                        mapPath = "immagini/satuarioDelVincolo.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.FIRELINK_SHRINE)) {
-                        mapPath = "immagini/fire_link.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.FIRELINK_SHRINE_ALT)) {
-                        mapPath = "immagini/fire.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.LOTHRIC_CASTLE_INTERIOR)) {
-                        mapPath = "immagini/dentroMura.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.HIGH_WALL_OF_LOTHRIC)) {
-                        mapPath = "immagini/muraAlte.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.MOCKUP_THIRD_AREA)) {
-                        mapPath = "immagini/terza_immagine_mockup.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.MOCKUP_SECOND_AREA)) {
-                        mapPath = "immagini/seconda_immagine_mockup.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.ANOR_LONDO)) {
-                        mapPath = "immagini/anorLondo.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.MOCKUP_FIRST_AREA)) {
-                        mapPath = "immagini/prima_immagine_mockup.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.ARCHDRAGON_PEAK)) {
-                        mapPath = "immagini/vettDeiDraghi.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.PAINTED_WORLD_OF_ARIANDEL)) {
-                        mapPath = "immagini/ariandel.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.MOCKUP_FOURTH_AREA)) {
-                        mapPath = "immagini/quarta_immagine_mockup.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else if (g.m.equals(Map.THE_RINGED_CITY)) {
-                        mapPath = "immagini/ringedCity.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    } else {
-                        mapPath = "immagini/satuarioDelVincolo.jpg";
-                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
-                        mainPanel.repaint();
-                    }
-                }
+                mapControll();
+                mainPanel.repaint();
             }
         };
 
@@ -388,6 +332,55 @@ public class FormGameScreen extends javax.swing.JFrame{
         
         
     }
+    public void mapControll(){
+        if (g.eventM.getLastEvent().equals(Event.NEW_LOCATION)) {
+                    if (g.m.equals(Map.CEMETERY_OF_ASH)) {
+                        mapPath = "immagini/satuarioDelVincolo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                        
+                    } else if (g.m.equals(Map.FIRELINK_SHRINE)) {
+                        mapPath = "immagini/fire_link.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.FIRELINK_SHRINE_ALT)) {
+                        mapPath = "immagini/fire.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.LOTHRIC_CASTLE_INTERIOR)) {
+                        mapPath = "immagini/dentroMura.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.HIGH_WALL_OF_LOTHRIC)) {
+                        mapPath = "immagini/muraAlte.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.MOCKUP_THIRD_AREA)) {
+                        mapPath = "immagini/terza_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.MOCKUP_SECOND_AREA)) {
+                        mapPath = "immagini/seconda_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.ANOR_LONDO)) {
+                        mapPath = "immagini/anorLondo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.MOCKUP_FIRST_AREA)) {
+                        mapPath = "immagini/prima_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.ARCHDRAGON_PEAK)) {
+                        mapPath = "immagini/vettDeiDraghi.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.PAINTED_WORLD_OF_ARIANDEL)) {
+                        mapPath = "immagini/ariandel.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.MOCKUP_FOURTH_AREA)) {
+                        mapPath = "immagini/quarta_immagine_mockup.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else if (g.m.equals(Map.THE_RINGED_CITY)) {
+                        mapPath = "immagini/ringedCity.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    } else {
+                        mapPath = "immagini/satuarioDelVincolo.jpg";
+                        sfondoAgg = new ImageIcon(mapPath).getImage(); // aggiorni immagine
+                    }
+                }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -29,6 +29,7 @@ public class FormFightScreen extends javax.swing.JFrame {
     private String imgPathAzione = "";
     private JPanel imgsCharacterActions;
     private Image sfondoAzione;
+    private String currentCharacterPath;
 //immagini/barbarian.png
 
     /**
@@ -43,6 +44,8 @@ public class FormFightScreen extends javax.swing.JFrame {
     public FormFightScreen(FormGameScreen fG, GameManager g, String imgPath) {
         initComponents();
         g.bossfightSound();
+        this.currentCharacterPath = imgPath;
+
         JPanel mainPanel = new JPanel(new GridLayout(2, 1)); // divide lo schermo in due righe
         this.add(mainPanel);
 
@@ -260,519 +263,145 @@ public class FormFightScreen extends javax.swing.JFrame {
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
 
-        ActionListener actionHeal = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (g.c.inv.numberEstus <= 0) {
-                    heal.setEnabled(false);
-                }
-                keyWord = "heal";
-                g.fight(keyWord);
-                if (imgPath.equals("immagini/barbarian.png") == true) {
-                    imgPathAzione = "immagini/barbarian_healing.png";
-                } else if (imgPath.equals("immagini/knight.png") == true) {
-                    imgPathAzione = "immagini/knight_healing.png";
-                } else if (imgPath.equals("immagini/mage.png") == true) {
-                    imgPathAzione = "immagini/mage_healing.png";
-                } else if (imgPath.equals("immagini/priest.png") == true) {
-                    imgPathAzione = "immagini/priest_healing.png";
-                }
-                changeActionImg();
-
-                lifeBar.setValue(g.c.getLife());
-                manaBar.setValue(g.c.getMana());
-                staminaBar.setValue(g.c.getStamina());
-
-                lifeBar.repaint();
-                manaBar.repaint();
-                staminaBar.repaint();
-                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
-                    if (g.fightM.getTurni() % 2 != 0) {
-                        specialAbility.setEnabled(true);
-                        turn.setForeground(Color.green);
-                        g.c.useEstus();
-                        g.c.useAshenEstus();
-                        g.c.useGreenblossom();
-                        numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                        numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                        numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                        lifeBar.setValue(g.c.getLife());
-                        manaBar.setValue(g.c.getMana());
-                        staminaBar.setValue(g.c.getStamina());
-
-                        lifeBar.repaint();
-                        manaBar.repaint();
-                        staminaBar.repaint();
-
-                    }
-                    lifeCharacter.setText(String.valueOf("  Life: " + g.c.getLife()));
-                    manaCharacter.setText(String.valueOf("  Mana: " + g.c.getMana()));
-                    staminaCharacter.setText(String.valueOf("  Stamina: " + g.c.getStamina()));
-                    if (g.fightM.getTurni() % 2 == 0) {
-                        specialAbility.setEnabled(false);
-                        turn.setForeground(Color.red);
-                    }
-
-                }
-                turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
-
-                if (g.getResult() == 0) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "Both you and your opponent have fallen… The fire fades.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 1) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "You have met your end… Ashes to ashes, ember to darkness.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.eventArea.setText("");
-                    fG.eventArea.append("YOU DIED");
-                    fG.eventArea.setForeground(Color.red);
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 2) {
-
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(true);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-
-                }
+        // --- HEAL ---
+        ActionListener actionHeal = e -> {
+            if (g.c.inv.numberEstus <= 0) {
+                heal.setEnabled(false);
             }
-        };
-        ActionListener actionAttac = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                keyWord = "attack";
-                g.fight(keyWord);
-                if (imgPath.equals("immagini/barbarian.png") == true) {
-                    imgPathAzione = "immagini/barbarian_att.png";
-                } else if (imgPath.equals("immagini/knight.png") == true) {
-                    imgPathAzione = "immagini/knight_att.png";
-                } else if (imgPath.equals("immagini/mage.png") == true) {
-                    imgPathAzione = "immagini/mage_att.png";
-                } else if (imgPath.equals("immagini/priest.png") == true) {
-                    imgPathAzione = "immagini/priest_att.png";
-                }
-                changeActionImg();
-                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                bossLife.setText(String.valueOf("  Life: " + g.v.getLife()));
-                lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
-                lifeBar.setValue(g.c.getLife());
-                lifeBar.repaint();
-                bossLifeBar.setValue(bossLifeBar.getValue() - g.c.getBaseAtt());
-                bossLifeBar.setValue(g.v.getLife());
-                bossLifeBar.repaint();
-
-                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
-                    if (g.fightM.getTurni() % 2 == 0) {
-                        specialAbility.setEnabled(false);
-                        turn.setForeground(Color.red);
-                        lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
-                        lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                        lifeBar.setValue(g.c.getLife());
-                        lifeBar.repaint();
-
-                    } else {
-                        specialAbility.setEnabled(true);
-                        turn.setForeground(Color.green);
-                        bossLifeBar.setValue(bossLifeBar.getValue() - g.c.getBaseAtt());
-                        bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
-                        bossLifeBar.setValue(g.v.getLife());
-                        bossLifeBar.repaint();
-
-                    }
-                }
-                turn.setText("  turn: " + String.valueOf(g.fightM.getTurni()));
-                numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                if (g.getResult() == 0) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "Both you and your opponent have fallen… The fire fades.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 1) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "You have met your end… Ashes to ashes, ember to darkness.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.eventArea.setText("");
-                    fG.eventArea.append("YOU DIED");
-                    fG.eventArea.setForeground(Color.red);
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 2) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(true);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    //non funziona
-                    //System.out.println("Boss name: [" + g.v.getName() + "]");
-                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if (g.getResult() == 2) {
-                        if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
-                            FormFightScreen.this.dispose();
-                            FormChoiseEnding cE = new FormChoiseEnding(g);
-                            g.stopBossSound();
-                            fG.dispose();
-                            cE.setVisible(true);
-                            return;
-                        }
-                        // altri boss normali
-                        g.stopBossSound();
-                        FormFightScreen.this.dispose();
-                    }
-                }
+            keyWord = "heal";
+            g.fight(keyWord);
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_healing.png";
+            } else if (imgPath.equals("immagini/knight.png")) {
+                imgPathAzione = "immagini/knight_healing.png";
+            } else if (imgPath.equals("immagini/mage.png")) {
+                imgPathAzione = "immagini/mage_healing.png";
+            } else if (imgPath.equals("immagini/priest.png")) {
+                imgPathAzione = "immagini/priest_healing.png";
             }
-        };
-        ActionListener actionRoll = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                keyWord = "roll";
-                g.fight(keyWord);
-                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                if (imgPath.equals("immagini/barbarian.png") == true) {
-                    imgPathAzione = "immagini/barbarian_roll.png";
-                } else if (imgPath.equals("immagini/knight.png") == true) {
-                    imgPathAzione = "immagini/knight_roll.png";
-                } else if (imgPath.equals("immagini/mage.png") == true) {
-                    imgPathAzione = "immagini/mage_roll.png";
-                } else if (imgPath.equals("immagini/priest.png") == true) {
-                    imgPathAzione = "immagini/priest_roll.png";
-                }
-                changeActionImg();
-                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
-                    if (g.fightM.getTurni() % 2 == 0) {
-                        specialAbility.setEnabled(false);
-                        turn.setForeground(Color.red);
-                    } else {
-                        specialAbility.setEnabled(true);
-                        turn.setForeground(Color.green);
-                    }
-                }
-                lifeBar.setValue(g.c.getLife());
-                staminaBar.setValue(g.c.getStamina());
+            changeActionImg();
 
-                lifeBar.repaint();
-                staminaBar.repaint();
-                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
-                numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                if (g.getResult() == 0) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "Both you and your opponent have fallen… The fire fades.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 1) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "You have met your end… Ashes to ashes, ember to darkness.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.eventArea.setText("");
-                    fG.eventArea.append("YOU DIED");
-                    fG.eventArea.setForeground(Color.red);
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 2) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(true);
-                    fG.exit.setEnabled(true);
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                }
+            if (g.c.getLife() > 0 && g.v.getLife() > 0 && g.fightM.getTurni() % 2 != 0) {
+                g.c.useEstus();
+                g.c.useAshenEstus();
+                g.c.useGreenblossom();
             }
-        };
-        ActionListener actionAbility = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                keyWord = "special ability";
-                g.fight(keyWord);
-                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
-                staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
-                if (imgPath.equals("immagini/barbarian.png") == true) {
-                    imgPathAzione = "immagini/barbarian_sp.png";
-                } else if (imgPath.equals("immagini/knight.png") == true) {
-                    imgPathAzione = "immagini/knight_sp.png";
-                } else if (imgPath.equals("immagini/mage.png") == true) {
-                    imgPathAzione = "immagini/mage_sp.png";
-                } else if (imgPath.equals("immagini/priest.png") == true) {
-                    imgPathAzione = "immagini/priest_sp.png";
-                }
-                changeActionImg();
-                lifeBar.setValue(g.c.getLife());
-                lifeBar.repaint();
-                manaBar.setValue(g.c.getMana());
-                manaBar.repaint();
-                staminaBar.setValue(g.c.getStamina());
-                staminaBar.repaint();
-                if (g.c.getLife() > 0 && g.v.getLife() > 0) {
-                    if (g.fightM.getTurni() % 2 == 0) {
-                        specialAbility.setEnabled(false);
-                        turn.setForeground(Color.red);
-                        lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
-                        lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                        manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
-                        staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                        lifeBar.setValue(g.c.getLife());
-                        lifeBar.repaint();
-                        manaBar.setValue(g.c.getMana());
-                        manaBar.repaint();
-                        staminaBar.setValue(g.c.getStamina());
-                        staminaBar.repaint();
-                    } else {
-                        specialAbility.setEnabled(true);
-                        turn.setForeground(Color.green);
-                        bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
-                        manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
-                        staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
-                        bossLifeBar.setValue(g.v.getLife());
-                        bossLifeBar.repaint();
-                        lifeBar.setValue(g.c.getLife());
-                        lifeBar.repaint();
-                        manaBar.setValue(g.c.getMana());
-                        manaBar.repaint();
-                        staminaBar.setValue(g.c.getStamina());
-                        staminaBar.repaint();
-                    }
-                }
-
-                turn.setText("  Turn: " + String.valueOf(g.fightM.getTurni()));
-                used = true;
-                if (used == true) {
-                    specialAbility.setEnabled(false);
-                    numEstus.setText("number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    numAshenEstus.setText("number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    numGreenBlossom.setText("number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                }
-                if (g.getResult() == 0) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "Both you and your opponent have fallen… The fire fades.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 1) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "You have met your end… Ashes to ashes, ember to darkness.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-
-                    fG.eventArea.setText("");
-                    fG.eventArea.append("YOU DIED");
-                    fG.eventArea.setForeground(Color.red);
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 2) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(true);
-                    fG.exit.setEnabled(true);
-                    fG.att.setText("base attac: " + String.valueOf(g.c.getBaseAtt()));
-                    fG.numEstus.setText("  number of estus: " + String.valueOf(g.c.inv.getNumberEstus()));
-                    fG.numAshenEstus.setText("  number of ashen estus: " + String.valueOf(g.c.inv.getNumberAshenEstus()));
-                    fG.numGreenBlossom.setText("  number of green blossom: " + String.valueOf(g.c.inv.getGreenBlossom()));
-                    //System.out.println("Boss name: [" + g.v.getName() + "]");
-                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
-                        FormFightScreen.this.dispose();
-                        FormChoiseEnding cE = new FormChoiseEnding(g);
-                        g.stopBossSound();
-                        fG.dispose();
-                        cE.setVisible(true);
-                        return;
-                    }
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                }
-            }
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
         };
 
-        ActionListener actionShield = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (imgPath.equals("immagini/barbarian.png") == true) {
-                    imgPathAzione = "immagini/barbarian_shield.png";
-                } else if (imgPath.equals("immagini/knight.png") == true) {
-                    imgPathAzione = "immagini/knight_shield.png";
-                } else if (imgPath.equals("immagini/mage.png") == true) {
-                    imgPathAzione = "immagini/mage_shield.png";
-                } else if (imgPath.equals("immagini/priest.png") == true) {
-                    imgPathAzione = "immagini/priest_shield.png";
-                }
-                changeActionImg();
-
-                keyWord = "use shield";
-                g.fight(keyWord);
-                lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                bossLife.setText(String.valueOf("  Life:" + g.v.getLife()));
-                lifeBar.setValue(g.c.getLife());
-                lifeBar.repaint();
-                bossLifeBar.setValue(g.v.getLife());
-                bossLifeBar.repaint();
-
-                if (g.getResult() == 0) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "Both you and your opponent have fallen… The fire fades.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 1) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "You have met your end… Ashes to ashes, ember to darkness.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(false);
-                    fG.exit.setEnabled(true);
-
-                    fG.eventArea.setText("");
-                    fG.eventArea.append("YOU DIED");
-                    fG.eventArea.setForeground(Color.red);
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                } else if (g.getResult() == 2) {
-                    JOptionPane.showMessageDialog(FormFightScreen.this,
-                            "The foe crumbles to dust… Victory is yours, but the journey continues.",
-                            "DARK SOULS 3",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    fG.travel.setEnabled(true);
-                    fG.exit.setEnabled(true);
-                    //System.out.println("Boss name: [" + g.v.getName() + "]");
-                    //System.out.println("Expected: [" + EnumVillain.SOUL_OF_CINDER.getDisplayName() + "]");
-                    if (g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
-                        g.stopBossSound();
-                        FormFightScreen.this.dispose();
-                        FormChoiseEnding cE = new FormChoiseEnding(g);
-                        fG.dispose();
-                        cE.setVisible(true);
-                        return;
-                    }
-                    g.stopBossSound();
-                    FormFightScreen.this.dispose();
-                }
+// --- ATTACK ---
+        ActionListener actionAttac = e -> {
+            keyWord = "attack";
+            g.fight(keyWord);
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_att.png";
+            } else if (imgPath.equals("immagini/knight.png")) {
+                imgPathAzione = "immagini/knight_att.png";
+            } else if (imgPath.equals("immagini/mage.png")) {
+                imgPathAzione = "immagini/mage_att.png";
+            } else if (imgPath.equals("immagini/priest.png")) {
+                imgPathAzione = "immagini/priest_att.png";
             }
-        };
+            changeActionImg();
 
-        ActionListener actionConsumable = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (g.c.inv.items.isEmpty() != true) {
-                    for (Item item : g.c.inv.items) {
-                        if (item.getName() == EnumItem.DIVINE_BLESSING) {
-                            g.c.setLife(g.c.getLife() + 20);
-                            g.c.inv.items.remove(item);
-                        } else if (item.getName() == EnumItem.EMBER) {
-                            g.c.setLife(100);
-                            g.c.inv.items.remove(item);
-                        } else if (item.getName() == EnumItem.SIEGBRAU) {
-                            g.c.setLife(g.c.getLife() + 10);
-                            g.c.inv.items.remove(item);
-                        }
-                    }
-
-                    lifeCharacter.setText(String.valueOf("  Life:" + g.c.getLife()));
-                    manaCharacter.setText(String.valueOf("  Mana:" + g.c.getMana()));
-                    staminaCharacter.setText(String.valueOf("  Stamina:" + g.c.getStamina()));
+            if (g.c.getLife() > 0 && g.v.getLife() > 0) {
+                if (g.fightM.getTurni() % 2 == 0) {
+                    lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
                 } else {
-                    JOptionPane.showMessageDialog(FormFightScreen.this, "INVENTORY EMPTY", "Inventory", JOptionPane.INFORMATION_MESSAGE);
+                    bossLifeBar.setValue(bossLifeBar.getValue() - g.c.getBaseAtt());
                 }
             }
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
+        };
+
+// --- ROLL ---
+        ActionListener actionRoll = e -> {
+            keyWord = "roll";
+            g.fight(keyWord);
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_roll.png";
+            } else if (imgPath.equals("immagini/knight.png")) {
+                imgPathAzione = "immagini/knight_roll.png";
+            } else if (imgPath.equals("immagini/mage.png")) {
+                imgPathAzione = "immagini/mage_roll.png";
+            } else if (imgPath.equals("immagini/priest.png")) {
+                imgPathAzione = "immagini/priest_roll.png";
+            }
+            changeActionImg();
+
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
+        };
+
+// --- SPECIAL ABILITY ---
+        ActionListener actionAbility = e -> {
+            keyWord = "special ability";
+            g.fight(keyWord);
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_sp.png";
+            } else if (imgPath.equals("immagini/knight.png")) {
+                imgPathAzione = "immagini/knight_sp.png";
+            } else if (imgPath.equals("immagini/mage.png")) {
+                imgPathAzione = "immagini/mage_sp.png";
+            } else if (imgPath.equals("immagini/priest.png")) {
+                imgPathAzione = "immagini/priest_sp.png";
+            }
+            changeActionImg();
+
+            if (g.c.getLife() > 0 && g.v.getLife() > 0 && g.fightM.getTurni() % 2 == 0) {
+                lifeBar.setValue(lifeBar.getValue() - g.v.getBaseAtt());
+            }
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
+        };
+
+// --- USE SHIELD ---
+        ActionListener actionShield = e -> {
+            keyWord = "use shield";
+            g.fight(keyWord);
+            // Supponendo che tu abbia le immagini scudo chiamate così:
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_shield.png";
+            } else if (imgPath.equals("immagini/knight.png")) {
+                imgPathAzione = "immagini/knight_shield.png";
+            }
+            changeActionImg();
+
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
+        };
+
+// --- USE CONSUMABLE ---
+        ActionListener actionConsumable = e -> {
+            keyWord = "use consumable";
+            g.fight(keyWord);
+            if (imgPath.equals("immagini/barbarian.png")) {
+                imgPathAzione = "immagini/barbarian_item.png";
+            }
+            changeActionImg();
+
+            refreshStatusUI(g, turn, bossLife, lifeCharacter, manaCharacter, staminaCharacter, numEstus, numAshenEstus, numGreenBlossom, bossLifeBar, specialAbility);
+            handleMatchResult(g, fG);
         };
 
         heal.addActionListener(actionHeal);
+
         attac.addActionListener(actionAttac);
+
         roll.addActionListener(actionRoll);
+
         specialAbility.addActionListener(actionAbility);
+
         useShield.addActionListener(actionShield);
+
         useConsumable.addActionListener(actionConsumable);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setVisible(true);
+
+        this.setVisible(
+                true);
 
         /**
          * This method is called from within the constructor to initialize the
@@ -785,6 +414,77 @@ public class FormFightScreen extends javax.swing.JFrame {
     public void changeActionImg() {
         sfondoAzione = new ImageIcon(imgPathAzione).getImage();
         imgsCharacterActions.repaint(); // ridisegna il pannello
+    }
+
+    // METODO COMUNE 1: Aggiorna tutti i testi e i valori delle barre
+    private void refreshStatusUI(GameManager g, JLabel turn, JLabel bossLife, JLabel lifeChar, JLabel manaChar, JLabel staminaChar, JLabel nEstus, JLabel nAshen, JLabel nGreen, JProgressBar bossBar, JButton specialBtn) {
+        lifeBar.setValue(g.c.getLife());
+        manaBar.setValue(g.c.getMana());
+        staminaBar.setValue(g.c.getStamina());
+        bossBar.setValue(g.v.getLife());
+
+        lifeChar.setText("  Life: " + g.c.getLife());
+        manaChar.setText("  Mana: " + g.c.getMana());
+        staminaChar.setText("  Stamina: " + g.c.getStamina());
+        bossLife.setText("  Life: " + g.v.getLife());
+        turn.setText("  turn: " + g.fightM.getTurni());
+
+        nEstus.setText("  number of estus: " + g.c.inv.getNumberEstus());
+        nAshen.setText("  number of ashen estus: " + g.c.inv.getNumberAshenEstus());
+        nGreen.setText("  number of green blossom: " + g.c.inv.getGreenBlossom());
+
+        // Gestione colore turno e bottone special
+        if (g.fightM.getTurni() % 2 == 0) {
+            specialBtn.setEnabled(false);
+            turn.setForeground(Color.red);
+        } else {
+            specialBtn.setEnabled(true);
+            turn.setForeground(Color.green);
+        }
+
+        lifeBar.repaint();
+        manaBar.repaint();
+        staminaBar.repaint();
+        bossBar.repaint();
+    }
+
+    private void handleMatchResult(GameManager g, FormGameScreen fG) {
+        if (g.getResult() == -1) {
+            return;
+        }
+
+        String msg = "";
+        if (g.getResult() == 0) {
+            msg = "Both you and your opponent have fallen… The fire fades.";
+        } else if (g.getResult() == 1) {
+            msg = "You have met your end… Ashes to ashes, ember to darkness.";
+        } else if (g.getResult() == 2) {
+            msg = "The foe crumbles to dust… Victory is yours, but the journey continues.";
+        }
+
+        JOptionPane.showMessageDialog(this, msg, "DARK SOULS 3", JOptionPane.INFORMATION_MESSAGE);
+
+        // Aggiornamento Form Precedente
+        fG.travel.setEnabled(g.getResult() == 2);
+        fG.exit.setEnabled(true);
+        fG.att.setText("base attac: " + g.c.getBaseAtt());
+        fG.numEstus.setText("  number of estus: " + g.c.inv.getNumberEstus());
+        fG.numAshenEstus.setText("  number of ashen estus: " + g.c.inv.getNumberAshenEstus());
+        fG.numGreenBlossom.setText("  number of green blossom: " + g.c.inv.getGreenBlossom());
+
+        if (g.getResult() == 1) {
+            fG.eventArea.setText("YOU DIED");
+            fG.eventArea.setForeground(Color.red);
+        }
+
+        // Caso speciale Soul of Cinder
+        if (g.getResult() == 2 && g.v.getName().equals(EnumVillain.SOUL_OF_CINDER.getDisplayName()) && g.fightM.bossesDefeated > 3) {
+            new FormChoiseEnding(g).setVisible(true);
+            fG.dispose();
+        }
+
+        g.stopBossSound();
+        this.dispose();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
