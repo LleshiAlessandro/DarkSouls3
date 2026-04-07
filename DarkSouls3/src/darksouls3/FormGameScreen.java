@@ -18,8 +18,8 @@ public class FormGameScreen extends javax.swing.JFrame{
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGameScreen.class.getName());
 
-    GameManager g;
-    FormFightScreen fF;
+    protected GameManager g;
+    protected FormFightScreen fF;
     protected JButton travel;
     protected JButton exit;
     protected JLabel life;

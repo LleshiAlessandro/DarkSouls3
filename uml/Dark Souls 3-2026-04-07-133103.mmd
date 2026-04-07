@@ -1,0 +1,340 @@
+---
+config:
+  layout: elk
+  theme: dark
+---
+classDiagram
+direction LR
+    class Player {
+	    -String name
+	    +Player(String name)
+    }
+
+    class Ending {
+	    GOOD_ENDING
+	    BAD_ENDING
+	    CLASSIC_ENDING
+    }
+
+    class Villain {
+	    +Villain()
+    }
+
+    class GameManager {
+	    #Character c
+	    #Villain v
+	    #Map m
+	    #Player p
+	    #FileManager fileM
+	    #EventManager eventM
+	    #FightManager fightM
+	    -EndingManager endingM
+	    -EnumVillain[] bosses
+	    -Random rnd
+	    #boolean inFight = false
+	    #int result = -1
+	    -int bossRand
+	    -ArrayList bossesNotAppeared
+	    -ArrayList bossesAppeared
+	    -Clip bossClip
+	    -Clip endClip
+	    +GameManager(Character c, Player p)
+	    +newBoss() void
+	    +itemFound(Item i) void
+	    +newNPC() void
+	    +restoreHeals(Character c) void
+	    +newLocation() void
+	    +eventManaging() void
+	    +fight(String keyWord) void
+	    +ending() void
+	    +bossfightSound() void
+	    +stopBossSound() void
+	    +endSound() void
+	    +stopEndSound() void
+	    +toString() String
+    }
+
+    class ChooseCharacter {
+	    -String nameCharacter
+	    #Character c
+	    #String imgPath
+	    +ChooseCharacter(Player p)
+    }
+
+    class OpenGame {
+	    -Clip startClip
+	    +OpenGame()
+    }
+
+    class ChoiseEnding {
+	    -boolean hasAnri = false
+	    -boolean hasYuria = false
+	    -boolean hasYoel = false
+	    -boolean hasFireKeeper = false
+	    -String endPath = ""
+	    -JPanel img
+	    -Timer t
+	    -int leaseTime = 30
+	    +ChoiseEnding(GameManager g)
+    }
+
+    class GameScreen {
+	    #GameManager g
+	    #FormFightScreen fF
+	    #JButton travel
+	    #JButton exit
+	    #JLabel life
+	    #JLabel mana
+	    #JLabel stamina
+	    #JLabel att
+	    #JLabel name
+	    #JTextArea eventArea
+	    -JScrollPane scrollEventAre
+	    #JLabel numEstus
+	    #JLabel numAshenEstus
+	    #JLabel numGreenBlossom
+	    -ArrayList item
+	    #ArrayList npcName
+	    -String mapPath
+	    -Image sfondoAgg
+	    -Salvataggio save
+	    -Character newC
+	    -JPanel imgCharacter
+	    -String pathLoad = " "
+	    -Image sfondo
+	    +GameScreen(String imgPath, Character c, Player p)
+	    +mapControll() void
+	    +uploadGraphic() void
+	    +uploadImg() String
+	    +setCharacterImage(String path) void
+    }
+
+    class FightScreen {
+	    -String keyWord = ""
+	    -String[] bossPaths
+	    -String bossPath
+	    -boolean used = false
+	    -int value
+	    -boolean soulOfCinderDefeated = false
+	    -boolean soul_of_cinder = false
+	    -JProgressBar lifeBar
+	    -JProgressBar manaBar
+	    -JProgressBar staminaBar
+	    -String imgPathAzione = ""
+	    -JPanel imgsCharacterActions
+	    -Image sfondoAzione
+	    -String currentCharacterPath
+	    +FightScreen(FormGameScreen fG, GameManager g, String imgPath)
+	    +changeActionImg() void
+	    +refreshStatusUI(GameManager g, JLabel turn, JLabel bossLife, JLabel lifeChar, JLabel manaChar, JLabel staminaChar, JLabel nEstus, JLabel nAshen, JLabel nGreen, JProgressBar bossBar, JButton specialBtn) void
+	    +handleMatchResult(GameManager g, FormGameScreen fG) void
+    }
+
+    class PgStatsCommon {
+	    #String name;
+	    #int life
+	    #int baseAtt
+	    -static final long serialVersionUID = 1L
+	    +PgStatsCommon(String name, int life, int baseAtt)
+	    +setLife() void
+	    +getLife() int
+    }
+
+    class Character {
+	    #int mana
+	    #int stamina
+	    #Inventory inv
+	    #ArrayList npcsMet
+	    -static final long serialVersionUID = 1L
+	    +Character(int mana, int stamina)
+	    + useEstus() void
+	    +useAshenEstus() void
+	    +useGreenblossom() void
+	    +restoreHeals() void
+	    +abstractspecialAbility(Villain v) void
+    }
+
+    class Mage {
+	    -static final long serialVersionUID = 1L
+	    +Mage()
+	    +SpecialAbility() int
+	    +toString() String
+    }
+
+    class Barbarian {
+	    -static final long serialVersionUID = 1L
+	    +Barbarian()
+	    +SpecialAbility() int
+	    +toString() String
+    }
+
+    class Knight {
+	    -static final long serialVersionUID = 1L
+	    +Knight()
+	    +SpecialAbility() int
+	    +toString() String
+    }
+
+    class Priest {
+	    -static final long serialVersionUID = 1L
+	    +Priest()
+	    +SpecialAbility() int
+	    +toString() String
+    }
+
+    class Inventory {
+	    #int numberEstus
+	    #int numberAshenEstus
+	    #int greenBlossom
+	    #ArrayList items
+	    +Inventory(int nE, int nAE, int gB)
+	    +addItem() void
+	    +removeItem() void
+	    +toString() String
+    }
+
+    class Item {
+	    -EnumItem name
+	    -Random rdn
+	    -int damage
+	    -int quantity
+	    +Item()
+	    + toString() String
+    }
+
+    class EnumItem {
+	    LONGSWORD
+	    GREATSWORD
+	    DAGGER
+	    GIANT_HAMMER
+	    SIEGBRAU
+	    DIVINE_BLESSING
+	    EMBER
+	    -int baseDamage
+	    -int quantity
+	    +EnumItem(int baseDamage, int quantity)
+    }
+
+    class Map {
+	    CEMETERY_OF_ASH
+	    FIRELINK_SHRINE
+	    FIRELINK_SHRINE_ALT
+	    LOTHRIC_CASTLE_INTERIOR
+	    HIGH_WALL_OF_LOTHRIC
+	    MOCKUP_THIRD_AREA
+	    MOCKUP_SECOND_AREA
+	    ANOR_LONDO
+	    MOCKUP_FIRST_AREA
+	    ARCHDRAGON_PEAK
+	    PAINTED_WORLD_OF_ARIANDEL
+	    MOCKUP_FOURTH_AREA
+	    THE_RINGED_CITY
+    }
+
+    class NPC_Name {
+	    FIRE_KEEPER
+	    HAWKWOOD
+	    ANRI_OF_ASTORA
+	    SIRRIS_OF_LOTHRIC
+	    EYGON_OF_CARIM
+	    YOEL_OF_LONDOR
+	    YURIA_OF_LONDOR
+	    CORNYX_THE_CRUSADER
+	    ANDRE_OF_ASTORA
+	    GREIRAT_THE_THIEF
+	    ORBECK_OF_VINHEIM
+	    ANSELMI_THE_OBSCURE_KNIGHT
+    }
+
+    class NPC {
+	    -NPC_Name name
+	    +NPC(NPC_Name name)
+	    +toString() String
+    }
+
+    class FileManager {
+	    -String gameSave = "salvataggio/save.ser"
+	    +saveSer(Salvataggio s) void
+	    +loadSer(Salvataggio s) Salvataggio
+    }
+
+    class Salvataggio {
+	    -Character c
+	    -Player p
+	    +Salvataggio(Character c, Player p)
+	    +Character getC()
+	    +Player getP()
+    }
+
+    class Event {
+	    ITEM_FOUND
+	    NEW_LOCATION
+	    NEW_NPC
+	    RESTORE_HEALS
+	    NEW_BOSS
+    }
+
+    class EventManager {
+	    -Random rdn
+	    -int randEvent
+	    -Event lastEvent
+	    +EventManager()
+	    +EventRandom() Event
+	    +getLastEvent() Event
+	    +toString() String
+    }
+
+    class FightManager {
+	    #int turni
+	    -String[] keyWords
+	    -Random escape
+	    -int escapeResult
+	    #int bossesDefeated = 0
+	    +FightManager()
+	    +incrementTurn() void
+	    +chooseTurn(Character c, Villain v) boolean
+	    +fightManaged(Character c, Villain v, String keyWord) void
+	    +fightResult(Character c, Villain v) int
+    }
+
+    class EndingManager {
+	    +ending(ArrayList npcsMet) Ending
+    }
+
+	<<enum>> Ending
+	<<form>> ChooseCharacter
+	<<form>> OpenGame
+	<<form>> GameScreen
+	<<form>> FightScreen
+	<<Abstract>> Character
+	<<enum>> EnumItem
+	<<enum>> Map
+	<<enum>> NPC_Name
+	<<enum>> Event
+
+    Character <|-- Mage
+    Character <|-- Barbarian
+    Character "1" o--> "1" Inventory : -Inventory
+    GameManager "1" --> "1" Player : -Player
+    GameManager "1" --> "1" FileManager : -FileManager
+    GameManager "1" ..> "1" EventManager
+    GameManager "1" --> "1" FightManager : -FightManager
+    Character <|-- Knight
+    Character <|-- Priest
+    Inventory "1" <--> "0..n" Item : -ArrayList Item
+    Item -- EnumItem
+    EventManager -- Event : -Event e
+    GameManager "1" ..> "1" EndingManager
+    EndingManager -- Ending
+    PgStatsCommon <|-- Character
+    GameManager -- PgStatsCommon : -PgStatsCommon
+    PgStatsCommon <|-- Villain
+    FightScreen -- GameManager
+    GameScreen -- GameManager : <br>
+    OpenGame -- GameManager : -GameManager g
+    GameManager -- Map : -Map m
+    GameManager -- NPC : -ArrayList NPC
+    ChoiseEnding -- GameManager
+    ChooseCharacter -- GameManager
+    NPC -- NPC_Name
+    FileManager -- Salvataggio

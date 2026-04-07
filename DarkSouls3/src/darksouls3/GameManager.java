@@ -25,7 +25,6 @@ public class GameManager {
     protected FightManager fightM = new FightManager();
     private EndingManager endingM = new EndingManager();
     private EnumVillain[] bosses = EnumVillain.values();
-    ;
     private Random rnd = new Random();
 
     protected boolean inFight = false;//mi serve per disabilitare i bottoni e per poter giocare solo al fight

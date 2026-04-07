@@ -263,7 +263,7 @@ public class FormFightScreen extends javax.swing.JFrame {
 
         azioniCharacterPanel.add(buttonsPanel, BorderLayout.CENTER);
 
-        // --- HEAL ---
+// --- HEAL ---
         ActionListener actionHeal = e -> {
             if (g.c.inv.numberEstus <= 0) {
                 heal.setEnabled(false);
