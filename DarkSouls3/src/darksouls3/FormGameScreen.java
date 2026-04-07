@@ -41,6 +41,8 @@ public class FormGameScreen extends javax.swing.JFrame{
     private JPanel imgCharacter;
     private String pathLoad = " ";
     private Image sfondo;
+    protected JButton saveButton;
+    protected JButton loadButton;
     /**
      * Creates new form GameScreen
      */
@@ -183,7 +185,7 @@ public class FormGameScreen extends javax.swing.JFrame{
         npcs.addActionListener(actionNpc);
         
         //serialized save and load
-        JButton saveButton = new JButton("save");
+        saveButton = new JButton("save");
         ActionListener actionSaveSerial = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -192,7 +194,7 @@ public class FormGameScreen extends javax.swing.JFrame{
                 g.fileM.saveSer(save);
             }
         };
-        JButton loadButton = new JButton("load");
+        loadButton = new JButton("load");
         ActionListener actionLoadSerial = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

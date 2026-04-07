@@ -78,37 +78,6 @@ direction LR
 	    +ChoiseEnding(GameManager g)
     }
 
-    class GameScreen {
-	    #GameManager g
-	    #FormFightScreen fF
-	    #JButton travel
-	    #JButton exit
-	    #JLabel life
-	    #JLabel mana
-	    #JLabel stamina
-	    #JLabel att
-	    #JLabel name
-	    #JTextArea eventArea
-	    -JScrollPane scrollEventAre
-	    #JLabel numEstus
-	    #JLabel numAshenEstus
-	    #JLabel numGreenBlossom
-	    -ArrayList item
-	    #ArrayList npcName
-	    -String mapPath
-	    -Image sfondoAgg
-	    -Salvataggio save
-	    -Character newC
-	    -JPanel imgCharacter
-	    -String pathLoad = " "
-	    -Image sfondo
-	    +GameScreen(String imgPath, Character c, Player p)
-	    +mapControll() void
-	    +uploadGraphic() void
-	    +uploadImg() String
-	    +setCharacterImage(String path) void
-    }
-
     class FightScreen {
 	    -String keyWord = ""
 	    -String[] bossPaths
@@ -301,16 +270,49 @@ direction LR
 	    +ending(ArrayList npcsMet) Ending
     }
 
+    class GameScreen {
+	    #GameManager g
+	    #FormFightScreen fF
+	    #JButton travel
+	    #JButton exit
+	    #JLabel life
+	    #JLabel mana
+	    #JLabel stamina
+	    #JLabel att
+	    #JLabel name
+	    #JTextArea eventArea
+	    -JScrollPane scrollEventAre
+	    #JLabel numEstus
+	    #JLabel numAshenEstus
+	    #JLabel numGreenBlossom
+	    -ArrayList item
+	    #ArrayList npcName
+	    -String mapPath
+	    -Image sfondoAgg
+	    -Salvataggio save
+	    -Character newC
+	    -JPanel imgCharacter
+	    -String pathLoad = " "
+	    -Image sfondo
+	    #JButton saveButton
+	    #JButton loadButton
+	    +GameScreen(String imgPath, Character c, Player p)
+	    +mapControll() void
+	    +uploadGraphic() void
+	    +uploadImg() String
+	    +setCharacterImage(String path) void
+    }
+
 	<<enum>> Ending
 	<<form>> ChooseCharacter
 	<<form>> OpenGame
-	<<form>> GameScreen
 	<<form>> FightScreen
 	<<Abstract>> Character
 	<<enum>> EnumItem
 	<<enum>> Map
 	<<enum>> NPC_Name
 	<<enum>> Event
+	<<form>> GameScreen
 
     Character <|-- Mage
     Character <|-- Barbarian

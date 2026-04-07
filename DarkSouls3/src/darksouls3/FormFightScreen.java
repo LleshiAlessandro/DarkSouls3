@@ -456,10 +456,17 @@ public class FormFightScreen extends javax.swing.JFrame {
         String msg = "";
         if (g.getResult() == 0) {
             msg = "Both you and your opponent have fallen… The fire fades.";
+            fG.uploadGraphic();
+            fG.saveButton.setEnabled(false);
+            fG.loadButton.setEnabled(false);
         } else if (g.getResult() == 1) {
             msg = "You have met your end… Ashes to ashes, ember to darkness.";
+            fG.uploadGraphic();
+            fG.saveButton.setEnabled(false);
+            fG.loadButton.setEnabled(false);
         } else if (g.getResult() == 2) {
             msg = "The foe crumbles to dust… Victory is yours, but the journey continues.";
+            fG.uploadGraphic();
         }
 
         JOptionPane.showMessageDialog(this, msg, "DARK SOULS 3", JOptionPane.INFORMATION_MESSAGE);
