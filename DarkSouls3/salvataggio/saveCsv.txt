@@ -1,0 +1,2 @@
+player name;life;mana;stamina;baseAtt;numberEstus;numberAshenEstus;numberGreenBlossom;npcs;characterType
+Player;75;0;100;22;5;5;5;YURIA_OF_LONDOR;Knight

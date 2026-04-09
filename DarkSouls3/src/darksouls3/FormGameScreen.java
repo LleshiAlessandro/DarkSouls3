@@ -37,12 +37,15 @@ public class FormGameScreen extends javax.swing.JFrame{
     private String mapPath;
     private Image sfondoAgg;
     private Salvataggio save;
+    private Salvataggio saveCsv;
     private Character newC;
     private JPanel imgCharacter;
     private String pathLoad = " ";
     private Image sfondo;
     protected JButton saveButton;
     protected JButton loadButton;
+    protected JButton saveButtonCSV;
+    protected JButton loadButtonCSV;
     /**
      * Creates new form GameScreen
      */
@@ -185,7 +188,7 @@ public class FormGameScreen extends javax.swing.JFrame{
         npcs.addActionListener(actionNpc);
         
         //serialized save and load
-        saveButton = new JButton("save");
+        saveButton = new JButton("save ser");
         ActionListener actionSaveSerial = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -194,7 +197,7 @@ public class FormGameScreen extends javax.swing.JFrame{
                 g.fileM.saveSer(save);
             }
         };
-        loadButton = new JButton("load");
+        loadButton = new JButton("load ser");
         ActionListener actionLoadSerial = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -214,6 +217,41 @@ public class FormGameScreen extends javax.swing.JFrame{
         loadButton.addActionListener(actionLoadSerial);
         
         
+        saveButtonCSV = new JButton("save csv");
+        ActionListener actionSaveCSV = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveCsv = new Salvataggio(g.c, p);
+                pathLoad = imgPath;
+                g.fileM.saveCsv(saveCsv);
+            }
+        };
+        loadButtonCSV = new JButton("load csv");
+        ActionListener actionLoadCSV = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //mettere il metodo che mi gestisce il salvataggio dal gestore
+                //gli passo un oggetto salvataggio come parametro così che so quale salvataggio deve prendere
+                Salvataggio newS = g.fileM.loadCsv();
+                g.c = newS.getC();
+                g.p = newS.getP();
+                uploadGraphic();
+                pathLoad = uploadImg();
+                setCharacterImage(pathLoad);
+            }
+        };
+        saveButtonCSV.addActionListener(actionSaveCSV);
+        loadButtonCSV.addActionListener(actionLoadCSV);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         imgCharacter.setPreferredSize(new Dimension(175, 550));
         westPanel.add(imgCharacter);
@@ -225,6 +263,8 @@ public class FormGameScreen extends javax.swing.JFrame{
         eastButtonPanel.add(npcs);
         eastButtonPanel.add(saveButton);
         eastButtonPanel.add(loadButton);
+        eastButtonPanel.add(saveButtonCSV);
+        eastButtonPanel.add(loadButtonCSV);
         westPanel.add(eastButtonPanel, BorderLayout.EAST);
 
         JPanel eastPanel = new JPanel(new BorderLayout());

@@ -15,8 +15,8 @@ public class Salvataggio implements Serializable{
 
     //dovrò inserire tutti i dati che dorvò salvare, così che con la serializzazione inserirò 1 solo oggetto Salvataggio nel fileManager e salverò tutto
     //con 1 solo oggetto
-    private Character c;
-    private Player p;
+    protected Character c;
+    protected Player p;
 
     public Salvataggio(Character c, Player p) {
         this.c = c;
@@ -29,6 +29,14 @@ public class Salvataggio implements Serializable{
 
     public Player getP() {
         return p;
+    }
+
+    public void setC(Character c) {
+        this.c = c;
+    }
+
+    public void setP(Player p) {
+        this.p = p;
     }
     
 }

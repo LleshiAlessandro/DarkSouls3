@@ -60,6 +60,18 @@ public class Inventory implements Serializable{
         this.greenBlossom = greenBlossom + 1;
     }
 
+    public void setNumberEstus(int numberEstus) {
+        this.numberEstus = numberEstus;
+    }
+
+    public void setNumberAshenEstus(int numberAshenEstus) {
+        this.numberAshenEstus = numberAshenEstus;
+    }
+
+    public void setGreenBlossom(int greenBlossom) {
+        this.greenBlossom = greenBlossom;
+    }
+
     @Override
     public String toString() {
         return "items: " + getItems();

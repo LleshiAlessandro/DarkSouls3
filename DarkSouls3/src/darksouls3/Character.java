@@ -95,6 +95,10 @@ public abstract class Character extends PgStatsCommon implements Serializable{
         return inv;
     }
 
+    public void setNpcsMet(ArrayList<NPC> npcsMet) {
+        this.npcsMet = npcsMet;
+    }
+
     
     
     public abstract void specialAbility(Villain v);
